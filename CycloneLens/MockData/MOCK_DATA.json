@@ -1,0 +1,204 @@
+// waarschijnlijk eruit gooien met API -> DB ipv API -> VS -> DB -> VS
+
+[
+  {
+    "naam": "Hermy",
+    "categorie": 2,
+    "windsnelheid": 306,
+    "bewegingssnelheid": 43,
+    "barometrische luchtdruk": 916,
+    "latitude": 57.855421,
+    "longitude": 11.8951003,
+    "timestamp": "7/14/2025"
+  },
+  {
+    "naam": "Karil",
+    "categorie": 3,
+    "windsnelheid": 285,
+    "bewegingssnelheid": 8,
+    "barometrische luchtdruk": 1063,
+    "latitude": 38.0361995,
+    "longitude": 8.2884236,
+    "timestamp": "5/12/2025"
+  },
+  {
+    "naam": "Pepito",
+    "categorie": 2,
+    "windsnelheid": 85,
+    "bewegingssnelheid": 3,
+    "barometrische luchtdruk": 947,
+    "latitude": 34.351432,
+    "longitude": 107.387303,
+    "timestamp": "4/30/2025"
+  },
+  {
+    "naam": "Patty",
+    "categorie": 3,
+    "windsnelheid": 246,
+    "bewegingssnelheid": 6,
+    "barometrische luchtdruk": 955,
+    "latitude": 4.7442679,
+    "longitude": 119.402976,
+    "timestamp": "4/6/2025"
+  },
+  {
+    "naam": "Eduard",
+    "categorie": 3,
+    "windsnelheid": 26,
+    "bewegingssnelheid": 40,
+    "barometrische luchtdruk": 1002,
+    "latitude": 6.7120714,
+    "longitude": 108.495859,
+    "timestamp": "4/20/2025"
+  },
+  {
+    "naam": "Doug",
+    "categorie": 2,
+    "windsnelheid": 126,
+    "bewegingssnelheid": 35,
+    "barometrische luchtdruk": 986,
+    "latitude": 31.30275,
+    "longitude": 121.389084,
+    "timestamp": "4/30/2025"
+  },
+  {
+    "naam": "Liza",
+    "categorie": 3,
+    "windsnelheid": 287,
+    "bewegingssnelheid": 33,
+    "barometrische luchtdruk": 983,
+    "latitude": 31.829323,
+    "longitude": 119.977286,
+    "timestamp": "12/31/2025"
+  },
+  {
+    "naam": "Adelle",
+    "categorie": 2,
+    "windsnelheid": 134,
+    "bewegingssnelheid": 8,
+    "barometrische luchtdruk": 1035,
+    "latitude": 42.6259555,
+    "longitude": 41.734917,
+    "timestamp": "2/26/2026"
+  },
+  {
+    "naam": "Silvan",
+    "categorie": 5,
+    "windsnelheid": 121,
+    "bewegingssnelheid": 0,
+    "barometrische luchtdruk": 998,
+    "latitude": 52.5264066,
+    "longitude": 85.1824498,
+    "timestamp": "8/3/2025"
+  },
+  {
+    "naam": "Rosmunda",
+    "categorie": 3,
+    "windsnelheid": 10,
+    "bewegingssnelheid": 34,
+    "barometrische luchtdruk": 975,
+    "latitude": 4.4725348,
+    "longitude": 97.9756343,
+    "timestamp": "6/30/2025"
+  },
+  {
+    "naam": "Tynan",
+    "categorie": 2,
+    "windsnelheid": 129,
+    "bewegingssnelheid": 14,
+    "barometrische luchtdruk": 998,
+    "latitude": 25.941937,
+    "longitude": 117.365052,
+    "timestamp": "2/25/2026"
+  },
+  {
+    "naam": "Krystle",
+    "categorie": 2,
+    "windsnelheid": 276,
+    "bewegingssnelheid": 39,
+    "barometrische luchtdruk": 1043,
+    "latitude": 41.1256135,
+    "longitude": 7.925857,
+    "timestamp": "9/9/2025"
+  },
+  {
+    "naam": "Ricardo",
+    "categorie": 3,
+    "windsnelheid": 240,
+    "bewegingssnelheid": 5,
+    "barometrische luchtdruk": 1059,
+    "latitude": 30.411429,
+    "longitude": 118.390218,
+    "timestamp": "9/1/2025"
+  },
+  {
+    "naam": "Hedda",
+    "categorie": 3,
+    "windsnelheid": 195,
+    "bewegingssnelheid": 37,
+    "barometrische luchtdruk": 1062,
+    "latitude": 59.1639426,
+    "longitude": 9.6358001,
+    "timestamp": "3/1/2026"
+  },
+  {
+    "naam": "Audrey",
+    "categorie": 1,
+    "windsnelheid": 180,
+    "bewegingssnelheid": 35,
+    "barometrische luchtdruk": 1036,
+    "latitude": 12.6612116,
+    "longitude": 0.5683399,
+    "timestamp": "4/18/2025"
+  },
+  {
+    "naam": "Conney",
+    "categorie": 2,
+    "windsnelheid": 298,
+    "bewegingssnelheid": 5,
+    "barometrische luchtdruk": 957,
+    "latitude": 23.2245912,
+    "longitude": 52.7670021,
+    "timestamp": "1/24/2026"
+  },
+  {
+    "naam": "Carol-jean",
+    "categorie": 1,
+    "windsnelheid": 221,
+    "bewegingssnelheid": 37,
+    "barometrische luchtdruk": 944,
+    "latitude": 22.787936,
+    "longitude": 50.2199938,
+    "timestamp": "6/25/2025"
+  },
+  {
+    "naam": "Shannan",
+    "categorie": 5,
+    "windsnelheid": 235,
+    "bewegingssnelheid": 0,
+    "barometrische luchtdruk": 1041,
+    "latitude": 49.5609979,
+    "longitude": 5.8741913,
+    "timestamp": "5/27/2025"
+  },
+  {
+    "naam": "Leland",
+    "categorie": 5,
+    "windsnelheid": 93,
+    "bewegingssnelheid": 5,
+    "barometrische luchtdruk": 1041,
+    "latitude": 49.904915,
+    "longitude": 30.8369641,
+    "timestamp": "5/9/2025"
+  },
+  {
+    "naam": "Faulkner",
+    "categorie": 3,
+    "windsnelheid": 277,
+    "bewegingssnelheid": 17,
+    "barometrische luchtdruk": 1004,
+    "latitude": 6.8641543,
+    "longitude": 107.6232996,
+    "timestamp": "10/4/2025"
+  }
+]

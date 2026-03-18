@@ -8,13 +8,13 @@
         private string Wachtwoord { get; set; }
         public bool BeheerRechten { get; private set; } 
 
-        public Gebruiker(int id, string naam, string email, string wachtwoord, bool beheerRechten)
+        public Gebruiker(int Id, string Naam, string Email, string Wachtwoord, bool BeheerRechten)
         {
-            this.Id = id;
-            this.Naam = naam;
-            this.Email = email;
-            this.Wachtwoord = wachtwoord;
-            this.BeheerRechten = beheerRechten;
+            this.Id = Id;
+            this.Naam = Naam;
+            this.Email = Email;
+            this.Wachtwoord = Wachtwoord;
+            this.BeheerRechten = BeheerRechten;
         }
 
         // + UpdateCycloonData(string naam) : void
