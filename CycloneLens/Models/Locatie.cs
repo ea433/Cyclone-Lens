@@ -2,20 +2,20 @@
 {
     public class Locatie
     {
-        public int id { get; }
-        public float longitude { get; private set; }
-        public float latitude { get; private set; }
-        public DateTime tijdstip { get; }
+        public int Id { get; }
+        public float Longitude { get; private set; }
+        public float Latitude { get; private set; }
+        public DateTime Tijdstip { get; private set; }
 
         public Locatie(int id, float longitude, float latitude, DateTime tijdstip)
         {
-            this.id = id;
-            this.longitude = longitude;
-            this.latitude = latitude;
-            this.tijdstip = tijdstip;
+            this.Id = id;
+            this.Longitude = longitude;
+            this.Latitude = latitude;
+            this.Tijdstip = tijdstip;
         }
 
-        public float GetCoordinates(float longitude, float latitude)
+        public float GetCoordinates(float longitude, float latitude) // into service?
         {
             return longitude + latitude;
         }

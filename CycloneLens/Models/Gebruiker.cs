@@ -2,21 +2,21 @@
 {
     public class Gebruiker
     {
-        public int id { get; }
-        public string naam { get; private set; }
-        private string email { get; set; } 
-        private string wachtwoord { get; set; }
-        public bool beheerRechten { get; set; } 
+        public int Id { get; }
+        public string Naam { get; private set; }
+        private string Email { get; set; } 
+        private string Wachtwoord { get; set; }
+        public bool BeheerRechten { get; private set; } 
 
         public Gebruiker(int id, string naam, string email, string wachtwoord, bool beheerRechten)
         {
-            this.id = id;
-            this.naam = naam;
-            this.email = email;
-            this.wachtwoord = wachtwoord;
-            this.beheerRechten = beheerRechten;
+            this.Id = id;
+            this.Naam = naam;
+            this.Email = email;
+            this.Wachtwoord = wachtwoord;
+            this.BeheerRechten = beheerRechten;
         }
 
-        // + UpdateCycloonData(c: Cycloon) : void
+        // + UpdateCycloonData(string naam) : void
     }
 }

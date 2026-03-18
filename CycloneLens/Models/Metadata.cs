@@ -2,15 +2,15 @@
 {
     public class Metadata
     {
-        public int id { get; }
-        public float windsnelheid { get; private set; }
-        public float luchtdruk { get; private set; } 
+        public int Id { get; }
+        public float Windsnelheid { get; private set; }
+        public float Luchtdruk { get; private set; } 
     
-    public Metadata()
+    public Metadata(int id, float windsnelheid, float luchtdruk)
         {
-            this.id = id;
-            this.windsnelheid = windsnelheid;
-            this.luchtdruk = luchtdruk;
+            this.Id = id;
+            this.Windsnelheid = windsnelheid;
+            this.Luchtdruk = luchtdruk;
         }
     }
 }

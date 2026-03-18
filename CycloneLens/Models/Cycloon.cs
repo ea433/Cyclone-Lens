@@ -4,9 +4,9 @@
     {
         public int Id { get; }
         public string Naam { get; private set; }
-        public StatusType Status { get; set; }
+        public StatusType Status { get; private set; }
         public int Categorie { get; set; }
-        public BassinType Bassin { get; set; }
+        public BassinType Bassin { get; private set; }
 
         public Cycloon(int id, string naam, StatusType status, int categorie, BassinType bassin)
         {
