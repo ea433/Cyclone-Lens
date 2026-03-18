@@ -2,30 +2,34 @@
 {
     public class Cycloon
     {
-        public int id { get; }
-        public required string naam { get; set; }
-        public StatusType status { get; set; }
-        public int categorie { get; set; }
-        public BassinType bassin { get; set; }
-    }
+        public int Id { get; }
+        public string Naam { get; private set; }
+        public StatusType Status { get; set; }
+        public int Categorie { get; set; }
+        public BassinType Bassin { get; set; }
 
-    public enum StatusType
-    {
-        Actief,
-        Inactief
-    }
+        public Cycloon(int id, string naam, StatusType status, int categorie, BassinType bassin)
+        {
+            this.Id = id;
+            this.Naam = naam;
+            this.Status = status;
+            this.Categorie = categorie;
+            this.Bassin = bassin;
+        }
 
-    public enum BassinType
-    {
-        Noord_Atlantisch,
-        Oostelijk_Stille_Oceaan,
-        Westelijk_Stille_Oceaan,
-        Noordelijk_Indische_Oceaan,
-        Zuidwest_Indische_Oceaan,
-        Zuidoost_Indische_Oceaan,
-        Westelijk_Australische_Oceaan,
-        Zuidelijk_Stille_Oceaan
-    }
+        public enum StatusType
+        {
+            Actief,
+            Inactief
+        }
 
-    // + GetTraject(): List<Locatie>
+        public enum BassinType
+        {
+            Noord_Atlantisch
+        }
+
+        // + GetTraject(): List<Locatie>
+        //public List<Locatie> GetTraject(float longitude, float latitude)
+    }
 }
+    

@@ -1,13 +1,26 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CycloneLens.Models
+﻿namespace CycloneLens.Models
 {
     public class Locatie
     {
-        public float longitude { get; set; } 
-        public float latitude { get; set; } 
-        public DateTime tijdstip { get; set; } 
-    }
+        public int id { get; }
+        public float longitude { get; private set; }
+        public float latitude { get; private set; }
+        public DateTime tijdstip { get; }
 
-    // + GetCoordinates(): (float, float)
+        public Locatie(int id, float longitude, float latitude, DateTime tijdstip)
+        {
+            this.id = id;
+            this.longitude = longitude;
+            this.latitude = latitude;
+            this.tijdstip = tijdstip;
+        }
+
+        public float GetCoordinates(float longitude, float latitude)
+        {
+            return longitude + latitude;
+        }
+    }
 }
+
+        // + GetCoordinates(): (float, float)
+
