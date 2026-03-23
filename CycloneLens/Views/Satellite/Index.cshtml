@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Cyclone Satellite Imagery";
+}
+
+<img src="@ViewBag.ImageUrl" 
+     alt="Cyclone satellite imagery"   
+     style="max-width:100%; height:auto;" />
+<p>Date: @ViewBag.Date</p>
+
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 10000); // refresh every 10 seconds
+</script>

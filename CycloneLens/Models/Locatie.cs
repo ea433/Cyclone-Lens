@@ -22,5 +22,5 @@
     }
 }
 
-        // + GetCoordinates(): (float, float)
+// + GetCoordinates(): (float, float)
 

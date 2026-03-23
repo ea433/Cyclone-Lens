@@ -8,11 +8,11 @@
         private string Wachtwoord { get; set; }
         public bool BeheerRechten { get; private set; } 
 
-        public Gebruiker(int Id, string Naam, string Email, string Wachtwoord, bool BeheerRechten)
+        public Gebruiker(int Id, string Naam, string email, string Wachtwoord, bool BeheerRechten)
         {
             this.Id = Id;
             this.Naam = Naam;
-            this.Email = Email;
+            this.Email = email;
             this.Wachtwoord = Wachtwoord;
             this.BeheerRechten = BeheerRechten;
         }
