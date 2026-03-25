@@ -13,8 +13,8 @@ namespace CycloneLens.Services
                 .Select(cycloon =>
                 {
                     var latestMetadata = MetadataList
-                        .Where(m => m.Cycloon_Id == cycloon.Id)
-                        .OrderByDescending(m => m.Tijdstip)
+                        .Where(metadata => metadata.Cycloon_Id == cycloon.Id)
+                        .OrderByDescending(metadata => metadata.Tijdstip)
                         .FirstOrDefault();
 
                     return new ViewModel(

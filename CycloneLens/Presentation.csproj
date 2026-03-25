@@ -11,4 +11,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Business Logic Layer\Logic.csproj" />
+  </ItemGroup>
+
 </Project>
