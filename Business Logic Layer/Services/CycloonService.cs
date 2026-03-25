@@ -3,7 +3,7 @@ using Logic.Enums;
 
 namespace CycloneLens.Services
 { 
-    class CycloonService
+    public class CycloonService
     {
         public List<ViewModel> GetActiveCyclonenNATL(List<Cycloon> Cyclonen, List<Metadata> MetadataList)
         {
