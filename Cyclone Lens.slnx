@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Business Logic Layer/Logic.csproj" Id="e0f48a34-0956-48a8-b720-d77caf3eedc8" />
+  <Project Path="CycloneLens/Presentation.csproj" />
+  <Project Path="Data Access Layer/DAL.csproj" Id="1a0a122f-106f-4f1e-8497-6a8566fb5844" />
+  <Project Path="Interface Layer/Interfaces.csproj" Id="259ae01c-19dd-461f-b7db-b9d9eaa787b8" />
+</Solution>
