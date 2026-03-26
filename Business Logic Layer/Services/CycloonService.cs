@@ -17,20 +17,20 @@ public class CycloonService
         var metadata = _repository.GetMetadata();
 
         return cyclonen
-            .Where(c => c.Status == StatusType.Actief &&
-                        c.Bassin == BassinType.Noord_Atlantisch)
-            .Select(c =>
+            .Where(cycloon => cycloon.Status == StatusType.Actief &&
+                        cycloon.Bassin == BassinType.Noord_Atlantisch)
+            .Select(cycloon =>
             {
                 var latest = metadata
-                    .Where(m => m.Cycloon_Id == c.Id)
-                    .OrderByDescending(m => m.Tijdstip)
+                    .Where(metadata => metadata.Cycloon_Id == cycloon.Id)
+                    .OrderByDescending(metadata => metadata.Tijdstip)
                     .FirstOrDefault();
 
                 return new ViewModel(
-                    c.Naam,
+                    cycloon.Naam,
                     latest?.Categorie ?? CategorieType.Tropische_Depressie,
-                    c.Bassin,
-                    c.Status
+                    cycloon.Bassin,
+                    cycloon.Status
                 );
             })
             .ToList();

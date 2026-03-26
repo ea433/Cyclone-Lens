@@ -81,14 +81,14 @@ namespace CycloneLens.DAL
                         }
 
                         var metadata = new Metadata(
-                            (int)reader["id"],
-                            (int)reader["cycloon_id"],
-                            Enum.Parse<CategorieType>(categorieString),
-                            Convert.ToDouble(reader["windsnelheid"]),
-                            Convert.ToDouble(reader["luchtdruk"]),
-                            Convert.ToDouble(reader["longitude"]),
-                            Convert.ToDouble(reader["latitude"]),
-                            (DateTime)reader["tijdstip"]
+                        (int)reader["id"],
+                        Convert.ToInt32(reader["cycloon_id"]), // 👈 THIS LINE
+                        (CategorieType)(int)reader["categorie"],
+                        Convert.ToDouble(reader["windsnelheid"]),
+                        Convert.ToDouble(reader["luchtdruk"]),
+                        Convert.ToDouble(reader["longitude"]),
+                        Convert.ToDouble(reader["latitude"]),
+                        (DateTime)reader["tijdstip"]
                         );
 
                         metadataList.Add(metadata);

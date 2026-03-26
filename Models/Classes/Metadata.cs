@@ -17,6 +17,7 @@ namespace CycloneLens.Models
             double longitude, double latitude, DateTime tijdstip)
         {
             this.Id = id;
+            this.Cycloon_Id = Cycloon_Id;
             this.Categorie = categorie;
             this.Windsnelheid = windsnelheid;
             this.Luchtdruk = luchtdruk;
