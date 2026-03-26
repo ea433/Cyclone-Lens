@@ -3,4 +3,5 @@
   <Project Path="CycloneLens/Presentation.csproj" />
   <Project Path="Data Access Layer/DAL.csproj" Id="1a0a122f-106f-4f1e-8497-6a8566fb5844" />
   <Project Path="Interface Layer/Interfaces.csproj" Id="259ae01c-19dd-461f-b7db-b9d9eaa787b8" />
+  <Project Path="Models/Models.csproj" Id="315c98ce-f1dc-4f5a-9dbc-dffeb763465b" />
 </Solution>

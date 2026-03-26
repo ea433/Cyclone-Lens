@@ -1,0 +1,25 @@
+﻿@model List<CycloneLens.Models.ViewModel>
+
+<h2>Actieve Cyclonen - Noord-Atlantisch Bassin</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Categorie</th>
+            <th>Bassin</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cycloon in Model)
+        {
+            <tr>
+                <td>@cycloon.Naam</td>
+                <td>@cycloon.Categorie</td>
+                <td>@cycloon.Bassin</td>
+                <td>@cycloon.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
