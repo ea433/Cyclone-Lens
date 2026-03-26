@@ -27,6 +27,7 @@ public class CycloonService
                     .FirstOrDefault();
 
                 return new ViewModel(
+                    cycloon.Id,
                     cycloon.Naam,
                     latest?.Categorie ?? CategorieType.Tropische_Depressie,
                     cycloon.Bassin,

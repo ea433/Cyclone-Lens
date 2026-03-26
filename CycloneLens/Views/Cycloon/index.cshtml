@@ -15,7 +15,13 @@
         @foreach (var cycloon in Model)
         {
             <tr>
-                <td>@cycloon.Naam</td>
+                <td>
+                    <a asp-controller="Cycloon" asp-action="Details" asp-route-id="@cycloon.Id">
+                        <a asp-controller="Metadata" asp-action="Details" asp-route-id="@cycloon.Id">
+                            @cycloon.Naam
+                        </a>
+                    </a>
+                </td>
                 <td>@cycloon.Categorie</td>
                 <td>@cycloon.Bassin</td>
                 <td>@cycloon.Status</td>

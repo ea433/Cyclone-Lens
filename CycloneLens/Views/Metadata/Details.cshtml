@@ -1,0 +1,28 @@
+﻿@model (CycloneLens.Models.Cycloon, List<CycloneLens.Models.Metadata>)
+
+<h2>@Model.Item1.Naam</h2>
+<p>@Model.Item1.Bassin</p>
+
+<h3>Traject en Metadata</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Categorie</th>
+            <th>Windsnelheid</th>
+            <th>Coördinaten</th>
+            <th>Tijdstip</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model.Item2)
+        {
+            <tr>
+                <td>@m.Categorie</td>
+                <td>@m.Windsnelheid km/u</td>
+                <td>@m.Latitude, @m.Longitude</td>
+                <td>@m.Tijdstip</td>
+            </tr>
+        }
+    </tbody>
+</table>
