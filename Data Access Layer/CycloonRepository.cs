@@ -82,7 +82,7 @@ namespace CycloneLens.DAL
 
                         var metadata = new Metadata(
                         (int)reader["id"],
-                        Convert.ToInt32(reader["cycloon_id"]), // 👈 THIS LINE
+                        Convert.ToInt32(reader["cycloon_id"]),
                         (CategorieType)(int)reader["categorie"],
                         Convert.ToDouble(reader["windsnelheid"]),
                         Convert.ToDouble(reader["luchtdruk"]),
