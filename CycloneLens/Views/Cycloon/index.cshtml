@@ -16,15 +16,16 @@
         {
             <tr>
                 <td>
-                    <a asp-controller="Cycloon" asp-action="Details" asp-route-id="@cycloon.Id">
-                        <a asp-controller="Metadata" asp-action="Details" asp-route-id="@cycloon.Id">
-                            @cycloon.Naam
-                        </a>
+                    <a asp-controller="Metadata" asp-action="Details" asp-route-id="@cycloon.Id">
+                        @cycloon.Naam
                     </a>
                 </td>
-                <td>@cycloon.Categorie</td>
-                <td>@cycloon.Bassin</td>
-                <td>@cycloon.Status</td>
+
+                <td>@cycloon.Categorie.ToString().Replace("_", " ")</td>
+
+                <td>@cycloon.Bassin.ToString().Replace("_", " ")</td>
+
+                <td>@cycloon.Status.ToString().Replace("_", " ")</td>
             </tr>
         }
     </tbody>
