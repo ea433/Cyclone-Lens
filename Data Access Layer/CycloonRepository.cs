@@ -98,5 +98,51 @@ namespace CycloneLens.DAL
 
             return metadataList;
         }
+
+        // fr-05 
+        public void UpdateCycloon(Cycloon cycloon)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = @"UPDATE Cycloon 
+                         SET naam = @naam, status = @status 
+                         WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", cycloon.Id);
+                    cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
+                    cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void AddMetadata(Metadata metadata)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO Metadata 
+        (cycloon_id, categorie, windsnelheid, luchtdruk, longitude, latitude, tijdstip)
+        VALUES (@cid, @cat, @wind, @druk, @lon, @lat, @tijd)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@cid", metadata.Cycloon_Id);
+                    cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enums
+                    cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
+                    cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
+                    cmd.Parameters.AddWithValue("@lon", metadata.Longitude);
+                    cmd.Parameters.AddWithValue("@lat", metadata.Latitude);
+                    cmd.Parameters.AddWithValue("@tijd", metadata.Tijdstip);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

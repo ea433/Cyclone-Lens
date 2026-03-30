@@ -6,5 +6,7 @@ namespace CycloneLens.Interfaces
     {
         List<Cycloon> GetCyclonen();
         List<Metadata> GetMetadata();
+        void UpdateCycloon(Cycloon cycloon);
+        void AddMetadata(Metadata metadata);
     }
 }

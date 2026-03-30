@@ -36,4 +36,21 @@ public class CycloonService
             })
             .ToList();
     }
+
+    // fr-05
+    public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
+    {
+        if (gebruiker == null || !gebruiker.BeheerRechten)
+            throw new Exception("Geen rechten");
+
+        if (string.IsNullOrWhiteSpace(cycloon.Naam))
+            throw new Exception("Naam is verplicht");
+
+        _repository.UpdateCycloon(cycloon);
+
+        if (metadata != null)
+        {
+            _repository.AddMetadata(metadata);
+        }
+    }
 }
