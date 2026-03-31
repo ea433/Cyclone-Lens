@@ -1,7 +1,7 @@
 ﻿@model (CycloneLens.Models.Cycloon, List<CycloneLens.Models.Metadata>)
 
 <h2>@Model.Item1.Naam</h2>
-<p>@Model.Item1.Bassin</p>
+<p>@Model.Item1.Bassin.ToString().Replace("_", " ")</p>
 
 <h3>Traject en Metadata</h3>
 
@@ -18,7 +18,7 @@
         @foreach (var m in Model.Item2)
         {
             <tr>
-                <td>@m.Categorie</td>
+                <td>@m.Categorie.ToString().Replace("_", " ")</td>
                 <td>@m.Windsnelheid km/u</td>
                 <td>@m.Latitude, @m.Longitude</td>
                 <td>@m.Tijdstip</td>
