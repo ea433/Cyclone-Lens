@@ -8,5 +8,7 @@ namespace CycloneLens.Interfaces
         List<Metadata> GetMetadata();
         void UpdateCycloon(Cycloon cycloon);
         void AddMetadata(Metadata metadata);
+        void LogWijziging(int cycloonId, string actie, int gebruikerId);
+        Cycloon? GetById(int id);
     }
 }

@@ -20,13 +20,15 @@ namespace CycloneLens.Controllers
 
             var repository = new CycloonRepository(connectionString);
             _service = new CycloonService(repository);
-        }
+        }      
 
         public IActionResult Index()
         {
             var cyclonen = _service.GetActiveCyclonenNATL();
             return View(cyclonen);
         }
+
+
 
 
         // fr-05
@@ -38,13 +40,8 @@ namespace CycloneLens.Controllers
                 var userId = HttpContext.Session.GetInt32("UserId");
                 var isAdmin = HttpContext.Session.GetInt32("IsAdmin") == 1;
 
-                var gebruiker = new Gebruiker(
-                    userId ?? 0,
-                    "temp",
-                    "temp",
-                    "temp",
-                    isAdmin
-                );
+                // var gebruiker = new Gebruiker(userId ?? 0, "temp", "temp", "temp", isAdmin);
+                var gebruiker = new Gebruiker(1, "test", "test", "test", true);
 
                 if (string.IsNullOrWhiteSpace(model.Naam))
                 {
@@ -73,10 +70,20 @@ namespace CycloneLens.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View("Error");
+            catch(Exception ex)
+{
+                return Content(ex.Message);
             }
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var cycloon = _service.GetById(id);
+
+            if (cycloon == null)
+                return View("Error");
+
+            return View(cycloon);
         }
     }
 }

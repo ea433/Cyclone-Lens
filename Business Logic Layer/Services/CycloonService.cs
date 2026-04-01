@@ -37,7 +37,7 @@ public class CycloonService
             .ToList();
     }
 
-    // fr-05
+    // fr-05 + logging
     public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
     {
         if (gebruiker == null || !gebruiker.BeheerRechten)
@@ -52,5 +52,16 @@ public class CycloonService
         {
             _repository.AddMetadata(metadata);
         }
+
+        _repository.LogWijziging(
+            cycloon.Id,
+            "Cycloon bijgewerkt",
+            gebruiker.Id
+        );
+    }
+
+    public Cycloon? GetById(int id)
+    {
+        return _repository.GetById(id);
     }
 }

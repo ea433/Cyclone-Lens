@@ -144,5 +144,59 @@ namespace CycloneLens.DAL
                 }
             }
         }
+
+        // fr-05 logging
+        public void LogWijziging(int cycloonId, string actie, int gebruikerId)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO CycloonLog 
+        (Cycloon_id, actie, Gebruiker_id, tijdstip)
+        VALUES (@cid, @actie, @gid, @tijd)";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@cid", cycloonId);
+                    cmd.Parameters.AddWithValue("@actie", actie);
+                    cmd.Parameters.AddWithValue("@gid", gebruikerId);
+                    cmd.Parameters.AddWithValue("@tijd", DateTime.UtcNow);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Cycloon? GetById(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM Cycloon WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Cycloon(
+                                (int)reader["id"],
+                                reader["naam"]?.ToString() ?? "",
+                                Enum.Parse<StatusType>(reader["status"]?.ToString() ?? "Actief"),
+                                Enum.Parse<BassinType>(reader["bassin"]?.ToString() ?? "Noord_Atlantisch")
+                            );
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
+
