@@ -1,8 +1,9 @@
-﻿@model (CycloneLens.Models.Cycloon, List<CycloneLens.Models.Metadata>)
-
-
-<h2>@Model.Item1.Naam</h2>
+﻿<h2>@Model.Item1.Naam</h2>
 <p>@Model.Item1.Bassin.ToString().Replace("_", " ")</p>
+
+<a asp-action="Edit" asp-route-id="@Model.Item1.Id" class="btn btn-primary">
+    Bewerken
+</a>
 
 <h3>Traject en Metadata</h3>
 
