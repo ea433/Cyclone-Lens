@@ -1,0 +1,98 @@
+﻿<h2>Orkaan @Model.Naam</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <!-- alle cycloondetails -->
+    <div class="box">
+        <div class="box-header">
+            <h4>Cycloon Details</h4>
+            <button type="submit">Opslaan</button>
+        </div>
+
+        <div class="grid">
+            <div class="field">
+                <label>Categorie:</label>
+                <input name="Categorie" />
+            </div>
+
+            <div class="field">
+                <label>Bassin:</label>
+                <input name="Bassin" value="@Model.Bassin" />
+            </div>
+
+            <div class="field">
+                <label>Status:</label>
+                <input name="Status" value="@Model.Status" />
+            </div>
+
+            <div class="field">
+                <label>Windsnelheid:</label>
+                <input name="Windsnelheid" />
+            </div>
+
+            <div class="field">
+                <label>Druk:</label>
+                <input name="Luchtdruk" />
+            </div>
+
+            <div class="field">
+                <label>Tijdstip:</label>
+                <input disabled value="@DateTime.Now" />
+            </div>
+
+            <div class="field">
+                <label>Breedtegraad:</label>
+                <input name="Latitude" />
+            </div>
+
+            <div class="field">
+                <label>Lengtegraad:</label>
+                <input name="Longitude" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    .box {
+        border: 1px solid #000;
+        padding: 15px;
+        margin: 20px auto; 
+        width: 60%; 
+    }
+
+    .box-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 40px;
+    }
+
+    .field label {
+        font-weight: bold;
+        display: block;
+    }
+
+    .field input {
+        width: 100%;
+        padding: 4px;
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .history-table th, .history-table td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: left;
+        }
+</style>

@@ -2,6 +2,7 @@
 using CycloneLens.Models;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
+using Models.Classes;
 
 namespace CycloneLens.DAL
 {
@@ -188,7 +189,7 @@ namespace CycloneLens.DAL
                                 (int)reader["id"],
                                 reader["naam"]?.ToString() ?? "",
                                 Enum.Parse<StatusType>(reader["status"]?.ToString() ?? "Actief"),
-                                Enum.Parse<BassinType>(reader["bassin"]?.ToString() ?? "Noord_Atlantisch")
+                                Enum.Parse<BassinType>((reader["bassin"] as string ?? "Noord_Atlantisch").Replace("-", "_"))
                             );
                         }
                     }

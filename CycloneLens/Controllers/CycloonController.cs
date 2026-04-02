@@ -28,9 +28,6 @@ namespace CycloneLens.Controllers
             return View(cyclonen);
         }
 
-
-
-
         // fr-05
         [HttpPost]
         public IActionResult Update(UpdateCycloonViewModel model)
@@ -40,8 +37,8 @@ namespace CycloneLens.Controllers
                 var userId = HttpContext.Session.GetInt32("UserId");
                 var isAdmin = HttpContext.Session.GetInt32("IsAdmin") == 1;
 
-                // var gebruiker = new Gebruiker(userId ?? 0, "temp", "temp", "temp", isAdmin);
-                var gebruiker = new Gebruiker(1, "test", "test", "test", true);
+                // var gebruiker = new Gebruiker(userId ?? 0, "temp", "temp@test", "temp", isAdmin);
+                var gebruiker = new Gebruiker(1, "test", "test@test", "test", true);
 
                 if (string.IsNullOrWhiteSpace(model.Naam))
                 {
