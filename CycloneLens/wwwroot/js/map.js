@@ -1,7 +1,5 @@
-﻿    // 1️⃣ CREATE MAP
-    var map = L.map('map').setView([20, -60], 4);
+﻿    var map = L.map('map').setView([20, -60], 4);
 
-    // 2️⃣ TILE LAYERS
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles © Esri'
         }).addTo(map);
@@ -11,7 +9,6 @@
     opacity: 0.6
         }).addTo(map);
 
-    // 3️⃣ 👉 ADD YOUR TRACK DATA HERE
     var trackMaria = [
     {lat: 14, lng: -23, category: 0 },
     {lat: 14.5, lng: -25, category: 0 },
@@ -53,12 +50,11 @@
     {lat: 13.5, lng: -39, category: 1 },
     {lat: 14, lng: -42, category: 1 },
     {lat: 14.5, lng: -45, category: 2 },
-    {lat: 15, lng: -48, category: 2 }, // peak Cat 2
+    {lat: 15, lng: -48, category: 2 }, // peak Cat 2 thus far
     ];
 
-        // 4️⃣ DRAW TRACK LINE
-        var latlngsAlberto = trackAlberto.map(p => [p.lat, p.lng]);
-        var latlngsMaria = trackMaria.map(q => [q.lat, q.lng]);
+    var latlngsAlberto = trackAlberto.map(p => [p.lat, p.lng]);
+    var latlngsMaria = trackMaria.map(q => [q.lat, q.lng]);
 
     L.polyline(latlngsAlberto, {
         color: 'red',
@@ -70,16 +66,14 @@
     weight: 3
         }).addTo(map);
 
-    // 5️⃣ CATEGORY COLORS
     function getColor(cat) {
-            if (cat == 0) return 'white';
+    if (cat == 0) return 'white';
     if (cat == 1) return 'yellow';
     if (cat == 2) return 'orange';
     if (cat == 3) return 'red';
             if (cat >= 4) return 'purple';
         }
 
-        // 6️⃣ DRAW POINTS
         trackMaria.forEach(p => {
         L.circleMarker([p.lat, p.lng], {
             radius: 6,
@@ -101,7 +95,7 @@
         });
 
 
-    // observation scripts below
+    
     var observations = [
     // Miami
     {
