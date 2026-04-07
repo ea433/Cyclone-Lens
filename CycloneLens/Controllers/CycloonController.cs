@@ -1,6 +1,7 @@
 ﻿using CycloneLens.DAL;
-using Microsoft.AspNetCore.Mvc;
 using CycloneLens.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.SqlServer.Types;
 using Models.Classes;
 
 namespace CycloneLens.Controllers
@@ -52,14 +53,14 @@ namespace CycloneLens.Controllers
                     model.Bassin
                 );
 
-                var metadata = new Metadata(
+                var metadata = new CycloonData(
                     0,
                     model.Id,
                     model.Categorie,
                     model.Windsnelheid,
                     model.Luchtdruk,
-                    model.Longitude,
-                    model.Latitude,
+                    SqlGeography.Point(model.Latitude, model.Longitude, 4326),
+                    SqlGeography.Point(model.Latitude, model.Longitude, 4326),
                     DateTime.UtcNow
                 );
 

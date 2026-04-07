@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="170.1000.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Business Logic Layer\Logic.csproj" />
     <ProjectReference Include="..\Data Access Layer\DAL.csproj" />
     <ProjectReference Include="..\Interface Layer\Interfaces.csproj" />

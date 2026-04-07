@@ -39,7 +39,7 @@ public class CycloonService
     }
 
     // fr-05 + logging
-    public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
+    public void UpdateCycloon(Cycloon cycloon, CycloonData metadata, Gebruiker gebruiker)
     {
         if (gebruiker == null || !gebruiker.BeheerRechten)
             throw new Exception("Geen rechten");

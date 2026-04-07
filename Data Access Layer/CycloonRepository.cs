@@ -2,6 +2,7 @@
 using CycloneLens.Models;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
+using Microsoft.SqlServer.Types;
 using Models.Classes;
 
 namespace CycloneLens.DAL
@@ -57,9 +58,9 @@ namespace CycloneLens.DAL
             return cyclonen;
         }
 
-        public List<Metadata> GetMetadata()
+        public List<CycloonData> GetMetadata()
         {
-            var metadataList = new List<Metadata>();
+            var metadataList = new List<CycloonData>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -81,14 +82,14 @@ namespace CycloneLens.DAL
                             throw new Exception("Invalid categorie value from database");
                         }
 
-                        var metadata = new Metadata(
+                        var metadata = new CycloonData(
                         (int)reader["id"],
                         Convert.ToInt32(reader["cycloon_id"]),
                         (CategorieType)(int)reader["categorie"],
                         Convert.ToDouble(reader["windsnelheid"]),
                         Convert.ToDouble(reader["luchtdruk"]),
-                        Convert.ToDouble(reader["longitude"]),
-                        Convert.ToDouble(reader["latitude"]),
+                        (SqlGeography)reader["latitude"],
+                        (SqlGeography)reader["longitude"],
                         (DateTime)reader["tijdstip"]
                         );
 
@@ -121,7 +122,7 @@ namespace CycloneLens.DAL
                 }
             }
         }
-        public void AddMetadata(Metadata metadata)
+        public void AddMetadata(CycloonData metadata)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
