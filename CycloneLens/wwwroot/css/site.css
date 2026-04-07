@@ -29,3 +29,45 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+thead {
+    background-color: #1e293b;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s ease;
+}
+
+    tbody tr:hover {
+        background-color: #f5f7fa;
+    }
+
+a {
+    color: #2563eb;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }

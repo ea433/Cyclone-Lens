@@ -6,7 +6,7 @@
 
     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles © Esri',
-    opacity: 0.6
+        opacity: 0.6
         }).addTo(map);
 
     var trackMaria = [
