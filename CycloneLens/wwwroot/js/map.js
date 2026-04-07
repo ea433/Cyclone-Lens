@@ -103,7 +103,7 @@
     lng: -80.2,
     wind: 140,
     pressure: 950,
-    description: "User report: Severe damage, strong winds"
+    description: "Gebruikersrapport: Ernstige schade, sterke winden"
             },
 
     // Tampa (FIXED)
@@ -112,7 +112,7 @@
     lng: -82.46,
     wind: 110,
     pressure: 970,
-    description: "User report: Heavy rain and flooding"
+    description: "Gebruikersrapport: Hevige regen en overstromingen"
             },
 
     // Mexico (Yucatán / Cancun area)
@@ -121,7 +121,7 @@
     lng: -86.85,
     wind: 120,
     pressure: 965,
-    description: "User report: Storm surge and strong winds"
+    description: "Gebruikersrapport: Stormvloed en sterke winden"
             },
 
     // Jamaica
@@ -130,7 +130,7 @@
     lng: -77.3,
     wind: 100,
     pressure: 980,
-    description: "User report: Flooding and landslides"
+    description: "Gebruikersrapport: Overstromingen en aardverschuivingen"
             },
 
     // Puerto Rico
@@ -139,7 +139,7 @@
     lng: -66.1,
     wind: 130,
     pressure: 955,
-    description: "User report: Widespread power outages"
+    description: "Gebruikersrapport: Stroomverstoringen"
             },
 
     // Cape Verde (storm origin region)
@@ -148,7 +148,7 @@
     lng: -23.6,
     wind: 60,
     pressure: 1005,
-    description: "User report: Developing tropical wave"
+    description: "Gebruikersrapport: Ontwikkelende tropische golf."
             }
     ];
 
@@ -162,7 +162,7 @@
             })
     .addTo(map)
     .bindPopup(
-    "<b>Observation</b><br>" +
+    "<b>Observatie:</b><br>" +
         "Wind: " + o.wind + " km/h<br>" +
             "Pressure: " + o.pressure + " mb<br>" +
                 o.description
