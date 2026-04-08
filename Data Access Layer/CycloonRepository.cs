@@ -67,7 +67,7 @@ namespace CycloneLens.DAL
                 conn.Open();
 
                 string query = @"SELECT id, cycloon_id, categorie, windsnelheid, luchtdruk,
-                                 longitude, latitude, tijdstip 
+                                 tijdstip, coordinaten
                                  FROM Metadata";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -88,8 +88,7 @@ namespace CycloneLens.DAL
                         (CategorieType)(int)reader["categorie"],
                         Convert.ToDouble(reader["windsnelheid"]),
                         Convert.ToDouble(reader["luchtdruk"]),
-                        (SqlGeography)reader["latitude"],
-                        (SqlGeography)reader["longitude"],
+                        (SqlGeography)reader["coordinaten"],
                         (DateTime)reader["tijdstip"]
                         );
 
@@ -138,8 +137,7 @@ namespace CycloneLens.DAL
                     cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enums
                     cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
                     cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
-                    cmd.Parameters.AddWithValue("@lon", metadata.Longitude);
-                    cmd.Parameters.AddWithValue("@lat", metadata.Latitude);
+                    cmd.Parameters.AddWithValue("@lon", metadata.Coordinaten);
                     cmd.Parameters.AddWithValue("@tijd", metadata.Tijdstip);
 
                     cmd.ExecuteNonQuery();

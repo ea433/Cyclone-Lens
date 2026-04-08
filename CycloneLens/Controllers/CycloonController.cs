@@ -59,8 +59,7 @@ namespace CycloneLens.Controllers
                     model.Categorie,
                     model.Windsnelheid,
                     model.Luchtdruk,
-                    SqlGeography.Point(model.Latitude, model.Longitude, 4326),
-                    SqlGeography.Point(model.Latitude, model.Longitude, 4326),
+                    SqlGeography.Point(model.Coordinaten, model.Coordinaten, 4326),
                     DateTime.UtcNow
                 );
 
@@ -69,7 +68,7 @@ namespace CycloneLens.Controllers
                 return RedirectToAction("Index");
             }
             catch(Exception ex)
-{
+            {
                 return Content(ex.Message);
             }
         }

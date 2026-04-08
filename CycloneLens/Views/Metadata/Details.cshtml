@@ -5,14 +5,14 @@
     Bewerken
 </a>
 
-<h3>Traject en Metadata</h3>
+<h3>Traject en Cycloondata</h3>
 
 <table class="table">
     <thead>
         <tr>
             <th>Categorie</th>
             <th>Windsnelheid</th>
-            <th>Coördinaten</th>
+            <th>Coordinaten</th>
             <th>Tijdstip</th>
         </tr>
     </thead>
@@ -22,7 +22,7 @@
             <tr>
                 <td>@m.Categorie.ToString().Replace("_", " ")</td>
                 <td>@m.Windsnelheid km/u</td>
-                <td>@m.Latitude, @m.Longitude</td>
+                <td>@m.Coordinaten</td>
                 <td>@m.Tijdstip</td>
             </tr>
         }

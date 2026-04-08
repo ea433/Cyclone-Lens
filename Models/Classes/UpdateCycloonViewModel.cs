@@ -12,7 +12,6 @@ namespace Models.Classes
         public CategorieType Categorie { get; set; }
         public double Windsnelheid { get; set; }
         public double Luchtdruk { get; set; }
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public double Coordinaten { get; set; }
     }
 }
