@@ -1,13 +1,46 @@
-﻿    var map = L.map('map').setView([20, -60], 4);
+﻿// 1️⃣ CREATE MAP
+var map = L.map('map').setView([20, -60], 4);
 
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri'
-        }).addTo(map);
+// 🛰️ Satellite base
+var satellite = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { attribution: 'Tiles © Esri' }
+);
 
-    L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles © Esri',
-        opacity: 0.6
-        }).addTo(map);
+// 🏷️ Labels overlay
+var labels = L.tileLayer(
+    'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+    { opacity: 0.7 }
+);
+
+// ✅ ADD THEM
+satellite.addTo(map);
+labels.addTo(map);
+
+async function loadRainLayer() {
+    try {
+        const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
+        const data = await res.json();
+
+        const frames = data.radar.past;
+        const latest = frames[frames.length - 1];
+
+        const rainLayer = L.tileLayer(
+            `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`,
+            {
+                opacity: 1,
+                attribution: 'RainViewer'
+            }
+        );
+
+        rainLayer.addTo(map);
+
+    } catch (e) {
+        console.error("Rain failed:", e);
+    }
+}
+
+loadRainLayer();
 
     var trackMaria = [
     {lat: 14, lng: -23, category: 0 },
