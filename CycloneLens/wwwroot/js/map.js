@@ -1,19 +1,22 @@
-﻿// 1️⃣ CREATE MAP
-var map = L.map('map').setView([20, -60], 4);
+﻿var map = L.map('map').setView([20, -60], 4);
 
-// 🛰️ Satellite base
 var satellite = L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    { attribution: 'Tiles © Esri' }
-);
+    {
+        attribution: 'Tiles © Esri'
+    }
+).addTo(map);
 
-// 🏷️ Labels overlay
+var clouds = L.tileLayer(
+    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
+    { opacity: 1 }
+).addTo(map);
+
 var labels = L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
     { opacity: 0.7 }
 );
 
-// ✅ ADD THEM
 satellite.addTo(map);
 labels.addTo(map);
 
@@ -83,7 +86,8 @@ loadRainLayer();
     {lat: 13.5, lng: -39, category: 1 },
     {lat: 14, lng: -42, category: 1 },
     {lat: 14.5, lng: -45, category: 2 },
-    {lat: 15, lng: -48, category: 2 }, // peak Cat 2 thus far
+    { lat: 15, lng: -48, category: 2 }, 
+    // nog actief
     ];
 
     var latlngsAlberto = trackAlberto.map(p => [p.lat, p.lng]);
@@ -132,7 +136,7 @@ loadRainLayer();
     var observations = [
     // Miami
     {
-        lat: 25.8,
+    lat: 25.8,
     lng: -80.2,
     wind: 140,
     pressure: 950,
@@ -141,7 +145,7 @@ loadRainLayer();
 
     // Tampa (FIXED)
     {
-        lat: 27.95,
+    lat: 27.95,
     lng: -82.46,
     wind: 110,
     pressure: 970,
@@ -150,7 +154,7 @@ loadRainLayer();
 
     // Mexico (Yucatán / Cancun area)
     {
-        lat: 21.16,
+    lat: 21.16,
     lng: -86.85,
     wind: 120,
     pressure: 965,
@@ -159,7 +163,7 @@ loadRainLayer();
 
     // Jamaica
     {
-        lat: 18.1,
+    lat: 18.1,
     lng: -77.3,
     wind: 100,
     pressure: 980,
@@ -168,7 +172,7 @@ loadRainLayer();
 
     // Puerto Rico
     {
-        lat: 18.4,
+    lat: 18.4,
     lng: -66.1,
     wind: 130,
     pressure: 955,
@@ -177,7 +181,7 @@ loadRainLayer();
 
     // Cape Verde (storm origin region)
     {
-        lat: 15.1,
+    lat: 15.1,
     lng: -23.6,
     wind: 60,
     pressure: 1005,

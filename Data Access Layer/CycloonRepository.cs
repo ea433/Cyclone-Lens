@@ -3,7 +3,6 @@ using CycloneLens.Models;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Types;
-using Models.Classes;
 
 namespace CycloneLens.DAL
 {
