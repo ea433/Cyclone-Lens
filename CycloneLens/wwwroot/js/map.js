@@ -1,9 +1,37 @@
-﻿var map = L.map('map').setView([20, -60], 4);
+﻿/* real high-quality sat data 
+|| without atlantic + labels
 
-var satellite = L.tileLayer(
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+var map = L.map('map', {
+            minZoom: 2,
+            maxZoom: 7,
+        }).setView([20, -60], 4);
+
+        var labels = L.tileLayer(
+            'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+            { opacity: 1 }
+        );
+        labels.addTo(map);
+
+        var nasa = L.tileLayer(
+          'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+          {
+            opacity: 0.95,
+            attribution: 'NASA VIIRS'
+          }
+        ).addTo(map);
+*/
+
+var map = L.map('map', {
+    minZoom: 2,
+    maxZoom: 7,
+}).setView([20, -60], 4);
+
+var nasa = L.tileLayer(
+    'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
     {
-        attribution: 'Tiles © Esri'
+        maxZoom: 9,
+        opacity: 0.8,
+        attribution: 'NASA GIBS'
     }
 ).addTo(map);
 
@@ -31,7 +59,7 @@ async function loadRainLayer() {
         const rainLayer = L.tileLayer(
             `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`,
             {
-                opacity: 1,
+                opacity: 0.7,
                 attribution: 'RainViewer'
             }
         );

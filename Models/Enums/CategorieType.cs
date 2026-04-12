@@ -8,6 +8,6 @@
         Categorie_2 = 4,
         Categorie_3 = 5,
         Categorie_4 = 6,
-        Categorie_5 = 7
+        Categorie_5 = 7,
     }
 }
