@@ -9,5 +9,8 @@
         Categorie_3 = 5,
         Categorie_4 = 6,
         Categorie_5 = 7,
+        Extratropische_Cycloon = 8,
+        Subtropische_Cycloon = 9,
+        Restlaag = 10
     }
 }
