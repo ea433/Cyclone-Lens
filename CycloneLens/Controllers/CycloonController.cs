@@ -2,7 +2,6 @@
 using CycloneLens.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
-using Models.Classes;
 using Presentation.Models;
 
 namespace CycloneLens.Controllers
@@ -22,12 +21,21 @@ namespace CycloneLens.Controllers
 
             var repository = new CycloonRepository(connectionString);
             _service = new CycloonService(repository);
-        }      
+        }
 
         public IActionResult Index()
         {
-            var cyclonen = _service.GetActiveCyclonenNATL();
-            return View(cyclonen);
+            var data = _service.GetActiveCyclonenNATL();
+
+            var ViewModel = data.Select(c => new ViewModel(
+                c.Id,
+                c.Naam,
+                c.Categorie,
+                c.Bassin,
+                c.Status
+            )).ToList();
+
+            return View(ViewModel);
         }
 
         // fr-05

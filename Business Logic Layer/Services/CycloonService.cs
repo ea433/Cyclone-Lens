@@ -1,6 +1,7 @@
 ﻿using CycloneLens.Interfaces;
 using CycloneLens.Models;
 using Logic.Enums;
+using Models.DTOs;
 
 public class CycloonService
 {
@@ -11,7 +12,7 @@ public class CycloonService
         _repository = repository;
     }
 
-    public List<ViewModel> GetActiveCyclonenNATL()
+    public List<CycloonDto> GetActiveCyclonenNATL()
     {
         var cyclonen = _repository.GetCyclonen();
         var metadata = _repository.GetMetadata();
@@ -26,12 +27,12 @@ public class CycloonService
                     .OrderByDescending(metadata => metadata.Tijdstip)
                     .FirstOrDefault();
 
-                return new ViewModel(
-                    cycloon.Id,
-                    cycloon.Naam,
-                    latest?.Categorie ?? CategorieType.Tropische_Depressie,
-                    cycloon.Bassin,
-                    cycloon.Status
+                return new CycloonDto(
+                cycloon.Id,
+                cycloon.Naam,
+                latest?.Categorie ?? CategorieType.Tropische_Depressie,
+                cycloon.Bassin,
+                cycloon.Status
                 );
             })
             .ToList();
