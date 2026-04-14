@@ -10,22 +10,22 @@
     <link rel="stylesheet" href="~/CycloneLens.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="icon" type="image/png" href="~/FaviconCL.png" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid position-relative">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top main-navbar">
+            <div class="container position-relative">
 
-                <!-- Brand (left) -->
-                <a class="navbar-brand position-absolute start-1" href="#">CycloneLens</a>
+                <!-- Logo LEFT -->
+                <a class="navbar-brand position-absolute start-0 d-flex align-items-center"
+                   asp-controller="Home" asp-action="Index">
+                    <img src="~/LogoCL.png" style="height: 30px; margin-right: 6px;" />
+                    CycloneLens
+                </a>
 
-                <!-- Toggle button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Centered nav -->
-                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <!-- CENTERED NAV -->
+                <div class="mx-auto">
                     <ul class="navbar-nav flex-row gap-3">
 
                         <li class="nav-item">
@@ -45,9 +45,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="CycloonSatellietView">
-                                Satelliet
-                            </a>
+                            <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="CycloonSatellietView">Satelliet</a>
                         </li>
 
                     </ul>

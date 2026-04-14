@@ -25,6 +25,7 @@ var map = L.map('map', {
 var map = L.map('map', {
     minZoom: 2,
     maxZoom: 7,
+    zoomControl: false
 }).setView([20, -60], 4);
 
 var esri = L.tileLayer(
