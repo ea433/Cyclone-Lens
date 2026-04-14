@@ -1,5 +1,4 @@
 ﻿using CycloneLens.Models;
-using Models.Classes;
 
 namespace CycloneLens.Interfaces
 {

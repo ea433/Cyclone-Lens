@@ -1,7 +1,7 @@
 ﻿using CycloneLens.Models;
 using Logic.Enums;
 
-namespace Models.Classes
+namespace Presentation.Models
 {
     public class UpdateCycloonViewModel
     {

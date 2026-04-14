@@ -1,6 +1,6 @@
 ﻿using Logic.Enums;
 
-namespace CycloneLens.Models
+namespace Presentation.Models
 {
     public class ViewModel
     {

@@ -1,7 +1,6 @@
 ﻿using CycloneLens.Interfaces;
 using CycloneLens.Models;
 using Logic.Enums;
-using Models.Classes;
 
 public class CycloonService
 {

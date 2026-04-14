@@ -1,7 +1,4 @@
-﻿/* real high-quality sat data 
-|| without atlantic + labels
-
-var map = L.map('map', {
+﻿var map = L.map('map', {
             minZoom: 2,
             maxZoom: 7,
         }).setView([20, -60], 4);
@@ -19,34 +16,32 @@ var map = L.map('map', {
             attribution: 'NASA VIIRS'
           }
         ).addTo(map);
-*/
 
+
+/*
 var map = L.map('map', {
     minZoom: 2,
     maxZoom: 7,
 }).setView([20, -60], 4);
 
-var nasa = L.tileLayer(
-    'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
-    {
-        maxZoom: 9,
-        opacity: 0.8,
-        attribution: 'NASA GIBS'
-    }
-).addTo(map);
-
 var clouds = L.tileLayer(
     'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
-    { opacity: 1 }
+    {
+        opacity: 1,
+        attribution: 'OpenWeatherMap'
+    }
 ).addTo(map);
 
 var labels = L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-    { opacity: 0.7 }
+    {
+        opacity: 0.7
+    }
 );
 
 satellite.addTo(map);
 labels.addTo(map);
+*/
 
 async function loadRainLayer() {
     try {
@@ -66,8 +61,8 @@ async function loadRainLayer() {
 
         rainLayer.addTo(map);
 
-    } catch (e) {
-        console.error("Rain failed:", e);
+    } catch (ErrorMessage) {
+        console.error("Rain failed:", ErrorMessage);
     }
 }
 
@@ -136,28 +131,28 @@ loadRainLayer();
     if (cat == 1) return 'yellow';
     if (cat == 2) return 'orange';
     if (cat == 3) return 'red';
-            if (cat >= 4) return 'purple';
-        }
+    if (cat >= 4) return 'purple';
+    }
 
-        trackMaria.forEach(p => {
-        L.circleMarker([p.lat, p.lng], {
-            radius: 6,
-            color: getColor(p.category),
-            fillOpacity: 0.8
-        })
-            .addTo(map)
-            .bindPopup("Category " + p.category);
-        });
+    trackMaria.forEach(p => {
+    L.circleMarker([p.lat, p.lng], {
+        radius: 6,
+        color: getColor(p.category),
+        fillOpacity: 0.8
+    })
+        .addTo(map)
+        .bindPopup("Category " + p.category);
+    });
 
-        trackAlberto.forEach(q => {
-        L.circleMarker([q.lat, q.lng], {
-            radius: 6,
-            color: getColor(q.category),
-            fillOpacity: 0.8
-        })
-            .addTo(map)
-            .bindPopup("Category " + q.category);
-        });
+    trackAlberto.forEach(q => {
+    L.circleMarker([q.lat, q.lng], {
+        radius: 6,
+        color: getColor(q.category),
+        fillOpacity: 0.8
+    })
+        .addTo(map)
+        .bindPopup("Category " + q.category);
+    });
 
 
     
@@ -169,7 +164,7 @@ loadRainLayer();
     wind: 140,
     pressure: 950,
     description: "Gebruikersrapport: Ernstige schade, sterke winden"
-            },
+    },
 
     // Tampa (FIXED)
     {
@@ -178,7 +173,7 @@ loadRainLayer();
     wind: 110,
     pressure: 970,
     description: "Gebruikersrapport: Hevige regen en overstromingen"
-            },
+    },
 
     // Mexico (Yucatán / Cancun area)
     {
@@ -187,7 +182,7 @@ loadRainLayer();
     wind: 120,
     pressure: 965,
     description: "Gebruikersrapport: Stormvloed en sterke winden"
-            },
+    },
 
     // Jamaica
     {
@@ -196,7 +191,7 @@ loadRainLayer();
     wind: 100,
     pressure: 980,
     description: "Gebruikersrapport: Overstromingen en aardverschuivingen"
-            },
+    },
 
     // Puerto Rico
     {
@@ -205,7 +200,7 @@ loadRainLayer();
     wind: 130,
     pressure: 955,
     description: "Gebruikersrapport: Stroomverstoringen"
-            },
+    },
 
     // Cape Verde (storm origin region)
     {
@@ -214,7 +209,7 @@ loadRainLayer();
     wind: 60,
     pressure: 1005,
     description: "Gebruikersrapport: Ontwikkelende tropische golf."
-            }
+    }
     ];
 
     var obsMarkers = [];

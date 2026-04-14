@@ -3,6 +3,7 @@ using CycloneLens.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
 using Models.Classes;
+using Presentation.Models;
 
 namespace CycloneLens.Controllers
 {

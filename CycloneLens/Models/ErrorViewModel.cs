@@ -1,4 +1,4 @@
-namespace CycloneLens.Models
+namespace Presentation.Models
 {
     public class ErrorViewModel
     {
