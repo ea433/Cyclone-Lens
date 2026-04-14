@@ -37,7 +37,7 @@ var esri = L.tileLayer(
 
 // ☁️ clouds (make them transparent!)
 var clouds = L.tileLayer(
-    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=YOUR_KEY',
+    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
     { opacity: 0.9 }
 ).addTo(map);
 
@@ -51,6 +51,8 @@ var labels = L.tileLayer(
     }
 ).addTo(map);
 
+let rainLayer = null;
+
 async function loadRainLayer() {
     try {
         const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
@@ -58,14 +60,11 @@ async function loadRainLayer() {
 
         const frames = data.radar.past || data.radar.nowcast;
 
-        if (!frames || frames.length === 0) {
-            console.warn("No radar frames available");
-            return;
-        }
+        if (!frames || frames.length === 0) return;
 
         const latest = frames[frames.length - 1];
 
-        const rainLayer = L.tileLayer(
+        rainLayer = L.tileLayer(
             `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`,
             {
                 opacity: 0.7,
@@ -82,20 +81,29 @@ async function loadRainLayer() {
 loadRainLayer();
 
 document.getElementById("toggleClouds").addEventListener("change", (e) => {
-    if (e.target.checked) map.addLayer(clouds);
-    else map.removeLayer(clouds);
+    if (e.target.checked) {
+        map.addLayer(clouds);
+    } else {
+        map.removeLayer(clouds);
+    }
 });
 
 document.getElementById("toggleLabels").addEventListener("change", (e) => {
-    if (e.target.checked) map.addLayer(labels);
-    else map.removeLayer(labels);
+    if (e.target.checked) {
+        map.addLayer(labels);
+    } else {
+        map.removeLayer(labels);
+    }
 });
 
 document.getElementById("toggleRadar").addEventListener("change", (e) => {
     if (!rainLayer) return;
 
-    if (e.target.checked) map.addLayer(rainLayer);
-    else map.removeLayer(rainLayer);
+    if (e.target.checked) {
+        map.addLayer(rainLayer);
+    } else {
+        map.removeLayer(rainLayer);
+    }
 });
 
 esri.bringToBack();
