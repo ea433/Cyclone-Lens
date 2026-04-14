@@ -4,17 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CycloneLens</title>
-    <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CycloneLens.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="icon" type="image/png" href="~/FaviconCL.png" />
+
     @RenderSection("Styles", required: false)
 </head>
+
 <body>
+
+    <!-- ===== NORMAL NAVBAR ===== -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white fixed-top main-navbar">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container position-relative">
 
                 <!-- Logo LEFT -->
@@ -45,7 +49,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="CycloonSatellietView">Satelliet</a>
+                            <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="CycloonSatellietView">
+                                Satelliet
+                            </a>
                         </li>
 
                     </ul>
@@ -54,20 +60,28 @@
             </div>
         </nav>
     </header>
+
+    <!-- ===== PAGE CONTENT ===== -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- ===== FOOTER ===== -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - CycloneLens - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - CycloneLens -
+            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

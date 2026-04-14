@@ -3,35 +3,45 @@
 }
 
 @section Styles {
-    <style>
-        .main-navbar {
-            background: rgba(255, 255, 255, 0.2) !important;
-        }
-    </style>
-}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Map</title>
-
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Your CSS -->
     <link rel="stylesheet" href="~/css/map.css" />
-</head>
-<body>
 
-    <div id="map"></div>
+    <style>
+        .navbar {
+            background: rgba(15, 23, 42, 0.6) !important;
+            backdrop-filter: blur(8px);
+        }
+    </style>
+}
 
+<div id="map"></div>
+
+<div class="map-panel">
+    <h6>Map Instellingen</h6>
+
+    <label>
+        <input type="checkbox" id="toggleClouds" checked>
+        Clouds
+    </label>
+
+    <label>
+        <input type="checkbox" id="toggleLabels" checked>
+        Borders
+    </label>
+
+    <label>
+        <input type="checkbox" id="toggleRadar" checked>
+        Radar
+    </label>
+</div>
+
+@section Scripts {
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <!-- Your JS -->
     <script src="~/js/map.js"></script>
-
-</body>
-</html>
-
+}

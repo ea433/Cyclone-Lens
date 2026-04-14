@@ -5,13 +5,56 @@
 
 #map {
     position: fixed;
-    top: 0;
+    top: 56px; 
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 56px);
+    z-index: 0;
 }
 
 .main-navbar {
     background: rgba(255,255,255,1);
     backdrop-filter: blur(6px);
+}
+
+.navbar {
+    background: rgba(15, 23, 42, 0.6) !important;
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1000;
+}
+
+.map-panel {
+    position: fixed;
+    top: 80px;
+    right: 15px;
+    width: 180px;
+    background: rgba(15, 23, 42, 0.85);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    z-index: 1000;
+}
+
+.map-panel h6 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.map-panel label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+
+.map-panel input[type="checkbox"] {
+    accent-color: #38bdf8;
 }

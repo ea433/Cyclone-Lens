@@ -81,6 +81,23 @@ async function loadRainLayer() {
 }
 loadRainLayer();
 
+document.getElementById("toggleClouds").addEventListener("change", (e) => {
+    if (e.target.checked) map.addLayer(clouds);
+    else map.removeLayer(clouds);
+});
+
+document.getElementById("toggleLabels").addEventListener("change", (e) => {
+    if (e.target.checked) map.addLayer(labels);
+    else map.removeLayer(labels);
+});
+
+document.getElementById("toggleRadar").addEventListener("change", (e) => {
+    if (!rainLayer) return;
+
+    if (e.target.checked) map.addLayer(rainLayer);
+    else map.removeLayer(rainLayer);
+});
+
 esri.bringToBack();
 clouds.bringToFront();
 labels.bringToFront();

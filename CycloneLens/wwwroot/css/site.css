@@ -73,13 +73,9 @@ a {
     }
 
 body {
-    background-color: #f4f6f9;
+    background: #f1f5f9
 }
 
 .card {
     border-radius: 10px;
-}
-
-body {
-    padding-top: 70px;
 }
