@@ -76,7 +76,7 @@ namespace CycloneLens.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Content(ex.Message);
             }
@@ -90,6 +90,11 @@ namespace CycloneLens.Controllers
                 return View("Error");
 
             return View(cycloon);
+        }
+
+        public IActionResult CycloonSatellietView()
+        {
+            return View();
         }
     }
 }
