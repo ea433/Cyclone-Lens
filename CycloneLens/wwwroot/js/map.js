@@ -1,13 +1,11 @@
-﻿var map = L.map('map', {
+﻿/*
+GOOD QUALITY SATELLITE: ONLY WPAC, AUS, part SIO & PAC
+RAINLAYER NOT INCLUDED
+
+var map = L.map('map', {
             minZoom: 2,
             maxZoom: 7,
         }).setView([20, -60], 4);
-
-        var labels = L.tileLayer(
-            'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-            { opacity: 1 }
-        );
-        labels.addTo(map);
 
         var nasa = L.tileLayer(
           'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
@@ -16,39 +14,54 @@
             attribution: 'NASA VIIRS'
           }
         ).addTo(map);
+        
+        var labels = L.tileLayer(
+            'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+            { opacity: 1 }
+        );
+        labels.addTo(map);
+*/
 
-
-/*
 var map = L.map('map', {
     minZoom: 2,
     maxZoom: 7,
 }).setView([20, -60], 4);
 
-var clouds = L.tileLayer(
-    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
+var esri = L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     {
-        opacity: 1,
-        attribution: 'OpenWeatherMap'
+        attribution: 'Esri'
     }
 ).addTo(map);
 
+// ☁️ clouds (make them transparent!)
+var clouds = L.tileLayer(
+    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=YOUR_KEY',
+    { opacity: 0.9 }
+).addTo(map);
+
+
+// 🏷️ labels (on top!)
 var labels = L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
     {
-        opacity: 0.7
+        opacity: 1,
+        pane: 'overlayPane'
     }
-);
-
-satellite.addTo(map);
-labels.addTo(map);
-*/
+).addTo(map);
 
 async function loadRainLayer() {
     try {
         const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
         const data = await res.json();
 
-        const frames = data.radar.past;
+        const frames = data.radar.past || data.radar.nowcast;
+
+        if (!frames || frames.length === 0) {
+            console.warn("No radar frames available");
+            return;
+        }
+
         const latest = frames[frames.length - 1];
 
         const rainLayer = L.tileLayer(
@@ -61,12 +74,15 @@ async function loadRainLayer() {
 
         rainLayer.addTo(map);
 
-    } catch (ErrorMessage) {
-        console.error("Rain failed:", ErrorMessage);
+    } catch (err) {
+        console.error("Rain failed:", err);
     }
 }
-
 loadRainLayer();
+
+esri.bringToBack();
+clouds.bringToFront();
+labels.bringToFront();
 
     var trackMaria = [
     {lat: 14, lng: -23, category: 0 },
