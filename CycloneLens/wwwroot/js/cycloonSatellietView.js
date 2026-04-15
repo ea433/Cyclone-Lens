@@ -1,4 +1,6 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// all this JS is from yesterday testing - doesn't currently work
+
+document.addEventListener("DOMContentLoaded", function () {
 
     function updateTime() {
         const now = new Date();

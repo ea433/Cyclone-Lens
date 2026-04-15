@@ -25,7 +25,6 @@
         <div class="card-body">
             <label class="form-label">Selecteer cycloon</label>
             <select class="form-select">
-                <option>Cycloon Maria (2023)</option>
             </select>
         </div>
     </div>
@@ -57,4 +56,49 @@
         Data via publieke API’s (NOAA, NASA, NHC)
     </div>
 
+</div>
+
+<div class="sat-container">
+    <img id="satImage" src="GEOCOLOR_URL" alt="Satellite image">
+
+    <div class="sat-buttons">
+        <button onclick="setSat('GEOCOLOR')">GeoColor</button>
+        <button onclick="setSat('AIR_MASS')">Air Mass</button>
+        <button onclick="setSat('SHORTWAVE_IR')">Shortwave IR</button>
+    </div>
+</div>
+
+<div>
+    <script>
+        const baseUrl = "https://your-goes-source/";
+
+        const products = {
+          GEOCOLOR: "geocolor.jpg",
+          AIR_MASS: "airmass.jpg",
+          DUST_RGB: "dust.jpg",
+          FIRE_TEMPERATURE: "fire.jpg"
+        };
+
+        let currentProduct = "GEOCOLOR";
+
+        function setSat(product) {
+          currentProduct = product;
+          updateImage();
+        }
+
+        function updateImage() {
+          const img = document.getElementById("satImage");
+
+          // cache buster so browser doesn't reuse old image
+          const timestamp = new Date().getTime();
+
+          img.src = baseUrl + products[currentProduct] + "?t=" + timestamp;
+        }
+
+        // refresh every 60 seconds
+        setInterval(updateImage, 60000);
+
+        // initial load
+        updateImage();
+    </script>
 </div>
