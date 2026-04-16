@@ -1,10 +1,10 @@
-﻿using CycloneLens.Interfaces;
-using CycloneLens.Models;
+﻿using CycloneLens.Models;
+using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Types;
 
-namespace CycloneLens.DAL
+namespace Data_Access_Layer.Repositories
 {
     public class CycloonRepository : ICycloonRepository
     {
@@ -57,48 +57,6 @@ namespace CycloneLens.DAL
             return cyclonen;
         }
 
-        public List<CycloonData> GetMetadata()
-        {
-            var metadataList = new List<CycloonData>();
-
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-
-                string query = @"SELECT id, cycloon_id, categorie, windsnelheid, luchtdruk,
-                                 tijdstip, coordinaten
-                                 FROM Metadata";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var categorieString = reader["categorie"]?.ToString();
-
-                        if (string.IsNullOrEmpty(categorieString))
-                        {
-                            throw new Exception("Invalid categorie value from database");
-                        }
-
-                        var metadata = new CycloonData(
-                        (int)reader["id"],
-                        Convert.ToInt32(reader["cycloon_id"]),
-                        (CategorieType)(int)reader["categorie"],
-                        Convert.ToDouble(reader["windsnelheid"]),
-                        Convert.ToDouble(reader["luchtdruk"]),
-                        (SqlGeography)reader["coordinaten"],
-                        (DateTime)reader["tijdstip"]
-                        );
-
-                        metadataList.Add(metadata);
-                    }
-                }
-            }
-
-            return metadataList;
-        }
-
         // fr-05 
         public void UpdateCycloon(Cycloon cycloon)
         {
@@ -115,29 +73,6 @@ namespace CycloneLens.DAL
                     cmd.Parameters.AddWithValue("@id", cycloon.Id);
                     cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
                     cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        public void AddMetadata(CycloonData metadata)
-        {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
-
-                string query = @"INSERT INTO Metadata 
-        (cycloon_id, categorie, windsnelheid, luchtdruk, longitude, latitude, tijdstip)
-        VALUES (@cid, @cat, @wind, @druk, @lon, @lat, @tijd)";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@cid", metadata.Cycloon_Id);
-                    cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enums
-                    cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
-                    cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
-                    cmd.Parameters.AddWithValue("@lon", metadata.Coordinaten);
-                    cmd.Parameters.AddWithValue("@tijd", metadata.Tijdstip);
 
                     cmd.ExecuteNonQuery();
                 }

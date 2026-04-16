@@ -1,21 +1,23 @@
-﻿using CycloneLens.Interfaces;
-using CycloneLens.Models;
+﻿using CycloneLens.Models;
+using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Models.Classes;
 
 public class CycloonService
 {
     private readonly ICycloonRepository _repository;
+    private readonly ICycloonDataRepository _dataRepository;
 
-    public CycloonService(ICycloonRepository repository)
+    public CycloonService(ICycloonRepository repository, ICycloonDataRepository datarepository)
     {
         _repository = repository;
+        _dataRepository = datarepository;
     }
 
     public List<CycloonOverzichtNATL> GetActiveCyclonenNATL()
     {
         var cyclonen = _repository.GetCyclonen();
-        var metadata = _repository.GetMetadata();
+        var metadata = _dataRepository.GetMetadata();
 
         return cyclonen
             .Where(cycloon => cycloon.Status == StatusType.Actief &&
@@ -39,19 +41,19 @@ public class CycloonService
     }
 
     // fr-05 + logging
-    public void UpdateCycloon(Cycloon cycloon, CycloonData metadata, Gebruiker gebruiker)
+    public void UpdateCycloon(Cycloon cycloon, CycloonData? metadata, Gebruiker gebruiker)
     {
         if (gebruiker == null || !gebruiker.BeheerRechten)
-            throw new Exception("Geen rechten");
+            throw new UnauthorizedAccessException("Geen rechten");
 
         if (string.IsNullOrWhiteSpace(cycloon.Naam))
-            throw new Exception("Naam is verplicht");
+            throw new ArgumentException("Naam is verplicht");
 
         _repository.UpdateCycloon(cycloon);
 
         if (metadata != null)
         {
-            _repository.AddMetadata(metadata);
+            _dataRepository.AddMetadata(metadata);
         }
 
         _repository.LogWijziging(

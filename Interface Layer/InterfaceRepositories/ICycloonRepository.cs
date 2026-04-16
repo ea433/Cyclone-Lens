@@ -1,13 +1,11 @@
 ﻿using CycloneLens.Models;
 
-namespace CycloneLens.Interfaces
+namespace Interface_Layer.InterfaceRepositories
 {
     public interface ICycloonRepository
     {
         List<Cycloon> GetCyclonen();
-        List<CycloonData> GetMetadata();
         void UpdateCycloon(Cycloon cycloon);
-        void AddMetadata(CycloonData metadata);
         void LogWijziging(int cycloonId, string actie, int gebruikerId);
         Cycloon? GetById(int id);
     }

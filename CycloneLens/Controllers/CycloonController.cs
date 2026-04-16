@@ -1,5 +1,5 @@
-﻿using CycloneLens.DAL;
-using CycloneLens.Models;
+﻿using CycloneLens.Models;
+using Data_Access_Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
 using Presentation.Models;
@@ -20,7 +20,8 @@ namespace CycloneLens.Controllers
             }
 
             var repository = new CycloonRepository(connectionString);
-            _service = new CycloonService(repository);
+            var dataRepository = new CycloonDataRepository(connectionString);
+            _service = new CycloonService(repository, dataRepository);
         }
 
         public IActionResult Index()
