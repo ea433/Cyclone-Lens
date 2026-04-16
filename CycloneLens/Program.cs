@@ -1,5 +1,5 @@
-using CycloneLens.DAL;
 using Interface_Layer.InterfaceRepositories;
+using Data_Access_Layer.Repositories;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +19,27 @@ builder.Services.AddScoped<ICycloonRepository>(provider =>
         throw new Exception("Connection string not found");
 
     return new CycloonRepository(connectionString);
+});
+
+builder.Services.AddScoped<ICycloonDataRepository>(provider =>
+{
+    var config = provider.GetRequiredService<IConfiguration>();
+    var connectionString = config.GetConnectionString("DefaultConnection");
+    if (string.IsNullOrEmpty(connectionString))
+        throw new Exception("Connection string not found");
+    else
+        return new CycloonDataRepository(connectionString);
+});
+
+builder.Services.AddScoped<ILoggingRepository>(provider =>
+{
+    var config = provider.GetRequiredService<IConfiguration>();
+    var connectionString = config.GetConnectionString("DefaultConnection");
+
+    if (string.IsNullOrEmpty(connectionString))
+        throw new Exception("Connection string not found");
+    else
+        return new LoggingRepository(connectionString);
 });
 
 var app = builder.Build();
