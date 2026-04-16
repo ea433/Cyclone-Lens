@@ -79,3 +79,10 @@ body {
 .card {
     border-radius: 10px;
 }
+
+.hero-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 6px;
+    display: inline; 
+}

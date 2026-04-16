@@ -1,8 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="container mt-4">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <!-- HERO SECTION -->
+    <div class="card shadow-sm mb-4 border-0">
+        <div class="position-relative">
+
+            <img src="https://d3i6fh83elv35t.cloudfront.net/static/2025/10/2025-10-28T140828Z_1095430042_RC2SKHAPM76G_RTRMADP_3_STORM-MELISSA-1024x576.jpg"
+                 class="img-fluid w-100 rounded"
+                 style="max-height: 400px; object-fit: cover;" />
+
+                <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+
+                    <h1 class="fw-bold hero-overlay">CycloneLens</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SATELLITE OPTIONS -->
+    <div class="row text-center">
+
+        <!-- GeoColor -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg"
+                     class="card-img-top"
+                     style="height: 200px; object-fit: cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">GeoColor</h5>
+                    <p class="card-text text-muted small">
+                        Satellietbeelden met natuurlijke kleuren die zichtbare en infraroodgegevens combineren en 
+                        presenteren.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Air Mass -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/AirMass/20261061630_GOES19-ABI-taw-AirMass-3600x2160.jpg"
+                     class="card-img-top"
+                     style="height: 200px; object-fit: cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">Air Mass</h5>
+                    <p class="card-text text-muted small">
+                        Highlights differences in air masses and atmospheric dynamics.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shortwave IR -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <img src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/07/20261062100_GOES19-ABI-taw-07-3600x2160.jpg"
+                     class="card-img-top"
+                     style="height: 200px; object-fit: cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">Shortwave IR</h5>
+                    <p class="card-text text-muted small">
+                        Detects heat signatures and storm intensity, even at night.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
