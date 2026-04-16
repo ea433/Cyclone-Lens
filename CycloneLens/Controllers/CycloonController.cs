@@ -21,7 +21,8 @@ namespace CycloneLens.Controllers
 
             var repository = new CycloonRepository(connectionString);
             var dataRepository = new CycloonDataRepository(connectionString);
-            _service = new CycloonService(repository, dataRepository);
+            var loggingRepository = new LoggingRepository(connectionString);
+            _service = new CycloonService(repository, dataRepository, loggingRepository);
         }
 
         public IActionResult Index()

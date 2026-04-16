@@ -7,11 +7,14 @@ public class CycloonService
 {
     private readonly ICycloonRepository _repository;
     private readonly ICycloonDataRepository _dataRepository;
+    private readonly ILoggingRepository _loggingRepository;
 
-    public CycloonService(ICycloonRepository repository, ICycloonDataRepository datarepository)
+    public CycloonService(ICycloonRepository repository, ICycloonDataRepository datarepository,
+        ILoggingRepository loggingrepository)
     {
         _repository = repository;
         _dataRepository = datarepository;
+        _loggingRepository = loggingrepository;
     }
 
     public List<CycloonOverzichtNATL> GetActiveCyclonenNATL()
@@ -56,7 +59,7 @@ public class CycloonService
             _dataRepository.AddMetadata(metadata);
         }
 
-        _repository.LogWijziging(
+        _loggingRepository.LogWijziging(
             cycloon.Id,
             "Cycloon bijgewerkt",
             gebruiker.Id

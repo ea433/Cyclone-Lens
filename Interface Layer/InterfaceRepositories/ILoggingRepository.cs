@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Interface_Layer.InterfaceRepositories
 {
-    internal interface Interface2
+    public interface ILoggingRepository
     {
+        void LogWijziging(int cycloonId, string actie, int gebruikerId);
     }
 }

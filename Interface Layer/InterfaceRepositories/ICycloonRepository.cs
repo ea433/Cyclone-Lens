@@ -6,7 +6,6 @@ namespace Interface_Layer.InterfaceRepositories
     {
         List<Cycloon> GetCyclonen();
         void UpdateCycloon(Cycloon cycloon);
-        void LogWijziging(int cycloonId, string actie, int gebruikerId);
         Cycloon? GetById(int id);
     }
 }
