@@ -1,5 +1,6 @@
-using Interface_Layer.InterfaceRepositories;
+using Business_Logic_Layer.Services;
 using Data_Access_Layer.Repositories;
+using Interface_Layer.InterfaceRepositories;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,17 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
+builder.Services.AddScoped<IObservatieService, ObservatieService>();
+builder.Services.AddScoped<IObservatieRepository>(provider =>
+{
+    var config = provider.GetRequiredService<IConfiguration>();
+
+    var connectionString = config.GetConnectionString("DefaultConnection")
+        ?? throw new Exception("Connection string not found");
+
+    return new ObservatieDAL(connectionString);
+});
 
 builder.Services.AddScoped<ICycloonRepository>(provider =>
 {

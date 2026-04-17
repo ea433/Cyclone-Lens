@@ -1,0 +1,90 @@
+﻿@model Presentation.Models.ObservatieViewModel
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 40px auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .box {
+        border: 1px solid #333;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .box-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .box-subtitle {
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.9em;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 3px;
+        border: 1px solid #333;
+    }
+
+    textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    .submit-btn {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #333;
+        background-color: #eee;
+        cursor: pointer;
+    }
+
+    .submit-btn:hover {
+        background-color: #ddd;
+    }
+</style>
+
+<div class="form-container">
+
+    <!-- Header box -->
+    <div class="box">
+        <div class="box-title">Observatie toevoegen</div>
+        <div class="box-subtitle">Vul uw waarnemingen in</div>
+    </div>
+
+    <!-- Form box -->
+    <div class="box">
+        <form asp-action="Create" method="post">
+
+            <input type="hidden" asp-for="CycloonId" />
+
+            <!-- Latitude -->
+            <label>Latitude *</label>
+            <input asp-for="Latitude" type="number" step="any" placeholder="bijv. 23.5" />
+
+            <!-- Longitude -->
+            <label>Longitude *</label>
+            <input asp-for="Longitude" type="number" step="any" placeholder="bijv. -65.2" />
+
+            <!-- Description -->
+            <label>Beschrijving *</label>
+            <textarea asp-for="Omschrijving" placeholder="Beschrijf uw waarneming..."></textarea>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn">
+                Observatie versturen
+            </button>
+        </form>
+    </div>
+</div>

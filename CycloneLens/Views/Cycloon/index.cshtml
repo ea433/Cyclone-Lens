@@ -9,6 +9,7 @@
             <th>Categorie</th>
             <th>Bassin</th>
             <th>Status</th>
+            <th>Acties</th> <!-- NEW -->
         </tr>
     </thead>
     <tbody>
@@ -26,8 +27,17 @@
                 <td>@cycloon.Bassin.ToString().Replace("_", " ")</td>
 
                 <td>@cycloon.Status.ToString().Replace("_", " ")</td>
+
+                <!-- NEW COLUMN -->
+                <td>
+                    <a asp-controller="Observatie"
+                       asp-action="Create"
+                       asp-route-cycloonId="@cycloon.Id"
+                       class="btn btn-sm btn-primary">
+                        + Observatie
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
-
