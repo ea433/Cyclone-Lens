@@ -35,6 +35,6 @@ namespace Data_Access_Layer.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
-        }
+        } 
     }
 }

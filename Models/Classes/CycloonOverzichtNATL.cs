@@ -4,11 +4,11 @@ namespace Models.Classes
 {
     public class CycloonOverzichtNATL
     {
-        public int Id { get; set; }
-        public string Naam { get; set; }
-        public CategorieType Categorie { get; set; }
-        public BassinType Bassin { get; set; }
-        public StatusType Status { get; set; }
+        public int Id { get; }
+        public string Naam { get; private set; }
+        public CategorieType Categorie { get; private set; }
+        public BassinType Bassin { get; private set; }
+        public StatusType Status { get; private set; }
 
 
         public CycloonOverzichtNATL(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
