@@ -1,10 +1,9 @@
 ﻿using CycloneLens.Models;
 using Interface_Layer.InterfaceRepositories;
-using Interface_Layer.InterfaceServices;
 using Logic.Enums;
 using Models.Classes;
 
-public class CycloonService : ICycloonService
+public class CycloonService
 {
     private readonly ICycloonRepository _repository;
     private readonly ICycloonDataRepository _dataRepository;

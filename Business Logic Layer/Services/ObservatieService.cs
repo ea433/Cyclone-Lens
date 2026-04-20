@@ -1,11 +1,10 @@
 ﻿using Interface_Layer.InterfaceRepositories;
-using Interface_Layer.InterfaceServices;
 using Microsoft.SqlServer.Types;
 using Models.Classes;
 
 namespace Business_Logic_Layer.Services
 {
-    public class ObservatieService : IObservatieService
+    public class ObservatieService
     {
         private readonly IObservatieRepository _dal;
 

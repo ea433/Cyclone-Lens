@@ -1,0 +1,16 @@
+﻿/*
+namespace TestProject
+{
+    [TestClass]
+    public sealed class Test1
+    {
+        [TestMethod]
+        public void TestMethod1()
+        {
+
+            CycloonService c = new CycloonService(new CycloonTestRepository());
+            
+        }
+    }
+}
+*/

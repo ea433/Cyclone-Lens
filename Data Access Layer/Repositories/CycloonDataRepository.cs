@@ -3,11 +3,6 @@ using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Types;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -75,7 +70,7 @@ namespace Data_Access_Layer.Repositories
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@cid", metadata.Cycloon_Id);
-                    cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enums
+                    cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enum dus vandaar int conversie
                     cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
                     cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
                     cmd.Parameters.AddWithValue("@coord", metadata.Coordinaten);
