@@ -1,6 +1,6 @@
 ﻿using Microsoft.SqlServer.Types;
 
-namespace Interface_Layer.InterfaceRepositories
+namespace Interface_Layer.InterfaceServices
 {
     public interface IObservatieService
     {

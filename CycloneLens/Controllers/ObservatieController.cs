@@ -1,4 +1,4 @@
-﻿using Interface_Layer.InterfaceRepositories;
+﻿using Interface_Layer.InterfaceServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
 using Presentation.Models;

@@ -35,7 +35,7 @@ namespace Data_Access_Layer.Repositories
                     cmd.Parameters.Add(geoParam);
 
                     conn.Open();
-                    int rows = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

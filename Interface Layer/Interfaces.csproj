@@ -8,13 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DataInterfaces\**" />
     <Compile Remove="DTOs\**" />
+    <EmbeddedResource Remove="DataInterfaces\**" />
     <EmbeddedResource Remove="DTOs\**" />
+    <None Remove="DataInterfaces\**" />
     <None Remove="DTOs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DataInterfaces\" />
   </ItemGroup>
 
   <ItemGroup>
