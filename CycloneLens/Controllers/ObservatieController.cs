@@ -17,11 +17,10 @@ namespace Presentation.Controllers
         [HttpGet]
         public IActionResult Create(int cycloonId)
         {
-            return View();
-            /*return View(new ObservatieViewModel
+            return View(new ObservatieViewModel
             {
                 CycloonId = cycloonId
-            });*/
+            });
         }
 
         [HttpPost]
@@ -32,7 +31,7 @@ namespace Presentation.Controllers
 
             try
             {
-                // TEMP: hardcoded user (replace later if needed)
+                // TEMP: hardcoded user (vervangen na fr-01/fr-02)
                 int gebruikerId = 1;
 
                 var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
