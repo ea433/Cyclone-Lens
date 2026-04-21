@@ -1,4 +1,5 @@
 ﻿using CycloneLens.Models;
+using Data_Access_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Microsoft.Data.SqlClient;
@@ -6,18 +7,18 @@ using Microsoft.SqlServer.Types;
 
 namespace Data_Access_Layer.Repositories
 {
-    public class CycloonDataRepository : ICycloonDataRepository
+    public class MetadataRepository : IMetadataRepository
     {
         private readonly string _connectionString;
 
-        public CycloonDataRepository(string connectionString)
+        public MetadataRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public List<CycloonData> GetMetadata()
+        public List<Metadata> GetMetadata()
         {
-            var metadataList = new List<CycloonData>();
+            var metadataList = new List<Metadata>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -39,14 +40,14 @@ namespace Data_Access_Layer.Repositories
                             throw new Exception("Invalid categorie value from database");
                         }
 
-                        var metadata = new CycloonData(
-                        (int)reader["id"],
-                        Convert.ToInt32(reader["cycloon_id"]),
-                        (CategorieType)(int)reader["categorie"],
-                        Convert.ToDouble(reader["windsnelheid"]),
-                        Convert.ToDouble(reader["luchtdruk"]),
-                        (SqlGeography)reader["coordinaten"],
-                        (DateTime)reader["tijdstip"]
+                        var metadata = new Metadata(
+                            (int)reader["id"],
+                            Convert.ToInt32(reader["cycloon_id"]),
+                            (CategorieType)(int)reader["categorie"],
+                            Convert.ToDouble(reader["windsnelheid"]),
+                            Convert.ToDouble(reader["luchtdruk"]),
+                            (SqlGeography)reader["coordinaten"],
+                            (DateTime)reader["tijdstip"]
                         );
 
                         metadataList.Add(metadata);
@@ -57,7 +58,7 @@ namespace Data_Access_Layer.Repositories
             return metadataList;
         }
 
-        public void AddMetadata(CycloonData metadata)
+        public void AddMetadata(Metadata metadata)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {

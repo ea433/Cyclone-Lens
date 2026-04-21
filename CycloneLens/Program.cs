@@ -1,7 +1,6 @@
 using Business_Logic_Layer.Services;
 using Data_Access_Layer.Repositories;
 using Interface_Layer.InterfaceRepositories;
-using Interface_Layer.InterfaceServices;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +11,6 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
-builder.Services.AddScoped<IObservatieService, ObservatieService>();
 builder.Services.AddScoped<IObservatieRepository>(provider =>
 {
     var config = provider.GetRequiredService<IConfiguration>();
@@ -34,14 +32,14 @@ builder.Services.AddScoped<ICycloonRepository>(provider =>
     return new CycloonRepository(connectionString);
 });
 
-builder.Services.AddScoped<ICycloonDataRepository>(provider =>
+builder.Services.AddScoped<IMetadataRepository>(provider =>
 {
     var config = provider.GetRequiredService<IConfiguration>();
     var connectionString = config.GetConnectionString("DefaultConnection");
     if (string.IsNullOrEmpty(connectionString))
         throw new Exception("Connection string not found");
     else
-        return new CycloonDataRepository(connectionString);
+        return new MetadataRepository(connectionString);
 });
 
 builder.Services.AddScoped<ILoggingRepository>(provider =>

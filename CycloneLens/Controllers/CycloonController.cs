@@ -2,6 +2,7 @@
 using Data_Access_Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
+using Models.Enums;
 using Presentation.Models;
 
 namespace CycloneLens.Controllers
@@ -20,7 +21,7 @@ namespace CycloneLens.Controllers
             }
 
             var repository = new CycloonRepository(connectionString);
-            var dataRepository = new CycloonDataRepository(connectionString);
+            var dataRepository = new MetadataRepository(connectionString);
             var loggingRepository = new LoggingRepository(connectionString);
             _service = new CycloonService(repository, dataRepository, loggingRepository);
         }
@@ -41,30 +42,44 @@ namespace CycloneLens.Controllers
         }
 
         // fr-05
-        [HttpPost]
-        public IActionResult Update(UpdateCycloonViewModel model)
+
+    [HttpPost]
+    public IActionResult Update(UpdateCycloonViewModel model)
+    {
+        try
         {
-            try
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            var userTypeValue = HttpContext.Session.GetInt32("UserType");
+            var userType = (UserType)(userTypeValue ?? 0);
+
+            var gebruiker = new Gebruiker(
+                userId ?? 0,
+                "test",
+                "test@test",
+                "test",
+                userType
+            );
+
+            if (string.IsNullOrWhiteSpace(model.Naam))
             {
-                var userId = HttpContext.Session.GetInt32("UserId");
-                var isAdmin = HttpContext.Session.GetInt32("IsAdmin") == 1;
+                return View("Error");
+            }
 
-                // var gebruiker = new Gebruiker(userId ?? 0, "temp", "temp@test", "temp", isAdmin);
-                var gebruiker = new Gebruiker(1, "test", "test@test", "test", true);
+            // Example usage of enum
+            if (gebruiker.UserType != UserType.Beheerder)
+            {
+                return View("Error"); // or Unauthorized()
+            }
 
-                if (string.IsNullOrWhiteSpace(model.Naam))
-                {
-                    return View("Error");
-                }
-
-                var cycloon = new Cycloon(
+            var cycloon = new Cycloon(
                     model.Id,
                     model.Naam,
                     model.Status,
                     model.Bassin
                 );
 
-                var metadata = new CycloonData(
+                var metadata = new Metadata(
                     0,
                     model.Id,
                     model.Categorie,

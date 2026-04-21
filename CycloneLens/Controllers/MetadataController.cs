@@ -6,9 +6,9 @@ namespace Presentation.Controllers
     public class MetadataController : Controller
     {
         private readonly ICycloonRepository _repository;
-        private readonly ICycloonDataRepository _dataRepository;
+        private readonly IMetadataRepository _dataRepository;
 
-        public MetadataController(ICycloonRepository repository, ICycloonDataRepository dataRepository)
+        public MetadataController(ICycloonRepository repository, IMetadataRepository dataRepository)
         {
             _repository = repository;
             _dataRepository = dataRepository;

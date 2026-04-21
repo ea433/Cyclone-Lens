@@ -2,14 +2,15 @@
 using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Models.Classes;
+using Models.Enums;
 
 public class CycloonService
 {
     private readonly ICycloonRepository _repository;
-    private readonly ICycloonDataRepository _dataRepository;
+    private readonly IMetadataRepository _dataRepository;
     private readonly ILoggingRepository _loggingRepository;
 
-    public CycloonService(ICycloonRepository repository, ICycloonDataRepository datarepository,
+    public CycloonService(ICycloonRepository repository, IMetadataRepository datarepository,
         ILoggingRepository loggingrepository)
     {
         _repository = repository;
@@ -44,9 +45,9 @@ public class CycloonService
     }
 
     // fr-05 + logging
-    public void UpdateCycloon(Cycloon cycloon, CycloonData? metadata, Gebruiker gebruiker)
+    public void UpdateCycloon(Cycloon cycloon, Metadata? metadata, Gebruiker gebruiker)
     {
-        if (gebruiker == null || !gebruiker.BeheerRechten)
+        if (gebruiker == null || gebruiker.UserType != UserType.Beheerder)
             throw new UnauthorizedAccessException("Geen rechten");
 
         if (string.IsNullOrWhiteSpace(cycloon.Naam))

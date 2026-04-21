@@ -2,7 +2,7 @@
 
 namespace Data_Access_Layer.DTOs
 {
-    public class CycloonDataDTO
+    public class MetadataDTO
     {
         public int Id { get; set; }
         public int CycloonId { get; set; }

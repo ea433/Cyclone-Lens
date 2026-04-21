@@ -3,7 +3,7 @@ using Microsoft.SqlServer.Types;
 
 namespace CycloneLens.Models
 {
-    public class CycloonData
+    public class Metadata
     {
         public int Id { get; }
         public int Cycloon_Id { get; } 
@@ -13,7 +13,7 @@ namespace CycloneLens.Models
         public SqlGeography Coordinaten { get; private set; }
         public DateTime Tijdstip { get; private set; } 
 
-        public CycloonData(int id, int Cycloon_Id, CategorieType categorie, double windsnelheid, double luchtdruk, 
+        public Metadata(int id, int Cycloon_Id, CategorieType categorie, double windsnelheid, double luchtdruk, 
             SqlGeography coordinaten, DateTime tijdstip)
         {
             this.Id = id;

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Interface_Layer.InterfaceRepositories
 {
-    public interface ICycloonDataRepository
+    public interface IMetadataRepository
     {
-        List<CycloonData> GetMetadata();
-        void AddMetadata(CycloonData metadata);
+        List<Metadata> GetMetadata();
+        void AddMetadata(Metadata metadata);
     }
 }

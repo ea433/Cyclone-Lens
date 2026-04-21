@@ -8,7 +8,7 @@ namespace CycloneLens.Models
         public string Naam { get; private set; }
         public StatusType Status { get; private set; }
         public BassinType Bassin { get; private set; }
-        public List<CycloonData> Metadata { get; private set; } = new();
+        public List<Metadata> Metadata { get; private set; } = new();
 
         public Cycloon(int id, string naam, StatusType status, BassinType bassin)
         {

@@ -1,17 +1,18 @@
-﻿using Interface_Layer.InterfaceServices;
+﻿using Interface_Layer.InterfaceRepositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
 using Presentation.Models;
+using Models.Classes;
 
 namespace Presentation.Controllers
 {
     public class ObservatieController : Controller
     {
-        private readonly IObservatieService _service;
+        private readonly IObservatieRepository _repository;
 
-        public ObservatieController(IObservatieService service)
+        public ObservatieController(IObservatieRepository repository)
         {
-            _service = service;
+            _repository = repository;
         }
 
         [HttpGet]
@@ -31,10 +32,7 @@ namespace Presentation.Controllers
 
             try
             {
-                // TEMP: hardcoded user (vervangen na fr-01/fr-02)
-                int gebruikerId = 1;
-
-                var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
+                int gebruikerId = 1; // temp
 
                 if (string.IsNullOrWhiteSpace(vm.Omschrijving))
                 {
@@ -42,14 +40,23 @@ namespace Presentation.Controllers
                     return View(vm);
                 }
 
-                _service.PlaatsObservatie(
+                var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
+
+                var observatie = new Observatie(
+                    0,
                     gebruikerId,
                     vm.CycloonId,
                     vm.Omschrijving!,
-                    coordinaten
+                    null, // afbeelding
+                    coordinaten,
+                    DateTime.Now
                 );
 
-                return RedirectToAction("Details", "Cycloon", new { id = vm.CycloonId });
+                _repository.InsertObservatie(observatie);
+
+                TempData["Success"] = "Observatie succesvol toegevoegd!";
+
+                return RedirectToAction("Index", "Cycloon");
             }
             catch (Exception ex)
             {
