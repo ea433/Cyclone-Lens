@@ -1,8 +1,6 @@
-﻿using CycloneLens.Models;
+﻿using Data_Access_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
-using Logic.Enums;
 using Microsoft.Data.SqlClient;
-using Microsoft.SqlServer.Types;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -15,9 +13,9 @@ namespace Data_Access_Layer.Repositories
             _connectionString = connectionString;
         }
 
-        public List<Cycloon> GetCyclonen()
+        public List<CycloonDTO> GetCyclonen()
         {
-            var cyclonen = new List<Cycloon>();
+            var cyclonen = new List<CycloonDTO>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -42,12 +40,13 @@ namespace Data_Access_Layer.Repositories
 
                         var normalizedBassin = bassinString.Replace("-", "_");
 
-                        var cycloon = new Cycloon(
-                            (int)reader["id"],
-                            naam,
-                            Enum.Parse<StatusType>(statusString),
-                            Enum.Parse<BassinType>(normalizedBassin)
-                        );
+                        var cycloon = new CycloonDTO
+                        {
+                            Id = (int)reader["id"],
+                            Naam = reader["naam"]?.ToString() ?? "",
+                            Status = reader["status"]?.ToString() ?? "",
+                            Bassin = reader["bassin"]?.ToString() ?? ""
+                        };
 
                         cyclonen.Add(cycloon);
                     }
@@ -58,7 +57,7 @@ namespace Data_Access_Layer.Repositories
         }
 
         // fr-05 
-        public void UpdateCycloon(Cycloon cycloon)
+        public void UpdateCycloon(CycloonDTO cycloon)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -79,7 +78,7 @@ namespace Data_Access_Layer.Repositories
             }
         }
 
-        public Cycloon? GetById(int id)
+        public CycloonDTO? GetById(int id)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -95,12 +94,13 @@ namespace Data_Access_Layer.Repositories
                     {
                         if (reader.Read())
                         {
-                            return new Cycloon(
-                                (int)reader["id"],
-                                reader["naam"]?.ToString() ?? "",
-                                Enum.Parse<StatusType>(reader["status"]?.ToString() ?? "Actief"),
-                                Enum.Parse<BassinType>((reader["bassin"] as string ?? "Noord_Atlantisch").Replace("-", "_"))
-                            );
+                            return new CycloonDTO
+                            {
+                                Id = (int)reader["id"],
+                                Naam = reader["naam"]?.ToString() ?? "",
+                                Status = reader["status"]?.ToString() ?? "",
+                                Bassin = reader["bassin"]?.ToString() ?? ""
+                            };
                         }
                     }
                 }

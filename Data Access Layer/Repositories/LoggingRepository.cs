@@ -1,8 +1,5 @@
 ﻿using Interface_Layer.InterfaceRepositories;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Data_Access_Layer.Repositories
 {

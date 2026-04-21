@@ -22,7 +22,7 @@ namespace Presentation.Controllers
             var cycloon = cyclonen.First(c => c.Id == id);
 
             var traject = metadata
-                .Where(m => m.Cycloon_Id == id)
+                .Where(m => m.CycloonId == id)
                 .OrderBy(m => m.Tijdstip)
                 .ToList();
 

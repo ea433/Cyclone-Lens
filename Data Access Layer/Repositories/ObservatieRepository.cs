@@ -1,7 +1,6 @@
-﻿using Microsoft.SqlServer.Types;
-using Models.Classes;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Interface_Layer.InterfaceRepositories;
+using Data_Access_Layer.DTOs;   
 
 namespace Data_Access_Layer.Repositories
 {
@@ -14,7 +13,7 @@ namespace Data_Access_Layer.Repositories
             _connectionString = connectionString;
         }
 
-        public void InsertObservatie(Observatie observatie)
+        public void InsertObservatie(ObservatieDTO observatie)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {

@@ -1,6 +1,6 @@
 ﻿using Interface_Layer.InterfaceRepositories;
 using Microsoft.SqlServer.Types;
-using Models.Classes;
+using Data_Access_Layer.DTOs;
 
 namespace Business_Logic_Layer.Services
 {
@@ -28,15 +28,16 @@ namespace Business_Logic_Layer.Services
             if (coordinaten == null)
                 throw new Exception("Locatie is verplicht");
 
-            var observatie = new Observatie(
-                0,
-                gebruikerId,
-                cycloonId,
-                omschrijving,
-                null,
-                coordinaten,
-                DateTime.Now
-            );
+            var observatie = new ObservatieDTO
+            {
+                GebruikerId = gebruikerId,
+                CycloonId = cycloonId,
+                Omschrijving = omschrijving,
+                AfbeeldingPad = null,
+                Coordinaten = coordinaten,
+                Tijdstip = DateTime.Now
+            };
+
 
             _dal.InsertObservatie(observatie);
         }

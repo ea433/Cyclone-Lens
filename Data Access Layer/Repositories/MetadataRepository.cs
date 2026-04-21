@@ -1,7 +1,5 @@
-﻿using CycloneLens.Models;
-using Data_Access_Layer.DTOs;
+﻿using Data_Access_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
-using Logic.Enums;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Types;
 
@@ -16,9 +14,9 @@ namespace Data_Access_Layer.Repositories
             _connectionString = connectionString;
         }
 
-        public List<Metadata> GetMetadata()
+        public List<MetadataDTO> GetMetadata()
         {
-            var metadataList = new List<Metadata>();
+            var metadataList = new List<MetadataDTO>();
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -40,16 +38,16 @@ namespace Data_Access_Layer.Repositories
                             throw new Exception("Invalid categorie value from database");
                         }
 
-                        var metadata = new Metadata(
-                            (int)reader["id"],
-                            Convert.ToInt32(reader["cycloon_id"]),
-                            (CategorieType)(int)reader["categorie"],
-                            Convert.ToDouble(reader["windsnelheid"]),
-                            Convert.ToDouble(reader["luchtdruk"]),
-                            (SqlGeography)reader["coordinaten"],
-                            (DateTime)reader["tijdstip"]
-                        );
-
+                        var metadata = new MetadataDTO
+                        {
+                            Id = (int)reader["id"],
+                            CycloonId = Convert.ToInt32(reader["cycloon_id"]),
+                            Categorie = Convert.ToInt32(reader["categorie"]),
+                            Windsnelheid = Convert.ToDouble(reader["windsnelheid"]),
+                            Luchtdruk = Convert.ToDouble(reader["luchtdruk"]),
+                            Coordinaten = (SqlGeography)reader["coordinaten"],
+                            Tijdstip = (DateTime)reader["tijdstip"]
+                        };
                         metadataList.Add(metadata);
                     }
                 }
@@ -58,7 +56,7 @@ namespace Data_Access_Layer.Repositories
             return metadataList;
         }
 
-        public void AddMetadata(Metadata metadata)
+        public void AddMetadata(MetadataDTO metadata)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -70,7 +68,7 @@ namespace Data_Access_Layer.Repositories
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@cid", metadata.Cycloon_Id);
+                    cmd.Parameters.AddWithValue("@cid", metadata.CycloonId);
                     cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enum dus vandaar int conversie
                     cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
                     cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);

@@ -1,4 +1,5 @@
 ﻿using CycloneLens.Models;
+using Data_Access_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
 using Models.Classes;
@@ -10,7 +11,9 @@ public class CycloonService
     private readonly IMetadataRepository _dataRepository;
     private readonly ILoggingRepository _loggingRepository;
 
-    public CycloonService(ICycloonRepository repository, IMetadataRepository datarepository,
+    public CycloonService(
+        ICycloonRepository repository,
+        IMetadataRepository datarepository,
         ILoggingRepository loggingrepository)
     {
         _repository = repository;
@@ -24,21 +27,22 @@ public class CycloonService
         var metadata = _dataRepository.GetMetadata();
 
         return cyclonen
-            .Where(cycloon => cycloon.Status == StatusType.Actief &&
-                        cycloon.Bassin == BassinType.Noord_Atlantisch)
+            .Where(cycloon =>
+                cycloon.Status == StatusType.Actief.ToString() &&
+                cycloon.Bassin.Replace("-", "_") == BassinType.Noord_Atlantisch.ToString())
             .Select(cycloon =>
             {
                 var latest = metadata
-                    .Where(metadata => metadata.Cycloon_Id == cycloon.Id)
+                    .Where(metadata => metadata.CycloonId == cycloon.Id)
                     .OrderByDescending(metadata => metadata.Tijdstip)
                     .FirstOrDefault();
 
                 return new CycloonOverzichtNATL(
-                cycloon.Id,
-                cycloon.Naam,
-                latest?.Categorie ?? CategorieType.Tropische_Depressie,
-                cycloon.Bassin,
-                cycloon.Status
+                    cycloon.Id,
+                    cycloon.Naam,
+                    (CategorieType)(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
+                    Enum.Parse<BassinType>(cycloon.Bassin.Replace("-", "_")),
+                    Enum.Parse<StatusType>(cycloon.Status)
                 );
             })
             .ToList();
@@ -53,11 +57,30 @@ public class CycloonService
         if (string.IsNullOrWhiteSpace(cycloon.Naam))
             throw new ArgumentException("Naam is verplicht");
 
-        _repository.UpdateCycloon(cycloon);
+        var cycloonDto = new CycloonDTO
+        {
+            Id = cycloon.Id,
+            Naam = cycloon.Naam,
+            Status = cycloon.Status.ToString(),
+            Bassin = cycloon.Bassin.ToString().Replace("_", "-")
+        };
+
+        _repository.UpdateCycloon(cycloonDto);
 
         if (metadata != null)
         {
-            _dataRepository.AddMetadata(metadata);
+            var metadataDto = new MetadataDTO
+            {
+                Id = metadata.Id,
+                CycloonId = metadata.Cycloon_Id,
+                Categorie = (int)metadata.Categorie,
+                Windsnelheid = metadata.Windsnelheid,
+                Luchtdruk = metadata.Luchtdruk,
+                Coordinaten = metadata.Coordinaten,
+                Tijdstip = metadata.Tijdstip
+            };
+
+            _dataRepository.AddMetadata(metadataDto);
         }
 
         _loggingRepository.LogWijziging(
@@ -69,6 +92,16 @@ public class CycloonService
 
     public Cycloon? GetById(int id)
     {
-        return _repository.GetById(id);
+        var dto = _repository.GetById(id);
+
+        if (dto == null)
+            return null;
+
+        return new Cycloon(
+            dto.Id,
+            dto.Naam,
+            Enum.Parse<StatusType>(dto.Status),
+            Enum.Parse<BassinType>(dto.Bassin.Replace("-", "_"))
+        );
     }
 }

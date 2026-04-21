@@ -1,8 +1,9 @@
-﻿using Interface_Layer.InterfaceRepositories;
+﻿using Data_Access_Layer.DTOs;
+using Interface_Layer.InterfaceRepositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
-using Presentation.Models;
 using Models.Classes;
+using Presentation.Models;
 
 namespace Presentation.Controllers
 {
@@ -42,15 +43,15 @@ namespace Presentation.Controllers
 
                 var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
 
-                var observatie = new Observatie(
-                    0,
-                    gebruikerId,
-                    vm.CycloonId,
-                    vm.Omschrijving!,
-                    null, // afbeelding
-                    coordinaten,
-                    DateTime.Now
-                );
+                var observatie = new ObservatieDTO
+                {
+                    GebruikerId = gebruikerId,
+                    CycloonId = vm.CycloonId,
+                    Omschrijving = vm.Omschrijving,
+                    AfbeeldingPad = null,
+                    Coordinaten = coordinaten,
+                    Tijdstip = DateTime.Now
+                };
 
                 _repository.InsertObservatie(observatie);
 
