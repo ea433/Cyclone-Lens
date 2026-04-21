@@ -10,7 +10,6 @@ namespace Models.Classes
         public BassinType Bassin { get; private set; }
         public StatusType Status { get; private set; }
 
-
         public CycloonOverzichtNATL(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
         {
             this.Id = id;
