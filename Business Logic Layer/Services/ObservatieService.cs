@@ -1,6 +1,6 @@
-﻿using Interface_Layer.InterfaceRepositories;
+﻿using Data_Access_Layer.DTOs;
+using Interface_Layer.InterfaceRepositories;
 using Microsoft.SqlServer.Types;
-using Data_Access_Layer.DTOs;
 
 namespace Business_Logic_Layer.Services
 {
@@ -17,10 +17,13 @@ namespace Business_Logic_Layer.Services
             int gebruikerId,
             int cycloonId,
             string omschrijving,
-            SqlGeography coordinaten)
+            SqlGeography? coordinaten)
         {
             if (gebruikerId <= 0)
                 throw new Exception("Gebruiker is verplicht");
+
+            if (cycloonId <= 0)
+                throw new Exception("Cycloon is verplicht");
 
             if (string.IsNullOrWhiteSpace(omschrijving))
                 throw new Exception("Omschrijving is verplicht");
@@ -37,7 +40,6 @@ namespace Business_Logic_Layer.Services
                 Coordinaten = coordinaten,
                 Tijdstip = DateTime.Now
             };
-
 
             _dal.InsertObservatie(observatie);
         }

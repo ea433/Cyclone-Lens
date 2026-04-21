@@ -2,7 +2,7 @@
 
 namespace Models.Classes
 {
-    public class CycloonOverzichtNATL
+    public class CycloonOverzicht
     {
         public int Id { get; }
         public string Naam { get; private set; }
@@ -10,7 +10,7 @@ namespace Models.Classes
         public BassinType Bassin { get; private set; }
         public StatusType Status { get; private set; }
 
-        public CycloonOverzichtNATL(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
+        public CycloonOverzicht(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
         {
             this.Id = id;
             this.Naam = naam;

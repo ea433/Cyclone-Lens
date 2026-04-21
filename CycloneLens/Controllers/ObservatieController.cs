@@ -1,19 +1,17 @@
-﻿using Data_Access_Layer.DTOs;
-using Interface_Layer.InterfaceRepositories;
+﻿using Business_Logic_Layer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
-using Models.Classes;
 using Presentation.Models;
 
 namespace Presentation.Controllers
 {
     public class ObservatieController : Controller
     {
-        private readonly IObservatieRepository _repository;
+        private readonly ObservatieService _service;
 
-        public ObservatieController(IObservatieRepository repository)
+        public ObservatieController(ObservatieService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
@@ -35,28 +33,16 @@ namespace Presentation.Controllers
             {
                 int gebruikerId = 1; // temp
 
-                if (string.IsNullOrWhiteSpace(vm.Omschrijving))
-                {
-                    ModelState.AddModelError("", "Omschrijving is verplicht");
-                    return View(vm);
-                }
-
                 var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
 
-                var observatie = new ObservatieDTO
-                {
-                    GebruikerId = gebruikerId,
-                    CycloonId = vm.CycloonId,
-                    Omschrijving = vm.Omschrijving,
-                    AfbeeldingPad = null,
-                    Coordinaten = coordinaten,
-                    Tijdstip = DateTime.Now
-                };
-
-                _repository.InsertObservatie(observatie);
+                _service.PlaatsObservatie(
+                    gebruikerId,
+                    vm.CycloonId,
+                    vm.Omschrijving!,
+                    coordinaten
+                );
 
                 TempData["Success"] = "Observatie succesvol toegevoegd!";
-
                 return RedirectToAction("Index", "Cycloon");
             }
             catch (Exception ex)

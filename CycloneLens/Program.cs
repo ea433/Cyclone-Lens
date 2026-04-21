@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ObservatieService>();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 

@@ -21,7 +21,7 @@ public class CycloonService
         _loggingRepository = loggingrepository;
     }
 
-    public List<CycloonOverzichtNATL> GetActiveCyclonenNATL()
+    public List<CycloonOverzicht> GetActiveCyclonenNATL()
     {
         var cyclonen = _repository.GetCyclonen();
         var metadata = _dataRepository.GetMetadata();
@@ -37,7 +37,7 @@ public class CycloonService
                     .OrderByDescending(metadata => metadata.Tijdstip)
                     .FirstOrDefault();
 
-                return new CycloonOverzichtNATL(
+                return new CycloonOverzicht(
                     cycloon.Id,
                     cycloon.Naam,
                     (CategorieType)(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
