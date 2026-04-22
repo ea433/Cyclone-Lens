@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CycloneLensTestProject.ModelTests
+﻿namespace CycloneLensTestProject.ModelTests
 {
     using System;
     using Xunit;

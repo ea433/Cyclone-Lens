@@ -1,6 +1,4 @@
-﻿using System;
-using Xunit;
-using CycloneLens.Models;
+﻿using CycloneLens.Models;
 using Logic.Enums;
 
 namespace CycloneLensTestProject.ModelTests
