@@ -13,9 +13,9 @@ namespace CycloneLens.Models
         public Gebruiker(int id, string naam, string email, string wachtwoord, UserType userType)
         {
             this.Id = id;
-            this.Naam = naam ?? throw new ArgumentNullException(nameof(Naam));
+            this.Naam = naam ?? throw new ArgumentNullException(nameof(naam));
             this.Email = email ?? throw new ArgumentNullException(nameof(email));
-            this.Wachtwoord = wachtwoord ?? throw new ArgumentNullException(nameof(Wachtwoord));
+            this.Wachtwoord = wachtwoord ?? throw new ArgumentNullException(nameof(wachtwoord));
             this.UserType = userType;
         }
     }

@@ -3,7 +3,7 @@ using Xunit;
 using CycloneLens.Models;
 using Logic.Enums;
 
-namespace CycloneLensTesting.Models
+namespace CycloneLensTestProject.ModelTests
 {
     public class CycloonTests
     {
