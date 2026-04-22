@@ -13,11 +13,7 @@ namespace Business_Logic_Layer.Services
             _dal = dal;
         }
 
-        public void PlaatsObservatie(
-            int gebruikerId,
-            int cycloonId,
-            string omschrijving,
-            SqlGeography? coordinaten)
+        public void PlaatsObservatie(int gebruikerId, int cycloonId, string omschrijving, SqlGeography? coordinaten)
         {
             if (gebruikerId <= 0)
                 throw new Exception("Gebruiker is verplicht");

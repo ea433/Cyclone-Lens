@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Data_Access_Layer.DTOs
+﻿namespace Data_Access_Layer.DTOs
 {
     public class CycloonDTO
     {

@@ -30,7 +30,7 @@ namespace CycloneLens.Controllers
         {
             var data = _service.GetActiveCyclonenNATL();
 
-            var ViewModel = data.Select(c => new ViewModel(
+            var ViewModel = data.Select(c => new CycloonViewModel(
                 c.Id,
                 c.Naam,
                 c.Categorie,

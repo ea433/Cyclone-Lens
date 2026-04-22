@@ -1,6 +1,4 @@
-﻿using Microsoft.SqlServer.Types;
-
-namespace Presentation.Models
+﻿namespace Presentation.Models
 {
     public class ObservatieViewModel
     {

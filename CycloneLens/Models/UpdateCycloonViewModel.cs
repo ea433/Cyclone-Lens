@@ -1,5 +1,4 @@
-﻿using CycloneLens.Models;
-using Logic.Enums;
+﻿using Logic.Enums;
 
 namespace Presentation.Models
 {

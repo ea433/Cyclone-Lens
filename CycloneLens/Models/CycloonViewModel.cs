@@ -2,7 +2,7 @@
 
 namespace Presentation.Models
 {
-    public class ViewModel
+    public class CycloonViewModel
     {
         public int Id { get; set; }
         public string Naam { get; set; }
@@ -10,7 +10,7 @@ namespace Presentation.Models
         public BassinType Bassin { get; set; }
         public StatusType Status { get; set; }
 
-        public ViewModel(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
+        public CycloonViewModel(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
         {
             this.Id = id;
             this.Naam = naam;

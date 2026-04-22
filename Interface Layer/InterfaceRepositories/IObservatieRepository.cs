@@ -1,6 +1,4 @@
-﻿using Microsoft.SqlServer.Types;
-using Models.Classes;
-using Data_Access_Layer.DTOs;
+﻿using Data_Access_Layer.DTOs;
 
 namespace Interface_Layer.InterfaceRepositories
 {
