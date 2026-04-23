@@ -7,26 +7,23 @@ namespace Presentation.Controllers
     {
         private readonly ICycloonRepository _repository;
         private readonly IMetadataRepository _dataRepository;
+        private readonly CycloonService _cycloonService;
 
-        public MetadataController(ICycloonRepository repository, IMetadataRepository dataRepository)
+        public MetadataController(ICycloonRepository repository, IMetadataRepository dataRepository, CycloonService cycloonService)
         {
             _repository = repository;
             _dataRepository = dataRepository;
+            _cycloonService = cycloonService;
         }
 
         public IActionResult Details(int id)
         {
-            var cyclonen = _repository.GetCyclonen();
-            var metadata = _dataRepository.GetMetadata();
+            var result = _cycloonService.GetCycloonDetails(id);
 
-            var cycloon = cyclonen.First(c => c.Id == id);
+            if (result == null)
+                return NotFound();
 
-            var traject = metadata
-                .Where(m => m.CycloonId == id)
-                .OrderBy(m => m.Tijdstip)
-                .ToList();
-
-            return View((cycloon, traject));
+            return View(result.Value);
         }
     }
 }

@@ -104,4 +104,25 @@ public class CycloonService
             Enum.Parse<BassinType>(dto.Bassin.Replace("-", "_"))
         );
     }
+
+    public (Cycloon cycloon, List<MetadataDTO> traject)? GetCycloonDetails(int id)
+    {
+        var cycloonDto = _repository.GetById(id);
+        if (cycloonDto == null)
+            return null;
+
+        var cycloon = new Cycloon(
+            cycloonDto.Id,
+            cycloonDto.Naam,
+            Enum.Parse<StatusType>(cycloonDto.Status),
+            Enum.Parse<BassinType>(cycloonDto.Bassin.Replace("-", "_"))
+        );
+
+        var traject = _dataRepository.GetMetadata()
+            .Where(m => m.CycloonId == id)
+            .OrderBy(m => m.Tijdstip)
+            .ToList();
+
+        return (cycloon, traject);
+    }
 }
