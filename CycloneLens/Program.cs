@@ -10,6 +10,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ObservatieService>();
 
+builder.Services.AddScoped<CycloonService>();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
