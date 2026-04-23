@@ -33,27 +33,33 @@
             [Fact]
             public void Constructor_Throws_WhenNaamIsNull()
             {
+                // Act
                 var ex = Assert.Throws<ArgumentNullException>(() =>
                     new Gebruiker(1, null!, "mail@test.com", "pass", UserType.Beheerder));
 
+                // Assert
                 Assert.Equal("naam", ex.ParamName);
             }
 
             [Fact]
             public void Constructor_Throws_WhenEmailIsNull()
             {
+                // Act
                 var ex = Assert.Throws<ArgumentNullException>(() =>
                     new Gebruiker(1, "Leander", null!, "pass", UserType.Beheerder));
 
+                // Assert
                 Assert.Equal("email", ex.ParamName);
             }
 
             [Fact]
             public void Constructor_Throws_WhenWachtwoordIsNull()
             {
+                // Act
                 var ex = Assert.Throws<ArgumentNullException>(() =>
                     new Gebruiker(1, "Leander", "mail@test.com", null!, UserType.Beheerder));
 
+                // Assert
                 Assert.Equal("wachtwoord", ex.ParamName);
             }
         }

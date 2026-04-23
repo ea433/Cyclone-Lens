@@ -62,6 +62,7 @@
             }
 
             [Fact]
+            // Act (new observatie) en Assert
             public void Constructor_Throws_WhenOmschrijvingIsNull()
             {
                 var ex = Assert.Throws<Exception>(() =>
@@ -78,6 +79,7 @@
             }
 
             [Fact]
+            // Act (new observatie) en Assert
             public void Constructor_Throws_WhenCoordinatenIsNull()
             {
                 var ex = Assert.Throws<Exception>(() =>

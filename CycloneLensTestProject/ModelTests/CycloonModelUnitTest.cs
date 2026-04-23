@@ -27,10 +27,11 @@ namespace CycloneLensTestProject.ModelTests
         [Fact]
         public void Constructor_Throws_WhenNaamIsNull()
         {
-            // Act & Assert
+            // Act
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 new Cycloon(1, null!, StatusType.Actief, BassinType.Noord_Atlantisch));
 
+            // Assert
             Assert.Equal("naam", exception.ParamName);
         }
 
