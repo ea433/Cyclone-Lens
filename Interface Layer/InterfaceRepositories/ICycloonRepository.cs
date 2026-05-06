@@ -1,5 +1,5 @@
 ﻿using CycloneLens.Models;
-using Data_Access_Layer.DTOs;
+using Interface_Layer.DTOs;
 
 
 namespace Interface_Layer.InterfaceRepositories

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Interface_Layer.InterfaceRepositories;
-using Data_Access_Layer.DTOs;   
+using Interface_Layer.DTOs;   
 
 namespace Data_Access_Layer.Repositories
 {

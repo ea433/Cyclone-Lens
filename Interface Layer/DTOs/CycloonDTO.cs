@@ -1,4 +1,4 @@
-﻿namespace Data_Access_Layer.DTOs
+﻿namespace Interface_Layer.DTOs
 {
     public class CycloonDTO
     {
