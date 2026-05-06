@@ -4,7 +4,7 @@
     {
         Gebruiker,
         Inzender,
-        Moderator,
-        Beheerder
+        Moderator, // ==toezichthouder
+        Beheerder // ==admininistator
     }
 }
