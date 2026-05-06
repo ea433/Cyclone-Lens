@@ -4,6 +4,7 @@
     {
         Gebruiker,
         Inzender,
+        Moderator,
         Beheerder
     }
 }

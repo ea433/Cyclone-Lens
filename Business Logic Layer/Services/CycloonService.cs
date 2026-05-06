@@ -11,10 +11,7 @@ public class CycloonService
     private readonly IMetadataRepository _dataRepository;
     private readonly ILoggingRepository _loggingRepository;
 
-    public CycloonService(
-        ICycloonRepository repository,
-        IMetadataRepository datarepository,
-        ILoggingRepository loggingrepository)
+    public CycloonService(ICycloonRepository repository, IMetadataRepository datarepository, ILoggingRepository loggingrepository)
     {
         _repository = repository;
         _dataRepository = datarepository;
