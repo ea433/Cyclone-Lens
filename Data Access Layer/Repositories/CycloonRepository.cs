@@ -17,42 +17,48 @@ namespace Data_Access_Layer.Repositories
         {
             var cyclonen = new List<CycloonDTO>();
 
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-
-                string query = "SELECT id, naam, bassin, status FROM Cycloon";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    while (reader.Read())
+                    conn.Open();
+
+                    string query = "SELECT id, naam, bassin, status FROM Cycloon";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var naam = reader["naam"]?.ToString() ?? "";
-
-                        var statusString = reader["status"]?.ToString();
-                        var bassinString = reader["bassin"]?.ToString();
-
-                        if (string.IsNullOrEmpty(statusString) || string.IsNullOrEmpty(bassinString))
+                        while (reader.Read())
                         {
-                            throw new Exception("Invalid enum value from database");
+                            var statusString = reader["status"]?.ToString();
+                            var bassinString = reader["bassin"]?.ToString();
+
+                            if (string.IsNullOrEmpty(statusString) || string.IsNullOrEmpty(bassinString))
+                            {
+                                throw new Exception("Invalid enum value from database");
+                            }
+
+                            var cycloon = new CycloonDTO
+                            {
+                                Id = (int)reader["id"],
+                                Naam = reader["naam"]?.ToString() ?? "",
+                                Status = statusString,
+                                Bassin = bassinString
+                            };
+
+                            cyclonen.Add(cycloon);
                         }
-
-                        var normalizedBassin = bassinString.Replace("-", "_");
-
-                        var cycloon = new CycloonDTO
-                        {
-                            Id = (int)reader["id"],
-                            Naam = reader["naam"]?.ToString() ?? "",
-                            Status = reader["status"]?.ToString() ?? "",
-                            Bassin = reader["bassin"]?.ToString() ?? ""
-                        };
-
-                        cyclonen.Add(cycloon);
                     }
                 }
             }
-
+            catch (SqlException DatabaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cyclonen.", DatabaseException);
+            }
+            catch (Exception OnverwachtException)
+            {
+                throw new Exception("Onverwachte fout bij ophalen van cyclonen.", OnverwachtException);
+            }
             return cyclonen;
         }
 
