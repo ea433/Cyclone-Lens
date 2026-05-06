@@ -51,13 +51,9 @@ namespace Data_Access_Layer.Repositories
                     }
                 }
             }
-            catch (SqlException DatabaseException)
+            catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", DatabaseException);
-            }
-            catch (Exception OnverwachtException)
-            {
-                throw new Exception("Onverwachte fout bij ophalen van cyclonen.", OnverwachtException);
+                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
             }
             return cyclonen;
         }
@@ -65,54 +61,69 @@ namespace Data_Access_Layer.Repositories
         // fr-05 
         public void UpdateCycloon(CycloonDTO cycloon)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
 
-                string query = @"UPDATE Cycloon 
+                    string query = @"UPDATE Cycloon 
                          SET naam = @naam, status = @status 
                          WHERE id = @id";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", cycloon.Id);
-                    cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
-                    cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", cycloon.Id);
+                        cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
+                        cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij updaten van cycloon.", databaseException);
             }
         }
 
         public CycloonDTO? GetById(int id)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-
-                string query = "SELECT * FROM Cycloon WHERE id = @id";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    conn.Open();
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    string query = "SELECT * FROM Cycloon WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        if (reader.Read())
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            return new CycloonDTO
+                            if (reader.Read())
                             {
-                                Id = (int)reader["id"],
-                                Naam = reader["naam"]?.ToString() ?? "",
-                                Status = reader["status"]?.ToString() ?? "",
-                                Bassin = reader["bassin"]?.ToString() ?? ""
-                            };
+                                return new CycloonDTO
+                                {
+                                    Id = (int)reader["id"],
+                                    Naam = reader["naam"]?.ToString() ?? "",
+                                    Status = reader["status"]?.ToString() ?? "",
+                                    Bassin = reader["bassin"]?.ToString() ?? ""
+                                };
+                            }
                         }
                     }
                 }
+
+                return null;
             }
 
-            return null;
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cycloon.", databaseException);
+            }
         }
     }
 }
