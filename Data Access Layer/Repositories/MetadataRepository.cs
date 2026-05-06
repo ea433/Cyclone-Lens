@@ -18,39 +18,46 @@ namespace Data_Access_Layer.Repositories
         {
             var metadataList = new List<MetadataDTO>();
 
-            using (SqlConnection conn = new SqlConnection(_connectionString))
-            {
-                conn.Open();
+            try
+            { 
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
 
-                string query = @"SELECT id, cycloon_id, categorie, windsnelheid, luchtdruk,
+                    string query = @"SELECT id, cycloon_id, categorie, windsnelheid, luchtdruk,
                                  tijdstip, coordinaten
                                  FROM Metadata";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var categorieString = reader["categorie"]?.ToString();
-
-                        if (string.IsNullOrEmpty(categorieString))
+                        while (reader.Read())
                         {
-                            throw new Exception("Invalid categorie value from database");
+                            var categorieString = reader["categorie"]?.ToString();
+
+                            if (string.IsNullOrEmpty(categorieString))
+                            {
+                                throw new Exception("Invalid categorie value from database");
+                            }
+
+                            var metadata = new MetadataDTO
+                            {
+                                Id = (int)reader["id"],
+                                CycloonId = Convert.ToInt32(reader["cycloon_id"]),
+                                Categorie = Convert.ToInt32(reader["categorie"]),
+                                Windsnelheid = Convert.ToDouble(reader["windsnelheid"]),
+                                Luchtdruk = Convert.ToDouble(reader["luchtdruk"]),
+                                Coordinaten = (SqlGeography)reader["coordinaten"],
+                                Tijdstip = (DateTime)reader["tijdstip"]
+                            };
+                            metadataList.Add(metadata);
                         }
-
-                        var metadata = new MetadataDTO
-                        {
-                            Id = (int)reader["id"],
-                            CycloonId = Convert.ToInt32(reader["cycloon_id"]),
-                            Categorie = Convert.ToInt32(reader["categorie"]),
-                            Windsnelheid = Convert.ToDouble(reader["windsnelheid"]),
-                            Luchtdruk = Convert.ToDouble(reader["luchtdruk"]),
-                            Coordinaten = (SqlGeography)reader["coordinaten"],
-                            Tijdstip = (DateTime)reader["tijdstip"]
-                        };
-                        metadataList.Add(metadata);
                     }
                 }
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
             }
 
             return metadataList;
@@ -58,25 +65,32 @@ namespace Data_Access_Layer.Repositories
 
         public void AddMetadata(MetadataDTO metadata)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
 
-                string query = @"INSERT INTO Metadata
+                    string query = @"INSERT INTO Metadata
                 (cycloon_id, categorie, windsnelheid, luchtdruk, coordinaten, tijdstip)
                 VALUES(@cid, @cat, @wind, @druk, @coord, @tijd)";
 
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@cid", metadata.CycloonId);
-                    cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enum dus vandaar int conversie
-                    cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
-                    cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
-                    cmd.Parameters.AddWithValue("@coord", metadata.Coordinaten);
-                    cmd.Parameters.AddWithValue("@tijd", metadata.Tijdstip);
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cid", metadata.CycloonId);
+                        cmd.Parameters.AddWithValue("@cat", (int)metadata.Categorie); // enum dus vandaar int conversie
+                        cmd.Parameters.AddWithValue("@wind", metadata.Windsnelheid);
+                        cmd.Parameters.AddWithValue("@druk", metadata.Luchtdruk);
+                        cmd.Parameters.AddWithValue("@coord", metadata.Coordinaten);
+                        cmd.Parameters.AddWithValue("@tijd", metadata.Tijdstip);
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij toevoegen van metadata.", databaseException);
             }
         }
     }
