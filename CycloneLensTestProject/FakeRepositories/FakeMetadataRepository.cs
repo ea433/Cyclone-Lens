@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Interface_Layer.DTOs;
+﻿using Interface_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 
 namespace CycloneLensTestProject.FakeRepositories

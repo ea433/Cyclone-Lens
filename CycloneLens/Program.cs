@@ -1,7 +1,6 @@
 using Business_Logic_Layer.Services;
 using Data_Access_Layer.Repositories;
 using Interface_Layer.InterfaceRepositories;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -82,5 +81,3 @@ app.MapControllerRoute(
 
 
 app.Run();
-
-// . 
