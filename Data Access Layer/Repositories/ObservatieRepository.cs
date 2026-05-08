@@ -1,6 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Interface_Layer.DTOs;   
 using Interface_Layer.InterfaceRepositories;
-using Interface_Layer.DTOs;   
+using Microsoft.Data.SqlClient;
+using Microsoft.SqlServer.Types;
+using Models.Classes;
 
 namespace Data_Access_Layer.Repositories
 {
@@ -44,6 +46,37 @@ namespace Data_Access_Layer.Repositories
             {
                 throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
             }
+        }
+
+        public List<Observatie> GetAllObservaties()
+        {
+            List<Observatie> observaties = new();
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM Observatie";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        observaties.Add(new Observatie(
+                            (int)reader["id"],
+                            (int)reader["gebruiker_id"],
+                            (int)reader["cycloon_id"],
+                            reader["omschrijving"].ToString() ?? "",
+                            reader["afbeelding"]?.ToString(),
+                            (SqlGeography)reader["coordinaten"],
+                            (DateTime)reader["tijdstip"]
+                        ));
+                    }
+                }
+            }
+
+            return observaties;
         }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using Interface_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 using Microsoft.SqlServer.Types;
+using Models.Classes;
 
 namespace Business_Logic_Layer.Services
 {
     public class ObservatieService
     {
-        private readonly IObservatieRepository _dal;
+        private readonly IObservatieRepository _observatieRepository;
 
-        public ObservatieService(IObservatieRepository dal)
+        public ObservatieService(IObservatieRepository observatieRepository)
         {
-            _dal = dal;
+            _observatieRepository = observatieRepository;
         }
 
         public void PlaatsObservatie(int gebruikerId, int cycloonId, string omschrijving, SqlGeography? coordinaten)
@@ -37,7 +38,12 @@ namespace Business_Logic_Layer.Services
                 Tijdstip = DateTime.Now
             };
 
-            _dal.InsertObservatie(observatie);
+            _observatieRepository.InsertObservatie(observatie);
+        }
+
+        public List<Observatie> GetAllObservaties()
+        {
+            return _observatieRepository.GetAllObservaties();
         }
     }
 }

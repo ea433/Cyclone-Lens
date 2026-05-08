@@ -196,8 +196,28 @@ labels.bringToFront();
         .bindPopup("Category " + q.category);
     });
 
+// Observaties van gebruikers (fetch from backend)
+fetch('/Observatie/GetObservaties')
+    .then(response => response.json())
+    .then(observations => {
 
-    
+        observations.forEach(function (o) {
+
+            var marker = L.marker([o.lat, o.lng])
+                .addTo(map)
+                .bindPopup(
+                    "<b>Observatie:</b><br>" +
+                    o.description +
+                    "<br><small>" + o.tijdstip + "</small>"
+                );
+
+            obsMarkers.push(marker);
+        });
+
+    })
+    .catch(err => console.error(err));
+
+    /*
     var observations = [
     // Miami
     {
@@ -272,3 +292,4 @@ labels.bringToFront();
 
                 obsMarkers.push(marker);
     });
+    */
