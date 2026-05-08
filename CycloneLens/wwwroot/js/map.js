@@ -35,14 +35,14 @@ var esri = L.tileLayer(
     }
 ).addTo(map);
 
-// ☁️ clouds (make them transparent!)
+// clouds
 var clouds = L.tileLayer(
     'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
     { opacity: 0.9 }
 ).addTo(map);
 
 
-// 🏷️ labels (on top!)
+// labels
 var labels = L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
     {
@@ -216,80 +216,3 @@ fetch('/Observatie/GetObservaties')
 
     })
     .catch(err => console.error(err));
-
-    /*
-    var observations = [
-    // Miami
-    {
-    lat: 25.8,
-    lng: -80.2,
-    wind: 140,
-    pressure: 950,
-    description: "Gebruikersrapport: Ernstige schade, sterke winden"
-    },
-
-    // Tampa (FIXED)
-    {
-    lat: 27.95,
-    lng: -82.46,
-    wind: 110,
-    pressure: 970,
-    description: "Gebruikersrapport: Hevige regen en overstromingen"
-    },
-
-    // Mexico (Yucatán / Cancun area)
-    {
-    lat: 21.16,
-    lng: -86.85,
-    wind: 120,
-    pressure: 965,
-    description: "Gebruikersrapport: Stormvloed en sterke winden"
-    },
-
-    // Jamaica
-    {
-    lat: 18.1,
-    lng: -77.3,
-    wind: 100,
-    pressure: 980,
-    description: "Gebruikersrapport: Overstromingen en aardverschuivingen"
-    },
-
-    // Puerto Rico
-    {
-    lat: 18.4,
-    lng: -66.1,
-    wind: 130,
-    pressure: 955,
-    description: "Gebruikersrapport: Stroomverstoringen"
-    },
-
-    // Cape Verde (storm origin region)
-    {
-    lat: 15.1,
-    lng: -23.6,
-    wind: 60,
-    pressure: 1005,
-    description: "Gebruikersrapport: Ontwikkelende tropische golf."
-    }
-    ];
-
-    var obsMarkers = [];
-
-    observations.forEach(function(o) {
-            var marker = L.marker([o.lat, o.lng], {
-        radius: 10, // initial
-    color: 'cyan',
-    fillOpacity: 0.7
-            })
-    .addTo(map)
-    .bindPopup(
-    "<b>Observatie:</b><br>" +
-        "Wind: " + o.wind + " km/h<br>" +
-            "Pressure: " + o.pressure + " mb<br>" +
-                o.description
-                );
-
-                obsMarkers.push(marker);
-    });
-    */
