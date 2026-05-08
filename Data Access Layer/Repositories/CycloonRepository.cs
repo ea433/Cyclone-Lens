@@ -58,7 +58,6 @@ namespace Data_Access_Layer.Repositories
             return cyclonen;
         }
 
-        // fr-05 
         public void UpdateCycloon(CycloonDTO cycloon)
         {
             try

@@ -2,9 +2,6 @@
 using Microsoft.SqlServer.Types;
 using Models.Classes;
 using Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CycloneLensTestProject.ModelTests
 {
