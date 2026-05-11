@@ -216,3 +216,50 @@ fetch('/Observatie/GetObservaties')
 
     })
     .catch(err => console.error(err));
+
+// test JTWC forecast
+
+async function loadJTWCForecast() {
+
+    try {
+
+        const response = await fetch('/data/jtwc_forecast.json');
+
+        const forecast = await response.json();
+
+        const latlngs = forecast.map(p => [p.lat, p.lng]);
+
+        // dashed forecast line
+        L.polyline(latlngs, {
+            color: 'cyan',
+            weight: 4,
+            dashArray: '8,8'
+        }).addTo(map);
+
+        // forecast points
+        forecast.forEach(p => {
+
+            L.circleMarker([p.lat, p.lng], {
+                radius: 7,
+                color: getColor(p.category),
+                fillOpacity: 0.8
+            })
+                .addTo(map)
+                .bindPopup(
+                    "<b>JTWC Forecast</b><br>" +
+                    "Forecast Hour: +" + p.forecastHour + "h<br>" +
+                    "Category: " + p.category
+                );
+
+        });
+
+    }
+    catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+loadJTWCForecast();

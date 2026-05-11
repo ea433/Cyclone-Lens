@@ -1,20 +1,21 @@
-[
-  {
-    "lat": 14,
-    "lng": -30,
-    "forecastHour": 0,
-    "category": 0
-  },
-  {
-    "lat": 15,
-    "lng": -34,
-    "forecastHour": 12,
-    "category": 1
-  },
-  {
-    "lat": 17,
-    "lng": -39,
-    "forecastHour": 24,
-    "category": 2
-  }
-]
+
+            [
+              {
+                "lat": 14,
+                "lng": -30,
+                "forecastHour": 0,
+                "category": 0
+              },
+              {
+                "lat": 16,
+                "lng": -36,
+                "forecastHour": 12,
+                "category": 1
+              },
+              {
+                "lat": 18,
+                "lng": -42,
+                "forecastHour": 24,
+                "category": 2
+              }
+            ]
