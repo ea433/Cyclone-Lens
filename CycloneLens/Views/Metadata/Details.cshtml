@@ -1,7 +1,10 @@
-﻿<h2>@Model.Item1.Naam</h2>
-<p>@Model.Item1.Bassin.ToString().Replace("_", " ")</p>
+﻿<h2>@Model.Naam</h2>
+<p>@Model.Bassin.ToString().Replace("_", " ")</p>
 
-<a asp-controller="Cycloon" asp-action="Edit" asp-route-id="@Model.Item1.Id" class="btn btn-primary">
+<a asp-controller="Cycloon"
+   asp-action="Edit"
+   asp-route-id="@Model.Id"
+   class="btn btn-primary">
     Bewerken
 </a>
 
@@ -16,8 +19,9 @@
             <th>Tijdstip</th>
         </tr>
     </thead>
+
     <tbody>
-        @foreach (var m in Model.Item2)
+        @foreach (var m in Model.Metadata)
         {
             <tr>
                 <td>@m.Categorie.ToString().Replace("_", " ")</td>

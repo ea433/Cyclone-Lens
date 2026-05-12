@@ -19,7 +19,7 @@ namespace Presentation.Controllers
             if (result == null)
                 return NotFound();
 
-            return View(result.Value);
+            return View(result);
         }
     }
 }

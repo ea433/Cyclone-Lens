@@ -105,21 +105,26 @@ public class CycloonService
     public Cycloon? GetCycloonDetails(int id)
     {
         var cycloonObj = _repository.GetById(id);
+
         if (cycloonObj == null)
             return null;
 
-        var cycloon = new Cycloon(
-            cycloonObj.Id,
-            cycloonObj.Naam,
-            Enum.Parse<StatusType>(cycloonObj.Status),
-            Enum.Parse<BassinType>(cycloonObj.Bassin.Replace("-", "_"))
-        );
-
-        var traject = _dataRepository.GetMetadata()
+        var metadata = _dataRepository.GetMetadata()
             .Where(m => m.CycloonId == id)
             .OrderBy(m => m.Tijdstip)
+            .Select(m => new Metadata(m.Id, m.CycloonId, (CategorieType)m.Categorie, m.Windsnelheid, m.Luchtdruk, m.Coordinaten, m.Tijdstip))
             .ToList();
 
-        return (cycloon);
+        var latestCategorie = metadata.LastOrDefault()?.Categorie
+            ?? CategorieType.Tropische_Depressie;
+
+        return new Cycloon(
+            cycloonObj.Id,
+            cycloonObj.Naam,
+            latestCategorie,
+            Enum.Parse<StatusType>(cycloonObj.Status),
+            Enum.Parse<BassinType>(cycloonObj.Bassin.Replace("-", "_")),
+            metadata
+        );
     }
 }
