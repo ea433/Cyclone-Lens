@@ -1,0 +1,52 @@
+﻿.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+}
+
+.box {
+    border: 1px solid #333;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.box-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.box-subtitle {
+    font-size: 0.9em;
+    color: #555;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 3px;
+    border: 1px solid #333;
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+.submit-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #ddd;
+}
