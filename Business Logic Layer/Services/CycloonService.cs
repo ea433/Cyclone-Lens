@@ -102,17 +102,17 @@ public class CycloonService
         );
     }
 
-    public (Cycloon cycloon, List<MetadataDTO> traject)? GetCycloonDetails(int id)
+    public Cycloon? GetCycloonDetails(int id)
     {
-        var cycloonDto = _repository.GetById(id);
-        if (cycloonDto == null)
+        var cycloonObj = _repository.GetById(id);
+        if (cycloonObj == null)
             return null;
 
         var cycloon = new Cycloon(
-            cycloonDto.Id,
-            cycloonDto.Naam,
-            Enum.Parse<StatusType>(cycloonDto.Status),
-            Enum.Parse<BassinType>(cycloonDto.Bassin.Replace("-", "_"))
+            cycloonObj.Id,
+            cycloonObj.Naam,
+            Enum.Parse<StatusType>(cycloonObj.Status),
+            Enum.Parse<BassinType>(cycloonObj.Bassin.Replace("-", "_"))
         );
 
         var traject = _dataRepository.GetMetadata()
@@ -120,6 +120,6 @@ public class CycloonService
             .OrderBy(m => m.Tijdstip)
             .ToList();
 
-        return (cycloon, traject);
+        return (cycloon);
     }
 }
