@@ -109,7 +109,7 @@ namespace CycloneLens.Controllers
             return View(cycloon);
         }
 
-        public IActionResult CycloonSatellietView()
+        public IActionResult Satelliet()
         {
             return View();
         }
