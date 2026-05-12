@@ -1,38 +1,55 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
 
+    const sources = {
+        GEOCOLOR:
+            "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg",
+
+        AIR_MASS:
+            "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/AirMass/latest.jpg",
+
+        SHORTWAVE_IR:
+            "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg"
+    };
+
+    let currentProduct = "GEOCOLOR";
+
     function updateTime() {
+
         const now = new Date();
 
-        const formatted = now.toLocaleString();
-
         const timeEl = document.getElementById("time");
-        if (timeEl) timeEl.textContent = formatted;
+
+        if (timeEl) {
+            timeEl.textContent =
+                "Last updated: " + now.toLocaleString();
+        }
     }
 
     function updateGOES() {
-        const timestamp = new Date().getTime();
 
-        const GeoColor = document.getElementById("geoColor");
-        const AirMass = document.getElementById("airMass");
-        const SWIR = document.getElementById("swir");
+        const img = document.getElementById("goesImage");
 
-        if (GeoColor) {
-            GeoColor.src = `https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg?t=${timestamp}`;
-        }
+        if (!img) return;
 
-        if (AirMass) {
-            AirMass.src = `https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/AIRMASS/latest.jpg?t=${timestamp}`;
-        }
+        const timestamp = Date.now();
 
-        if (SWIR) {
-            SWIR.src = `https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg?t=${timestamp}`;
-        }
-
+        img.src =
+            sources[currentProduct] + "?t=" + timestamp;
         updateTime();
     }
 
+    // Make available to HTML buttons
+    window.setSat = function (product) {
+
+        currentProduct = product;
+
+        updateGOES();
+    };
+
+    // Initial load
     updateGOES();
-    // refresh every 10 minutes
+
+    // Refresh every 10 minutes
     setInterval(updateGOES, 600000);
 
 });
