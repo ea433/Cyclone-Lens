@@ -1,6 +1,5 @@
-﻿using CycloneLens.Models;
+﻿using Models.Classes;
 using Microsoft.SqlServer.Types;
-using Models.Classes;
 using Models.Enums;
 
 namespace CycloneLensTestProject.ModelTests
