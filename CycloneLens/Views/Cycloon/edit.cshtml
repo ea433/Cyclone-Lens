@@ -3,6 +3,12 @@
 <form asp-action="Update" method="post">
     <input type="hidden" name="Id" value="@Model.Id" />
 
+    @section Styles {
+        <link rel="stylesheet"
+              href="~/css/CycloonEdit.css"
+              asp-append-version="true" />
+    }
+
     <!-- alle cycloondetails -->
     <div class="box">
         <div class="box-header">
@@ -53,46 +59,3 @@
         </div>
     </div>
 </form>
-
-<style>
-    .box {
-        border: 1px solid #000;
-        padding: 15px;
-        margin: 20px auto; 
-        width: 60%; 
-    }
-
-    .box-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px 40px;
-    }
-
-    .field label {
-        font-weight: bold;
-        display: block;
-    }
-
-    .field input {
-        width: 100%;
-        padding: 4px;
-    }
-
-    .history-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-        .history-table th, .history-table td {
-            border: 1px solid #000;
-            padding: 5px;
-            text-align: left;
-        }
-</style>
