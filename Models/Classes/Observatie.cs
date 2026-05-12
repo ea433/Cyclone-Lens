@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.SqlServer.Types;
+﻿using Microsoft.SqlServer.Types;
 
 namespace Models.Classes
 {

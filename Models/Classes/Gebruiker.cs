@@ -1,6 +1,6 @@
 ﻿using Models.Enums;
 
-namespace CycloneLens.Models
+namespace Models.Classes
 {
     public class Gebruiker
     {

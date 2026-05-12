@@ -1,7 +1,7 @@
 ﻿using Logic.Enums;
 using Microsoft.SqlServer.Types;
 
-namespace CycloneLens.Models
+namespace Models.Classes
 {
     public class Metadata
     {

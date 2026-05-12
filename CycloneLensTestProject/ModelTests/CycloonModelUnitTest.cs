@@ -1,4 +1,4 @@
-﻿using CycloneLens.Models;
+﻿using Models.Classes;
 using Logic.Enums;
 
 namespace CycloneLensTestProject.ModelTests

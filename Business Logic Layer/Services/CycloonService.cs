@@ -1,8 +1,7 @@
-﻿using CycloneLens.Models;
+﻿using Models.Classes;
 using Interface_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 using Logic.Enums;
-using Models.Classes;
 using Models.Enums;
 
 namespace Business_Logic_Layer.Services
@@ -48,7 +47,7 @@ namespace Business_Logic_Layer.Services
         }
 
         // fr-05 + logging
-        public void UpdateCycloon(Cycloon cycloon, Metadata? metadata, Gebruiker gebruiker)
+        public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
         {
             if (gebruiker == null || gebruiker.UserType != UserType.Beheerder)
                 throw new UnauthorizedAccessException("Geen rechten");
@@ -112,9 +111,10 @@ namespace Business_Logic_Layer.Services
                 return null;
 
             var metadata = _dataRepository.GetMetadata()
-                .Where(m => m.CycloonId == id)
-                .OrderBy(m => m.Tijdstip)
-                .Select(m => new Metadata(m.Id, m.CycloonId, (CategorieType)m.Categorie, m.Windsnelheid, m.Luchtdruk, m.Coordinaten, m.Tijdstip))
+                .Where(metadata => metadata.CycloonId == id)
+                .OrderBy(metadata => metadata.Tijdstip)
+                .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, (CategorieType)metadata.Categorie, metadata.Windsnelheid,
+                    metadata.Luchtdruk, metadata.Coordinaten, metadata.Tijdstip))
                 .ToList();
 
             var latestCategorie = metadata.LastOrDefault()?.Categorie

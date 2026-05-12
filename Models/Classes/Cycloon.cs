@@ -1,6 +1,7 @@
-﻿using Logic.Enums;
+﻿using Models.Classes;
+using Logic.Enums;
 
-namespace CycloneLens.Models
+namespace Models.Classes
 {
     public class Cycloon
     {

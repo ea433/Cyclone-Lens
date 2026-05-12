@@ -1,4 +1,4 @@
-﻿using CycloneLens.Models;
+﻿using Models.Classes;
 using Data_Access_Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
@@ -31,12 +31,12 @@ namespace CycloneLens.Controllers
         {
             var data = _service.GetActiveCyclonenNATL();
 
-            var ViewModel = data.Select(c => new CycloonViewModel(
-                c.Id,
-                c.Naam,
-                c.Categorie,
-                c.Bassin,
-                c.Status
+            var ViewModel = data.Select(cycloon => new CycloonViewModel(
+                cycloon.Id,
+                cycloon.Naam,
+                cycloon.Categorie,
+                cycloon.Bassin,
+                cycloon.Status
             )).ToList();
 
             return View(ViewModel);

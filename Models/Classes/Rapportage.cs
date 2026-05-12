@@ -1,5 +1,4 @@
-﻿using CycloneLens.Models;
-using Models.Enums;
+﻿using Models.Enums;
 
 namespace Models.Classes
 {
