@@ -28,6 +28,12 @@ namespace Business_Logic_Layer.Services
             if (coordinaten == null)
                 throw new Exception("Locatie is verplicht");
 
+            if (coordinaten.Lat.Value == 0 || coordinaten.Long.Value == 0)
+                throw new Exception("Ongeldige locatie");
+
+            if (coordinaten.Lat.Value > 90 || coordinaten.Long.Value > 180)
+                throw new Exception("Ongeldige locatie");
+
             var observatie = new ObservatieDTO
             {
                 GebruikerId = gebruikerId,

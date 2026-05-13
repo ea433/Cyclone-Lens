@@ -16,26 +16,54 @@
 
     <!-- Form box -->
     <div class="box">
-        <form asp-action="Create" method="post"2 enctype="multipart/form-data">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
 
             <input type="hidden" asp-for="CycloonId" />
 
             <!-- Latitude -->
             <label>Latitude *</label>
-            <input asp-for="Latitude" type="number" step="any" placeholder="bijv. 23.5" />
+
+            <input asp-for="Latitude"
+                   type="number"
+                   step="any"
+                   min="-90"
+                   max="90"
+                   required
+                   placeholder="bijv. 23.5" />
+
+            <span asp-validation-for="Latitude"
+                  class="text-danger"></span>
 
             <!-- Longitude -->
             <label>Longitude *</label>
-            <input asp-for="Longitude" type="number" step="any" placeholder="bijv. -65.2" />
+
+            <input asp-for="Longitude"
+                   type="number"
+                   step="any"
+                   min="-180"
+                   max="180"
+                   required
+                   placeholder="bijv. -65.2" />
+
+            <span asp-validation-for="Longitude"
+                  class="text-danger"></span>
 
             <!-- Description -->
             <label>Beschrijving *</label>
-            <textarea asp-for="Omschrijving" placeholder="Beschrijf uw waarneming..."></textarea>
+
+            <textarea asp-for="Omschrijving"
+                      required
+                      minlength="10"
+                      placeholder="Beschrijf uw waarneming..."></textarea>
+
+            <span asp-validation-for="Omschrijving"
+                  class="text-danger"></span>
 
             <!-- Submit -->
             <button type="submit" class="submit-btn">
                 Observatie versturen
             </button>
+
         </form>
     </div>
 </div>
