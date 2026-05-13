@@ -1,71 +1,65 @@
-﻿<div class="container mt-4">
+﻿@{
+    ViewData["Title"] = "Home";
 
+    var satellieten = new[]
+    {
+        new
+        {
+            Naam = "GeoColor",
+            Url = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg",
+            Beschrijving = "Satellietbeelden met natuurlijke kleuren die zichtbare en infraroodgegevens combineren en presenteren."
+        },
+
+        new
+        {
+            Naam = "Luchtmassa",
+            Url = "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/AirMass/latest.jpg",
+            Beschrijving = "Benadrukt de verschillen in luchtmassa's en atmosferische dynamiek."
+        },
+
+        new
+        {
+            Naam = "SWIR",
+            Url = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg",
+            Beschrijving = "Detecteert warmtesignaturen en stormintensiteit."
+        }
+    };
+}
+
+<div class="container mt-4">
     <!-- HERO SECTION -->
     <div class="card shadow-sm mb-4 border-0">
         <div class="position-relative">
-
             <img src="https://d3i6fh83elv35t.cloudfront.net/static/2025/10/2025-10-28T140828Z_1095430042_RC2SKHAPM76G_RTRMADP_3_STORM-MELISSA-1024x576.jpg"
-                 class="img-fluid w-100 rounded"
-                 style="max-height: 400px; object-fit: cover;" />
+                 class="img-fluid w-100 rounded hero-image" />
+            <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+                <h1 class="fw-bold hero-overlay">
+                    CycloneLens
+                </h1>
 
-                <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
-
-                    <h1 class="fw-bold hero-overlay">CycloneLens</h1>
-                </div>
             </div>
         </div>
     </div>
-
 
     <!-- SATELLITE OPTIONS -->
     <div class="row text-center">
+        @foreach (var satelliet in satellieten)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="@satelliet.Url"
+                         class="card-img-top satellite-card-image" />
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @satelliet.Naam
+                        </h5>
+                        <p class="card-text text-muted small">
+                            @satelliet.Beschrijving
+                        </p>
 
-        <!-- GeoColor -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg"
-                     class="card-img-top"
-                     style="height: 200px; object-fit: cover;" />
-
-                <div class="card-body">
-                    <h5 class="card-title">GeoColor</h5>
-                    <p class="card-text text-muted small">
-                        Satellietbeelden met natuurlijke kleuren die zichtbare en infraroodgegevens combineren en 
-                        presenteren.
-                    </p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Air Mass -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/AirMass/latest.jpg"
-                     class="card-img-top"
-                     style="height: 200px; object-fit: cover;" />
-
-                <div class="card-body">
-                    <h5 class="card-title">Luchtmassa</h5>
-                    <p class="card-text text-muted small">
-                    Benadrukt de verschillen in luchtmassa's en atmosferische dynamiek.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Shortwave IR -->
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100">
-            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg"
-                     class="card-img-top"
-                     style="height: 200px; object-fit: cover;" />
-
-                <div class="card-body">
-                    <h5 class="card-title">SWIR</h5>
-                    <p class="card-text text-muted small">
-                    Detecteert warmtesignaturen en stormintensiteit.
-                </p>
-                </div>
-            </div>
-        </div>
+        }
     </div>
+</div>

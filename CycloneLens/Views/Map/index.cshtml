@@ -1,40 +1,53 @@
 ﻿@{
     Layout = "_Layout";
+
+    var instellingen = new[]
+    {
+        new { Id = "toggleClouds", Naam = "Wolken" },
+        new { Id = "toggleLabels", Naam = "Grenzen" },
+        new { Id = "toggleRadar", Naam = "Radar" }
+    };
 }
 
 @section Styles {
+
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet"
+    href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Your CSS -->
-    <link rel="stylesheet" href="~/css/livemap.css" />
+    <link rel="stylesheet"
+    href="~/css/livemap.css"
+    asp-append-version="true" />
 }
 
 <div id="map"></div>
 
 <div class="map-panel">
+
     <h6>Map Instellingen</h6>
 
-    <label>
-        <input type="checkbox" id="toggleClouds" checked>
-        Wolken
-    </label>
+    @foreach (var instelling in instellingen)
+    {
+        <label>
 
-    <label>
-        <input type="checkbox" id="toggleLabels" checked>
-        Grenzen
-    </label>
+            <input type="checkbox"
+                   id="@instelling.Id"
+                   checked />
 
-    <label>
-        <input type="checkbox" id="toggleRadar" checked>
-        Radar
-    </label>
+            @instelling.Naam
+
+        </label>
+    }
+
 </div>
 
 @section Scripts {
+
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <!-- Your JS -->
-    <script src="~/js/livemap.js"></script>
+    <script src="~/js/livemap.js"
+    asp-append-version="true"></script>
 }
