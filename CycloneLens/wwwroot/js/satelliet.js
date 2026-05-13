@@ -1,4 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// satellietbeelden laden met NOAA source links
+document.addEventListener("DOMContentLoaded", function () {
 
     const sources = {
         GeoColor:
