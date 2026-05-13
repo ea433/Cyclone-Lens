@@ -1,14 +1,20 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
 
     const sources = {
-        GEOCOLOR:
+        GeoColor:
             "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/GEOCOLOR/latest.jpg",
 
-        AIR_MASS:
+        Luchtmassa:
             "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/AirMass/latest.jpg",
 
-        SHORTWAVE_IR:
-            "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg"
+        SWIR:
+            "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/taw/07/latest.jpg",
+        
+        Bliksemflitsomvang:
+            "https://cdn.star.nesdis.noaa.gov/GOES19/GLM/SECTOR/taw/EXTENT3/latest.jpg",
+
+        Droog_Luchtmassa:
+            "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/taw/Dust/latest.jpg"
     };
 
     let currentProduct = "GEOCOLOR";
