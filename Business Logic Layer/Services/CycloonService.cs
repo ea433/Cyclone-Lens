@@ -19,7 +19,7 @@ namespace Business_Logic_Layer.Services
             _loggingRepository = loggingrepository;
         }
 
-        public List<CycloonOverzicht> GetActiveCyclonenNATL()
+        public List<Cycloon> GetActiveCyclonenNATL()
         {
             var cyclonen = _repository.GetCyclonen();
             var metadata = _dataRepository.GetMetadata();
@@ -35,7 +35,7 @@ namespace Business_Logic_Layer.Services
                         .OrderByDescending(metadata => metadata.Tijdstip)
                         .FirstOrDefault();
 
-                    return new CycloonOverzicht(
+                    return new Cycloon(
                         cycloon.Id,
                         cycloon.Naam,
                         (CategorieType)(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
@@ -46,7 +46,6 @@ namespace Business_Logic_Layer.Services
                 .ToList();
         }
 
-        // fr-05 + logging
         public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
         {
             if (gebruiker == null || gebruiker.UserType != UserType.Beheerder)

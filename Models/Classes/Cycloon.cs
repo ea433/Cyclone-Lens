@@ -12,6 +12,14 @@ namespace Models.Classes
         public BassinType Bassin { get; private set; }
         public List<Metadata> Metadata { get; private set; } = new();
 
+        public Cycloon(int id, string naam, StatusType status, BassinType bassin)
+        {
+            this.Id = id;
+            this.Naam = naam ?? throw new ArgumentNullException(nameof(naam));
+            this.Status = status;
+            this.Bassin = bassin;
+        }
+
         public Cycloon(int id, string naam, CategorieType categorie, StatusType status, BassinType bassin, List<Metadata> metadata)
         {
             this.Id = id;
@@ -22,12 +30,13 @@ namespace Models.Classes
             this.Metadata = metadata;
         }
 
-        public Cycloon(int id, string naam, StatusType status, BassinType bassin)
+        public Cycloon(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
         {
             this.Id = id;
-            this.Naam = naam ?? throw new ArgumentNullException(nameof(naam));
-            this.Status = status;
+            this.Naam = naam;
+            this.Categorie = categorie;
             this.Bassin = bassin;
+            this.Status = status;
         }
     }
 }

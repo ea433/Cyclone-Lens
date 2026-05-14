@@ -59,7 +59,7 @@ namespace Presentation.Controllers
                 .Select(o => new
                 {
                     id = o.Id,
-                    lat = o.Coordinaten.Lat.Value,
+                    lat = o.Coordinaten!.Lat.Value,
                     lng = o.Coordinaten.Long.Value,
                     description = o.Omschrijving,
                     tijdstip = o.Tijdstip
