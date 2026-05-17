@@ -1,4 +1,4 @@
-﻿namespace Logic.Enums
+﻿namespace Models.Enums
 {
     public enum CategorieType
     {

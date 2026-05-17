@@ -1,4 +1,4 @@
-﻿using Logic.Enums;
+﻿using Models.Enums;
 
 namespace Presentation.Models
 {

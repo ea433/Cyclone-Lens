@@ -1,5 +1,5 @@
 ﻿using Interface_Layer.DTOs;
-using Logic.Enums;
+using Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;

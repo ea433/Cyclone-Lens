@@ -1,5 +1,5 @@
 ﻿using Models.Classes;
-using Logic.Enums;
+using Models.Enums;
 using Microsoft.SqlServer.Types;
 
 namespace CycloneLensTestProject.ModelTests

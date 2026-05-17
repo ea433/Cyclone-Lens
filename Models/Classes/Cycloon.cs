@@ -1,5 +1,4 @@
-﻿using Models.Classes;
-using Logic.Enums;
+﻿using Models.Enums;
 
 namespace Models.Classes
 {
@@ -20,6 +19,15 @@ namespace Models.Classes
             this.Bassin = bassin;
         }
 
+        public Cycloon(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
+        {
+            this.Id = id;
+            this.Naam = naam;
+            this.Categorie = categorie;
+            this.Bassin = bassin;
+            this.Status = status;
+        }
+
         public Cycloon(int id, string naam, CategorieType categorie, StatusType status, BassinType bassin, List<Metadata> metadata)
         {
             this.Id = id;
@@ -28,15 +36,6 @@ namespace Models.Classes
             this.Status = status;
             this.Bassin = bassin;
             this.Metadata = metadata;
-        }
-
-        public Cycloon(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
-        {
-            this.Id = id;
-            this.Naam = naam;
-            this.Categorie = categorie;
-            this.Bassin = bassin;
-            this.Status = status;
         }
     }
 }
