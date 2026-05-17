@@ -50,7 +50,7 @@ namespace Data_Access_Layer.Repositories
 
         public List<Observatie> GetAllObservaties()
         {
-            List<Observatie> observaties = new();
+            List<Observatie> observaties = new List<Observatie>();
 
             try
             {
