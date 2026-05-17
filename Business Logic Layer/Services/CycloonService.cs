@@ -48,7 +48,7 @@ namespace Business_Logic_Layer.Services
 
         public void UpdateCycloon(Cycloon cycloon, Metadata metadata, Gebruiker gebruiker)
         {
-            if (gebruiker == null || gebruiker.UserType != UserType.Beheerder)
+            if (gebruiker == null || gebruiker.UserType != GebruikerType.Beheerder)
                 throw new UnauthorizedAccessException("Geen rechten");
 
             if (string.IsNullOrWhiteSpace(cycloon.Naam))

@@ -13,7 +13,7 @@ namespace CycloneLensTestProject.ModelTests
             string naam = "Leander";
             string email = "test@mail.com";
             string wachtwoord = "password123";
-            UserType userType = UserType.Beheerder; // adjust if needed
+            GebruikerType userType = GebruikerType.Beheerder; // adjust if needed
 
             // Act
             var gebruiker = new Gebruiker(id, naam, email, wachtwoord, userType);
@@ -31,7 +31,7 @@ namespace CycloneLensTestProject.ModelTests
         {
             // Act
             var ex = Assert.Throws<ArgumentNullException>(() =>
-                new Gebruiker(1, null!, "mail@test.com", "pass", UserType.Beheerder));
+                new Gebruiker(1, null!, "mail@test.com", "pass", GebruikerType.Beheerder));
 
             // Assert
             Assert.Equal("naam", ex.ParamName);
@@ -42,7 +42,7 @@ namespace CycloneLensTestProject.ModelTests
         {
             // Act
             var ex = Assert.Throws<ArgumentNullException>(() =>
-                new Gebruiker(1, "Leander", null!, "pass", UserType.Beheerder));
+                new Gebruiker(1, "Leander", null!, "pass", GebruikerType.Beheerder));
 
             // Assert
             Assert.Equal("email", ex.ParamName);
@@ -53,7 +53,7 @@ namespace CycloneLensTestProject.ModelTests
         {
             // Act
             var ex = Assert.Throws<ArgumentNullException>(() =>
-                new Gebruiker(1, "Leander", "mail@test.com", null!, UserType.Beheerder));
+                new Gebruiker(1, "Leander", "mail@test.com", null!, GebruikerType.Beheerder));
 
             // Assert
             Assert.Equal("wachtwoord", ex.ParamName);

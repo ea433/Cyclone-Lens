@@ -52,7 +52,7 @@ namespace CycloneLens.Controllers
             var userId = HttpContext.Session.GetInt32("UserId");
 
             var userTypeValue = HttpContext.Session.GetInt32("UserType");
-            var userType = (UserType)(userTypeValue ?? 0);
+            var userType = (GebruikerType)(userTypeValue ?? 0);
 
             var gebruiker = new Gebruiker(
                 userId ?? 0,
@@ -68,7 +68,7 @@ namespace CycloneLens.Controllers
             }
 
             // Example usage of enum
-            if (gebruiker.UserType != UserType.Beheerder)
+            if (gebruiker.UserType != GebruikerType.Beheerder)
             {
                 return View("Error"); // or Unauthorized()
             }

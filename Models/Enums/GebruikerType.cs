@@ -1,6 +1,6 @@
 ﻿namespace Models.Enums
 {
-    public enum UserType
+    public enum GebruikerType
     {
         Gebruiker,
         Inzender,

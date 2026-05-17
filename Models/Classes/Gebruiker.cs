@@ -8,9 +8,9 @@ namespace Models.Classes
         public string Naam { get; private set; }
         public string Email { get; private set; } 
         public string Wachtwoord { get; private set; }
-        public UserType UserType { get; private set; }
+        public GebruikerType UserType { get; private set; }
 
-        public Gebruiker(int id, string naam, string email, string wachtwoord, UserType userType)
+        public Gebruiker(int id, string naam, string email, string wachtwoord, GebruikerType userType)
         {
             this.Id = id;
             this.Naam = naam ?? throw new ArgumentNullException(nameof(naam));

@@ -51,21 +51,5 @@ namespace Presentation.Controllers
                 return View(vm);
             }
         }
-
-        [HttpGet]
-        public JsonResult GetObservaties()
-        {
-            var observaties = _service.GetAllObservaties()
-                .Select(o => new
-                {
-                    id = o.Id,
-                    lat = o.Coordinaten!.Lat.Value,
-                    lng = o.Coordinaten.Long.Value,
-                    description = o.Omschrijving,
-                    tijdstip = o.Tijdstip
-                });
-
-            return Json(observaties);
-        }
     }
 }
