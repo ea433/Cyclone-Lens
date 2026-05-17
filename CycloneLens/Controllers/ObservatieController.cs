@@ -72,5 +72,26 @@ namespace Presentation.Controllers
             }
             return View(viewModels);
         }
+
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            Observatie? observatie = _service.GetById(id);
+
+            if (observatie == null)
+            {
+                return NotFound();
+            }
+
+            ObservatieViewModel viewModels = new ObservatieViewModel
+            {
+                Id = observatie.Id,
+                Inzender = observatie.GebruikerNaam,
+                Omschrijving = observatie.Omschrijving,
+                Tijdstip = observatie.Tijdstip
+            };
+
+            return View(viewModels);
+        }
     }
 }
