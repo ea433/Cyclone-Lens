@@ -93,5 +93,13 @@ namespace Presentation.Controllers
 
             return View(viewModels);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            _service.DeleteObservatie(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }

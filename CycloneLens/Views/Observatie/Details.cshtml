@@ -32,9 +32,20 @@
 
         <div class="mt-4">
 
-            <button class="btn btn-outline-danger">
-                Verwijder
-            </button>
+            <form asp-action="Delete"
+                  asp-controller="Observatie"
+                  method="post">
+
+                <input type="hidden"
+                       name="id"
+                       value="@Model.Id" />
+
+                <button type="submit"
+                        class="btn btn-outline-danger">
+                    Verwijder
+                </button>
+
+            </form>
         </div>
     </div>
 </div>
