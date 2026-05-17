@@ -52,32 +52,80 @@ namespace Data_Access_Layer.Repositories
         {
             List<Observatie> observaties = new();
 
-            using (SqlConnection conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-
-                string query = "SELECT * FROM Observatie";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    while (reader.Read())
+                    conn.Open();
+
+                    string query = "SELECT * FROM Observatie";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        observaties.Add(new Observatie(
-                            (int)reader["id"],
-                            (int)reader["gebruiker_id"],
-                            reader["gebruiker_naam"]?.ToString() ?? "",
-                            (int)reader["cycloon_id"],
-                            reader["omschrijving"]?.ToString() ?? "",
-                            reader["afbeelding"]?.ToString(),
-                            (SqlGeography)reader["coordinaten"],
-                            (DateTime)reader["tijdstip"]
-                        ));
+                        while (reader.Read())
+                        {
+                            observaties.Add(new Observatie(
+                                (int)reader["id"],
+                                (int)reader["gebruiker_id"],
+                                reader["gebruiker_naam"]?.ToString() ?? "",
+                                (int)reader["cycloon_id"],
+                                reader["omschrijving"]?.ToString() ?? "",
+                                reader["afbeelding"]?.ToString(),
+                                (SqlGeography)reader["coordinaten"],
+                                (DateTime)reader["tijdstip"]
+                            ));
+                        }
                     }
                 }
-            }
 
-            return observaties;
+                return observaties;
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+            }
+        }
+
+        public Observatie? GetById(int id)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    string query =
+                        "SELECT * FROM Observatie WHERE id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new Observatie(
+                                    (int)reader["id"],
+                                    (int)reader["gebruiker_id"],
+                                    reader["gebruiker_naam"]?.ToString() ?? "",
+                                    (int)reader["cycloon_id"],
+                                    reader["omschrijving"]?.ToString() ?? "",
+                                    reader["afbeelding"]?.ToString(),
+                                    (SqlGeography)reader["coordinaten"],
+                                    (DateTime)reader["tijdstip"]
+                                );
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+            }
         }
     }
 }

@@ -51,5 +51,10 @@ namespace Business_Logic_Layer.Services
         {
             return _observatieRepository.GetAllObservaties();
         }
+
+        public Observatie? GetById(int id)
+        {
+            return _observatieRepository.GetById(id);
+        }
     }
 }
