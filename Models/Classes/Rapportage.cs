@@ -1,6 +1,4 @@
-﻿using Models.Enums;
-
-namespace Models.Classes
+﻿namespace Models.Classes
 {
     public class Rapportage
     {
