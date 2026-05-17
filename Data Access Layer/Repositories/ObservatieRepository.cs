@@ -66,8 +66,9 @@ namespace Data_Access_Layer.Repositories
                         observaties.Add(new Observatie(
                             (int)reader["id"],
                             (int)reader["gebruiker_id"],
+                            reader["gebruiker_naam"]?.ToString() ?? "",
                             (int)reader["cycloon_id"],
-                            reader["omschrijving"].ToString() ?? "",
+                            reader["omschrijving"]?.ToString() ?? "",
                             reader["afbeelding"]?.ToString(),
                             (SqlGeography)reader["coordinaten"],
                             (DateTime)reader["tijdstip"]

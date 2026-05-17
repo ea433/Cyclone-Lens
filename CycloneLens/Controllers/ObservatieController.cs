@@ -66,7 +66,7 @@ namespace Presentation.Controllers
                 viewModels.Add(new ObservatieViewModel
                 {
                     Id = observatie.Id,
-                    Inzender = observatie.GebruikerId.Naam,
+                    Inzender = observatie.GebruikerNaam,
                     Tijdstip = observatie.Tijdstip,
                 });
             }
