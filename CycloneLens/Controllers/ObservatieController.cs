@@ -53,7 +53,7 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Index()
         {
             List<Observatie> observaties =

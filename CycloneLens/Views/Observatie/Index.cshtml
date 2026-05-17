@@ -1,0 +1,60 @@
+﻿@using Presentation.Models
+@model List<ObservatieViewModel>
+
+<h1>Observaties</h1>
+
+<p>Bekijk en rapporteer meteorologische observaties</p>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ingediend door</th>
+            <th>Datum</th>
+            <th>Actie</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var observatie in Model)
+        {
+            <tr>
+
+                <td>
+                    @observatie.Id
+                </td>
+
+                <td>
+                    @observatie.Inzender
+                </td>
+
+                <td>
+                    @observatie.Tijdstip
+                    .ToString("yyyy-MM-dd HH:mm")
+                </td>
+
+                <td>
+
+                    <a class="btn btn-primary"
+                       href="/Observatie/Details/@observatie.Id">
+                        Bekijken
+                    </a>
+
+                    <br />
+                    <br />
+
+                    <a class="btn btn-danger"
+                       href="/Rapportage/Create/@observatie.Id">
+                        Rapporteer
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
