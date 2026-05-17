@@ -8,6 +8,6 @@
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string? Inzender { get; set; }  
-        public DateTime Datum { get; set; }  
+        public DateTime Tijdstip { get; set; }  
     }
 }

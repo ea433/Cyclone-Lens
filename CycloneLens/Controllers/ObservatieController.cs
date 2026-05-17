@@ -1,6 +1,7 @@
 ﻿using Business_Logic_Layer.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SqlServer.Types;
+using Models.Classes;
 using Presentation.Models;
 
 namespace Presentation.Controllers
@@ -50,6 +51,26 @@ namespace Presentation.Controllers
                 ModelState.AddModelError("", ex.Message);
                 return View(vm);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Index()
+        {
+            List<Observatie> observaties =
+                _service.GetAllObservaties();
+
+            List<ObservatieViewModel> viewModels = new();
+
+            foreach (var observatie in observaties)
+            {
+                viewModels.Add(new ObservatieViewModel
+                {
+                    Id = observatie.Id,
+                    Inzender = observatie.GebruikerId.Naam,
+                    Tijdstip = observatie.Tijdstip,
+                });
+            }
+            return View(viewModels);
         }
     }
 }
