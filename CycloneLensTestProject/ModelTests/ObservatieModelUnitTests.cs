@@ -11,6 +11,7 @@ namespace CycloneLensTestProject.ModelTests
             // Arrange
             int id = 1;
             int gebruikerId = 5;
+            string gebruikerNaam = "Gianna Beenen";
             int cycloonId = 10;
             string omschrijving = "Sterke wind waargenomen";
             string? afbeeldingPad = "image.jpg";
@@ -21,6 +22,7 @@ namespace CycloneLensTestProject.ModelTests
             var observatie = new Observatie(
                 id,
                 gebruikerId,
+                gebruikerNaam,
                 cycloonId,
                 omschrijving,
                 afbeeldingPad,
@@ -47,6 +49,7 @@ namespace CycloneLensTestProject.ModelTests
             var observatie = new Observatie(
                 1,
                 5,
+                "Gianna Beenen",
                 10,
                 "Test",
                 null,
@@ -65,6 +68,7 @@ namespace CycloneLensTestProject.ModelTests
                 new Observatie(
                     1,
                     5,
+                    "Jan Honing",
                     10,
                     null!,
                     "img.jpg",
@@ -82,6 +86,7 @@ namespace CycloneLensTestProject.ModelTests
                 new Observatie(
                     1,
                     5,
+                    "Jan Honing",
                     10,
                     "Test",
                     "img.jpg",
