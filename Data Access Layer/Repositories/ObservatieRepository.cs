@@ -130,22 +130,30 @@ namespace Data_Access_Layer.Repositories
 
         public void DeleteObservatie(int id)
         {
-            using (SqlConnection conn =
-                new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
 
-                string query =
-                    "DELETE FROM Observatie WHERE id = @id";
-
-                using (SqlCommand cmd =
-                    new SqlCommand(query, conn))
+                using (SqlConnection conn =
+                    new SqlConnection(_connectionString))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    conn.Open();
 
-                    cmd.ExecuteNonQuery();
+                    string query =
+                        "DELETE FROM Observatie WHERE id = @id";
+
+                    using (SqlCommand cmd =
+                        new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        cmd.ExecuteNonQuery();
+                    }
+
                 }
-
+            }
+            catch (SqlException databaseException)
+            {
+                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
             }
         }
     }
