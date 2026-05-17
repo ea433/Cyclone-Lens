@@ -56,5 +56,10 @@ namespace Business_Logic_Layer.Services
         {
             return _observatieRepository.GetById(id);
         }
+
+        public void DeleteObservatie(int id)
+        {
+            _observatieRepository.DeleteObservatie(id);
+        }
     }
 }

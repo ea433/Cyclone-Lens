@@ -8,5 +8,6 @@ namespace Interface_Layer.InterfaceRepositories
         void InsertObservatie(ObservatieDTO observatie);
         List<Observatie> GetAllObservaties();
         Observatie? GetById(int id);
+        void DeleteObservatie(int id);
     }
 }

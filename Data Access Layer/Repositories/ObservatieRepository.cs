@@ -127,5 +127,26 @@ namespace Data_Access_Layer.Repositories
                 throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
             }
         }
+
+        public void DeleteObservatie(int id)
+        {
+            using (SqlConnection conn =
+                new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query =
+                    "DELETE FROM Observatie WHERE id = @id";
+
+                using (SqlCommand cmd =
+                    new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+            }
+        }
     }
 }
