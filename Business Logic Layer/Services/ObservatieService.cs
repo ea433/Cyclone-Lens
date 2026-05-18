@@ -70,8 +70,7 @@ namespace Business_Logic_Layer.Services
             }
             catch
             {
-                throw new Exception(
-                    "Je hebt deze observatie al gerapporteerd.");
+                throw new Exception("Je hebt deze observatie al gerapporteerd.");
             }
         }
     }

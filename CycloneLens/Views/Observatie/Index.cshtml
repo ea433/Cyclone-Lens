@@ -22,29 +22,48 @@
         @foreach (var observatie in Model)
         {
             <tr>
+
                 <td>
                     @observatie.Id
                 </td>
+
                 <td>
                     @observatie.Inzender
                 </td>
-                <td>@observatie.Tijdstip.ToString("yyyy-MM-dd HH:mm")</td>
+
                 <td>
-                    <a class="btn btn-primary"
-                       href="/Observatie/Details/@observatie.Id">
-                        Bekijken
-                    </a>
-
-                    <br />
-                    <br />
-
-                    <a class="btn btn-danger"
-                       href="/Rapportage/Create/@observatie.Id">
-                        Rapporteer
-                    </a>
-
+                    @observatie.Tijdstip.ToString("yyyy-MM-dd HH:mm")
                 </td>
 
+                <td>
+
+                    <a class="btn btn-primary"
+                       href="/Observatie/Details/@observatie.Id">
+
+                        Bekijken
+
+                    </a>
+
+                    <br />
+                    <br />
+
+                    <form asp-action="Rapporteer"
+                          asp-controller="Observatie"
+                          method="post">
+
+                        <input type="hidden"
+                               name="observatieId"
+                               value="@observatie.Id" />
+
+                        <button type="submit"
+                                class="btn btn-outline-dark"
+                                onclick="return confirm('Weet je zeker dat je deze observatie wilt rapporteren?')">
+
+                            Rapporteer
+
+                        </button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

@@ -101,5 +101,26 @@ namespace Presentation.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult Rapporteer(int observatieId)
+        {
+            try
+            {
+                int gebruikerId = 1;
+
+                _service.RapporteerObservatie(gebruikerId, observatieId);
+
+                TempData["Success"] =
+                    "Observatie succesvol gerapporteerd.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] =
+                    ex.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
