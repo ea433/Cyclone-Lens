@@ -168,16 +168,15 @@ namespace Data_Access_Layer.Repositories
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@gebruikerId", gebruikerId);
-
                         cmd.Parameters.AddWithValue("@observatieId", observatieId);
-
+                        
                         cmd.ExecuteNonQuery();
                     }
                 }
             }
-            catch (SqlException databaseException)
+            catch (Exception)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Je hebt deze observatie al gerapporteerd.");
             }
         }
     }
