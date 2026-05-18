@@ -133,8 +133,7 @@ namespace Data_Access_Layer.Repositories
             try
             {
 
-                using (SqlConnection conn =
-                    new SqlConnection(_connectionString))
+                using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
                     conn.Open();
 
@@ -154,6 +153,25 @@ namespace Data_Access_Layer.Repositories
             catch (SqlException databaseException)
             {
                 throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+            }
+        }
+
+        public void VoegRapportageToe(int gebruikerId, int observatieId)
+        {
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                string query = @"INSERT INTO Rapportage(gebruiker_id, observatie_id, tijdstip) VALUES (@gebruikerId, @observatieId, GETDATE())";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@gebruikerId", gebruikerId);
+
+                    cmd.Parameters.AddWithValue("@observatieId", observatieId);
+
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }

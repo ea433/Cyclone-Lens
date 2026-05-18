@@ -61,5 +61,18 @@ namespace Business_Logic_Layer.Services
         {
             _observatieRepository.DeleteObservatie(id);
         }
+
+        public void RapporteerObservatie(int gebruikerId, int observatieId)
+        {
+            try
+            {
+                _observatieRepository.VoegRapportageToe(gebruikerId, observatieId);
+            }
+            catch
+            {
+                throw new Exception(
+                    "Je hebt deze observatie al gerapporteerd.");
+            }
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Interface_Layer.InterfaceRepositories
         List<Observatie> GetAllObservaties();
         Observatie? GetById(int id);
         void DeleteObservatie(int id);
+        void VoegRapportageToe(int gebruikerId, int observatieId);
     }
 }
