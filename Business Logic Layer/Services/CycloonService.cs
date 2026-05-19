@@ -103,9 +103,9 @@ namespace Business_Logic_Layer.Services
 
         public Cycloon? GetCycloonDetails(int id)
         {
-            var cycloonObj = _repository.GetById(id);
+            var cycloonDetails = _repository.GetById(id);
 
-            if (cycloonObj == null)
+            if (cycloonDetails == null)
                 return null;
 
             var metadata = _dataRepository.GetMetadata()
@@ -119,11 +119,11 @@ namespace Business_Logic_Layer.Services
                 ?? CategorieType.Tropische_Depressie;
 
             return new Cycloon(
-                cycloonObj.Id,
-                cycloonObj.Naam,
+                cycloonDetails.Id,
+                cycloonDetails.Naam,
                 latestCategorie,
-                Enum.Parse<StatusType>(cycloonObj.Status),
-                Enum.Parse<BassinType>(cycloonObj.Bassin.Replace("-", "_")),
+                Enum.Parse<StatusType>(cycloonDetails.Status),
+                Enum.Parse<BassinType>(cycloonDetails.Bassin.Replace("-", "_")),
                 metadata
             );
         }

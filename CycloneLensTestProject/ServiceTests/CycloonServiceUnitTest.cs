@@ -4,8 +4,6 @@ using Models.Enums;
 using Microsoft.SqlServer.Types;
 using Business_Logic_Layer.Services;
 
-// onafgemaakt 
-
 namespace CycloneLensTestProject.ServiceTests
 {
     public class CycloonServiceUnitTest
