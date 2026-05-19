@@ -68,10 +68,12 @@
     </div>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted
+    @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Map"
+                ? "d-none"
+                : "")">
         <div class="container">
-            &copy; 2026 - CycloneLens -
-            <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - CycloneLens
         </div>
     </footer>
 
