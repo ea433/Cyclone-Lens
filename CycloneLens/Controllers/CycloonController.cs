@@ -6,7 +6,7 @@ using Models.Enums;
 using Presentation.Models;
 using Business_Logic_Layer.Services;
 
-namespace CycloneLens.Controllers
+namespace Presentation.Controllers
 {
     public class CycloonController : Controller
     {

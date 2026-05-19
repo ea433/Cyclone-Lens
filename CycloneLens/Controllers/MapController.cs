@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace CycloneLens.Controllers
+namespace Presentation.Controllers
 {
     public class MapController : Controller
     {
