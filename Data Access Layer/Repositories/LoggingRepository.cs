@@ -20,9 +20,7 @@ namespace Data_Access_Layer.Repositories
                 {
                     conn.Open();
 
-                    string query = @"INSERT INTO CycloonLog 
-        (Cycloon_id, actie, Gebruiker_id, tijdstip)
-        VALUES (@cid, @actie, @gid, @tijd)";
+                    string query = @"INSERT INTO CycloonLog (Cycloon_id, actie, Gebruiker_id, tijdstip) VALUES (@cid, @actie, @gid, @tijd)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
