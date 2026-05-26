@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (timeEl) {
             timeEl.textContent =
-                "Last updated: " + now.toLocaleString();
+                "Laatst geüpdate: " + now.toLocaleString();
         }
     }
 
