@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const timeEl = document.getElementById("time");
 
         if (timeEl) {
-            timeEl.textContent =
-                "Laatst geüpdate: " + now.toLocaleString();
+            timeEl.textContent = "Laatst geüpdate: " + now.toLocaleString();
         }
     }
 
@@ -40,8 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const timestamp = Date.now();
 
-        img.src =
-            sources[currentProduct] + "?t=" + timestamp;
+        img.src = sources[currentProduct] + "?t=" + timestamp;
         updateTime();
     }
 
