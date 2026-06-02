@@ -30,55 +30,62 @@ var map = L.map('map', {
 
 var esri = L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    {
-        attribution: 'Esri'
+    { attribution: 'Esri' }
+).addTo(map);
+
+var goes = L.TileLayer.extend({
+    getTileUrl: function (coords) {
+        const tileBounds = this._tileCoordsToBounds(coords);
+        const sw = L.CRS.EPSG3857.project(tileBounds.getSouthWest());
+        const ne = L.CRS.EPSG3857.project(tileBounds.getNorthEast());
+
+        const params = new URLSearchParams({
+            minx: sw.x.toFixed(2),
+            miny: sw.y.toFixed(2),
+            maxx: ne.x.toFixed(2),
+            maxy: ne.y.toFixed(2),
+            width: 256,
+            height: 256,
+            layers: 'global_visible_imagery_mosaic,global_longwave_imagery_mosaic'
+        });
+
+        return `/api/goesproxy/tile?${params}`;
     }
-).addTo(map);
+});
 
-// clouds
-var clouds = L.tileLayer(
-    'https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=28d9aec8fcaefad710f8ad00443b1830',
-    { opacity: 0.9 }
-).addTo(map);
+var goesLayer = new goes(null, {
+    opacity: 0.85,
+    attribution: 'NOAA nowCOAST',
+    minZoom: 2,
+    maxZoom: 7
+}).addTo(map);
 
-
-// labels
 var labels = L.tileLayer(
     'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-    {
-        opacity: 1,
-        pane: 'overlayPane'
-    }
+    { opacity: 1, pane: 'overlayPane' }
 ).addTo(map);
 
 let rainLayer = null;
-
 async function loadRainLayer() {
     try {
         const res = await fetch("https://api.rainviewer.com/public/weather-maps.json");
         const data = await res.json();
-
         const frames = data.radar.past || data.radar.nowcast;
-
         if (!frames || frames.length === 0) return;
-
         const latest = frames[frames.length - 1];
-
         rainLayer = L.tileLayer(
             `https://tilecache.rainviewer.com${latest.path}/256/{z}/{x}/{y}/2/1_1.png`,
-            {
-                opacity: 0.7,
-                attribution: 'RainViewer'
-            }
+            { opacity: 0.7, attribution: 'RainViewer' }
         );
-
         rainLayer.addTo(map);
-
+        labels.bringToFront();
     } catch (err) {
         console.error("Rain failed:", err);
     }
 }
 loadRainLayer();
+
+setInterval(() => goesLayer.redraw(), 5 * 60 * 1000);
 
 document.getElementById("toggleClouds").addEventListener("change", (e) => {
     if (e.target.checked) {
