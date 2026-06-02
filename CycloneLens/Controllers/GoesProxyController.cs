@@ -24,9 +24,8 @@ namespace Presentation.Controllers
             [FromQuery] string maxy,
             [FromQuery] int width = 256,
             [FromQuery] int height = 256,
-            [FromQuery] string layers = "global_visible_imagery_mosaic,global_longwave_imagery_mosaic")
+            [FromQuery] string layers = "global_longwave_imagery_mosaic")
         {
-            // Parse the values so we can expand the bbox slightly
             if (!double.TryParse(minx, System.Globalization.NumberStyles.Float,
                 System.Globalization.CultureInfo.InvariantCulture, out double dMinX) ||
                 !double.TryParse(miny, System.Globalization.NumberStyles.Float,
@@ -39,15 +38,22 @@ namespace Presentation.Controllers
                 return BadRequest("Invalid bbox");
             }
 
-            // Expand bbox by 1% on each side to cover tile edge gaps
             double bufferX = (dMaxX - dMinX) * 0.01;
             double bufferY = (dMaxY - dMinY) * 0.01;
+
+            var bbox = string.Format(
+                System.Globalization.CultureInfo.InvariantCulture,
+                "{0},{1},{2},{3}",
+                dMinX - bufferX,
+                dMinY - bufferY,
+                dMaxX + bufferX,
+                dMaxY + bufferY);
 
             var wmsUrl =
                 $"https://nowcoast.noaa.gov/geoserver/observations/satellite/ows" +
                 $"?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap" +
                 $"&LAYERS={layers}" +
-                $"&BBOX={dMinX - bufferX},{dMinY - bufferY},{dMaxX + bufferX},{dMaxY + bufferY}" +
+                $"&BBOX={bbox}" +
                 $"&WIDTH={width}&HEIGHT={height}" +
                 $"&CRS=EPSG:3857" +
                 $"&FORMAT=image/png" +

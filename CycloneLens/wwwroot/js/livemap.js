@@ -28,10 +28,12 @@ var map = L.map('map', {
     zoomControl: false
 }).setView([20, -60], 4);
 
+/*
 var esri = L.tileLayer(
     'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     { attribution: 'Esri' }
 ).addTo(map);
+*/
 
 var goes = L.TileLayer.extend({
     getTileUrl: function (coords) {
@@ -40,16 +42,16 @@ var goes = L.TileLayer.extend({
         const ne = L.CRS.EPSG3857.project(tileBounds.getNorthEast());
 
         const params = new URLSearchParams({
-            minx: sw.x.toFixed(2),
-            miny: sw.y.toFixed(2),
-            maxx: ne.x.toFixed(2),
-            maxy: ne.y.toFixed(2),
+            minx: Math.min(sw.x, ne.x).toFixed(2),
+            miny: Math.min(sw.y, ne.y).toFixed(2),
+            maxx: Math.max(sw.x, ne.x).toFixed(2),
+            maxy: Math.max(sw.y, ne.y).toFixed(2),
             width: 256,
             height: 256,
-            layers: 'global_visible_imagery_mosaic,global_longwave_imagery_mosaic'
+            layers: 'global_longwave_imagery_mosaic'
         });
 
-        return `/api/goesproxy/tile?${params}`;
+        return `${window.location.origin}/api/goesproxy/tile?${params}`;
     }
 });
 
@@ -57,7 +59,8 @@ var goesLayer = new goes(null, {
     opacity: 0.85,
     attribution: 'NOAA nowCOAST',
     minZoom: 2,
-    maxZoom: 7
+    maxZoom: 7,
+    bounds: [[-72, -180], [72, 180]]  // matches NOAA's actual coverage area
 }).addTo(map);
 
 var labels = L.tileLayer(
