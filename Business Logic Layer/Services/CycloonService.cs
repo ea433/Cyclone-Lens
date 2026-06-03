@@ -1,6 +1,7 @@
-﻿using Models.Classes;
+﻿using Business_Logic_Layer.Mappers;
 using Interface_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
+using Models.Classes;
 using Models.Enums;
 
 namespace Business_Logic_Layer.Services
@@ -37,9 +38,9 @@ namespace Business_Logic_Layer.Services
                     return new Cycloon(
                         cycloon.Id,
                         cycloon.Naam,
-                        (CategorieType)(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
-                        Enum.Parse<BassinType>(cycloon.Bassin.Replace("-", "_")),
-                        Enum.Parse<StatusType>(cycloon.Status)
+                        CycloonMapper.ParseCategorie(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
+                        CycloonMapper.ParseBassin(cycloon.Bassin),
+                        CycloonMapper.ParseStatus(cycloon.Status)
                     );
                 })
                 .ToList();
@@ -57,8 +58,8 @@ namespace Business_Logic_Layer.Services
             {
                 Id = cycloon.Id,
                 Naam = cycloon.Naam,
-                Status = cycloon.Status.ToString(),
-                Bassin = cycloon.Bassin.ToString().Replace("_", "-")
+                Status = CycloonMapper.StatusToString(cycloon.Status),
+                Bassin = CycloonMapper.BassinToString(cycloon.Bassin)
             };
 
             _repository.UpdateCycloon(cycloonDto);
@@ -96,8 +97,8 @@ namespace Business_Logic_Layer.Services
             return new Cycloon(
                 dto.Id,
                 dto.Naam,
-                Enum.Parse<StatusType>(dto.Status),
-                Enum.Parse<BassinType>(dto.Bassin.Replace("-", "_"))
+                CycloonMapper.ParseStatus(dto.Status),
+                CycloonMapper.ParseBassin(dto.Bassin)
             );
         }
 
@@ -111,7 +112,7 @@ namespace Business_Logic_Layer.Services
             var metadata = _dataRepository.GetMetadata()
                 .Where(metadata => metadata.CycloonId == id)
                 .OrderBy(metadata => metadata.Tijdstip)
-                .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, (CategorieType)metadata.Categorie, metadata.Windsnelheid,
+                .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, CycloonMapper.ParseCategorie(metadata.Categorie), metadata.Windsnelheid,
                     metadata.Luchtdruk, metadata.Coordinaten, metadata.Tijdstip))
                 .ToList();
 
@@ -122,8 +123,8 @@ namespace Business_Logic_Layer.Services
                 cycloonDetails.Id,
                 cycloonDetails.Naam,
                 latestCategorie,
-                Enum.Parse<StatusType>(cycloonDetails.Status),
-                Enum.Parse<BassinType>(cycloonDetails.Bassin.Replace("-", "_")),
+                CycloonMapper.ParseStatus(cycloonDetails.Status),
+                CycloonMapper.ParseBassin(cycloonDetails.Bassin),
                 metadata
             );
         }

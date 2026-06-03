@@ -76,7 +76,9 @@ namespace Data_Access_Layer.Repositories
                         cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
                         cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
 
-                        cmd.ExecuteNonQuery();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected == 0)
+                            throw new Exception("Cycloon niet gevonden.");
                     }
                 }
             }
