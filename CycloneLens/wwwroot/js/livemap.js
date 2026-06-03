@@ -1,39 +1,8 @@
-﻿/*
-GOOD QUALITY SATELLITE: ONLY WPAC, AUS, part SIO & PAC
-RAINLAYER NOT INCLUDED
-
-var map = L.map('map', {
-            minZoom: 2,
-            maxZoom: 7,
-        }).setView([20, -60], 4);
-
-        var nasa = L.tileLayer(
-          'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
-          {
-            opacity: 0.95,
-            attribution: 'NASA VIIRS'
-          }
-        ).addTo(map);
-        
-        var labels = L.tileLayer(
-            'https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-            { opacity: 1 }
-        );
-        labels.addTo(map);
-*/
-
-var map = L.map('map', {
+﻿var map = L.map('map', {
     minZoom: 2,
     maxZoom: 7,
     zoomControl: false
 }).setView([20, -60], 4);
-
-/*
-var esri = L.tileLayer(
-    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    { attribution: 'Esri' }
-).addTo(map);
-*/
 
 var goes = L.TileLayer.extend({
     getTileUrl: function (coords) {
@@ -60,7 +29,7 @@ var goesLayer = new goes(null, {
     attribution: 'NOAA nowCOAST',
     minZoom: 2,
     maxZoom: 7,
-    bounds: [[-72, -180], [72, 180]]  // matches NOAA's actual coverage area
+    bounds: [[-72, -180], [72, 180]]
 }).addTo(map);
 
 var labels = L.tileLayer(
@@ -91,128 +60,26 @@ loadRainLayer();
 setInterval(() => goesLayer.redraw(), 5 * 60 * 1000);
 
 document.getElementById("toggleClouds").addEventListener("change", (e) => {
-    if (e.target.checked) {
-        map.addLayer(clouds);
-    } else {
-        map.removeLayer(clouds);
-    }
+    if (e.target.checked) map.addLayer(goesLayer);
+    else map.removeLayer(goesLayer);
 });
 
 document.getElementById("toggleLabels").addEventListener("change", (e) => {
-    if (e.target.checked) {
-        map.addLayer(labels);
-    } else {
-        map.removeLayer(labels);
-    }
+    if (e.target.checked) map.addLayer(labels);
+    else map.removeLayer(labels);
 });
 
 document.getElementById("toggleRadar").addEventListener("change", (e) => {
     if (!rainLayer) return;
-
-    if (e.target.checked) {
-        map.addLayer(rainLayer);
-    } else {
-        map.removeLayer(rainLayer);
-    }
+    if (e.target.checked) map.addLayer(rainLayer);
+    else map.removeLayer(rainLayer);
 });
 
-esri.bringToBack();
-clouds.bringToFront();
-labels.bringToFront();
-
-    var trackMaria = [
-    {lat: 14, lng: -23, category: 0 },
-    {lat: 14.5, lng: -25, category: 0 },
-    {lat: 15, lng: -28, category: 0 },
-    {lat: 15.5, lng: -31, category: 1 },
-    {lat: 16, lng: -35, category: 1 },
-    {lat: 16.5, lng: -38, category: 2 },
-    {lat: 17, lng: -42, category: 2 },
-    {lat: 17.5, lng: -46, category: 3 },
-    {lat: 18, lng: -50, category: 3 },
-    {lat: 18.5, lng: -54, category: 4 },
-    {lat: 19, lng: -58, category: 4 },
-    {lat: 19.5, lng: -61, category: 4 },
-    {lat: 20, lng: -65, category: 4 },
-    {lat: 20.5, lng: -68, category: 3 },
-    {lat: 21, lng: -72, category: 3 },
-    {lat: 21.5, lng: -75, category: 3 },
-    {lat: 22, lng: -78, category: 3 },
-    {lat: 21.5, lng: -82, category: 2 },
-    {lat: 21, lng: -85, category: 2 },
-    {lat: 21.5, lng: -86, category: 2 },
-    {lat: 22, lng: -87, category: 2 },
-    {lat: 23.5, lng: -85.5, category: 3 },
-    {lat: 25, lng: -84, category: 3 },
-    {lat: 26.5, lng: -82, category: 2 },
-    {lat: 28, lng: -80, category: 2 },
-    {lat: 30, lng: -77, category: 1 },
-    {lat: 32, lng: -75, category: 1 },
-    {lat: 35, lng: -72, category: 0 },
-    {lat: 38, lng: -68, category: 0 },
-    {lat: 42, lng: -64, category: 0 },
-    {lat: 45, lng: -60, category: 0 }
-    ];
-
-    var trackAlberto = [
-    {lat: 12, lng: -30, category: 0 },
-    {lat: 12.5, lng: -33, category: 0 },
-    {lat: 13, lng: -36, category: 1 },
-    {lat: 13.5, lng: -39, category: 1 },
-    {lat: 14, lng: -42, category: 1 },
-    {lat: 14.5, lng: -45, category: 2 },
-    { lat: 15, lng: -48, category: 2 }, 
-    // nog actief
-    ];
-
-    var latlngsAlberto = trackAlberto.map(p => [p.lat, p.lng]);
-    var latlngsMaria = trackMaria.map(q => [q.lat, q.lng]);
-
-    L.polyline(latlngsAlberto, {
-        color: 'red',
-    weight: 3
-        }).addTo(map);
-
-    L.polyline(latlngsMaria, {
-        color: 'red',
-    weight: 3
-        }).addTo(map);
-
-    function getColor(cat) {
-    if (cat == 0) return 'white';
-    if (cat == 1) return 'yellow';
-    if (cat == 2) return 'orange';
-    if (cat == 3) return 'red';
-    if (cat >= 4) return 'purple';
-    }
-
-    trackMaria.forEach(p => {
-    L.circleMarker([p.lat, p.lng], {
-        radius: 6,
-        color: getColor(p.category),
-        fillOpacity: 0.8
-    })
-        .addTo(map)
-        .bindPopup("Category " + p.category);
-    });
-
-    trackAlberto.forEach(q => {
-    L.circleMarker([q.lat, q.lng], {
-        radius: 6,
-        color: getColor(q.category),
-        fillOpacity: 0.8
-    })
-        .addTo(map)
-        .bindPopup("Category " + q.category);
-    });
-
-// Observaties van gebruikers (fetch from backend)
+// Observaties van gebruikers
 fetch('/Observatie/GetObservaties')
     .then(response => response.json())
     .then(observations => {
-
         observations.forEach(function (o) {
-
             var marker = L.marker([o.lat, o.lng])
                 .addTo(map)
                 .bindPopup(
@@ -220,56 +87,181 @@ fetch('/Observatie/GetObservaties')
                     o.description +
                     "<br><small>" + o.tijdstip + "</small>"
                 );
-
             obsMarkers.push(marker);
         });
-
     })
     .catch(err => console.error(err));
 
-// test JTWC forecast
-
-async function loadJTWCForecast() {
-
-    try {
-
-        const response = await fetch('/data/jtwc_forecast.json');
-
-        const forecast = await response.json();
-
-        const latlngs = forecast.map(p => [p.lat, p.lng]);
-
-        // dashed forecast line
-        L.polyline(latlngs, {
-            color: 'cyan',
-            weight: 4,
-            dashArray: '8,8'
-        }).addTo(map);
-
-        // forecast points
-        forecast.forEach(p => {
-
-            L.circleMarker([p.lat, p.lng], {
-                radius: 7,
-                color: getColor(p.category),
-                fillOpacity: 0.8
-            })
-                .addTo(map)
-                .bindPopup(
-                    "<b>JTWC Forecast</b><br>" +
-                    "Forecast Hour: +" + p.forecastHour + "h<br>" +
-                    "Category: " + p.category
-                );
-
-        });
-
-    }
-    catch (err) {
-
-        console.error(err);
-
-    }
-
+// Storm colors
+function stormColor(windKts) {
+    const w = parseInt(windKts);
+    if (w < 34) return '#5eead4';
+    if (w < 64) return '#facc15';
+    if (w < 83) return '#fb923c';
+    if (w < 96) return '#f87171';
+    if (w < 113) return '#c084fc';
+    if (w < 137) return '#e879f9';
+    return '#ff0000';
 }
 
-loadJTWCForecast();
+function stormLabel(windKts) {
+    const w = parseInt(windKts);
+    if (w < 34) return 'TD';
+    if (w < 64) return 'TS';
+    if (w < 83) return 'Cat 1';
+    if (w < 96) return 'Cat 2';
+    if (w < 113) return 'Cat 3';
+    if (w < 137) return 'Cat 4';
+    return 'Cat 5';
+}
+
+function parseKmlCoords(coordString) {
+    return coordString.trim().split(/\s+/).map(c => {
+        const parts = c.split(',');
+        return [parseFloat(parts[1]), parseFloat(parts[0])];
+    });
+}
+
+var stormLayers = [];
+
+function clearStormLayers() {
+    stormLayers.forEach(l => map.removeLayer(l));
+    stormLayers = [];
+}
+
+async function loadKmzLayer(kmzUrl, type) {
+    try {
+        const res = await fetch(`/api/tropical/kmz?url=${encodeURIComponent(kmzUrl)}`);
+        if (!res.ok) return;
+        const kmlText = await res.text();
+
+        const parser = new DOMParser();
+        const kml = parser.parseFromString(kmlText, 'application/xml');
+        const placemarks = kml.querySelectorAll('Placemark');
+
+        const trackCoords = [];
+
+        placemarks.forEach(pm => {
+            // Track line
+            const line = pm.querySelector('LineString coordinates');
+            if (line && type === 'track') {
+                const coords = parseKmlCoords(line.textContent);
+                // Only draw the 120hr line (longest one)
+                const fcstpd = pm.querySelector('Data[name="fcstpd"] value');
+                if (!fcstpd || fcstpd.textContent === '120') {
+                    const layer = L.polyline(coords, {
+                        color: '#ffffff',
+                        weight: 2,
+                        dashArray: '6 3',
+                        opacity: 0.9
+                    }).addTo(map);
+                    stormLayers.push(layer);
+                }
+            }
+
+            // Cone polygon
+            const polygon = pm.querySelector('Polygon outerBoundaryIs LinearRing coordinates');
+            if (polygon && type === 'cone') {
+                const layer = L.polygon(parseKmlCoords(polygon.textContent), {
+                    color: '#ffffff',
+                    fillColor: '#94a3b8',
+                    fillOpacity: 0.2,
+                    weight: 1,
+                    dashArray: '4 4'
+                }).addTo(map);
+                stormLayers.push(layer);
+            }
+
+            // Forecast points
+            const point = pm.querySelector('Point coordinates');
+            if (point && type === 'track') {
+                const parts = point.textContent.trim().split(',');
+                const lon = parseFloat(parts[0]);
+                const lat = parseFloat(parts[1]);
+                if (isNaN(lat) || isNaN(lon)) return;
+
+                // Extract wind from description HTML
+                const rawDesc = pm.querySelector('description')?.textContent || '';
+                const windMatch = rawDesc.match(/Maximum Wind:\s*(\d+)\s*knots/);
+                const wind = windMatch ? parseInt(windMatch[1]) : 0;
+                const color = stormColor(wind);
+
+                const styleUrl = pm.querySelector('styleUrl')?.textContent || '';
+                const isInitial = styleUrl.includes('initial');
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = rawDesc;
+                const rows = tempDiv.querySelectorAll('td');
+                const lines = Array.from(rows)
+                    .map(td => td.textContent.trim())
+                    .filter(t => t.length > 0 && t !== '—' && t !== '-');
+
+                const tooltipHtml = `<div style="line-height:1.6">${lines.join('<br>')}</div>`;
+
+                const layer = L.circleMarker([lat, lon], {
+                    radius: isInitial ? 9 : 6,
+                    fillColor: color,
+                    color: '#ffffff',
+                    weight: isInitial ? 2.5 : 1.5,
+                    fillOpacity: 0.9
+                }).bindTooltip(tooltipHtml, {
+                    className: 'storm-tooltip',
+                    sticky: true,
+                    opacity: 0.95,
+                    direction: 'top',
+                    offset: [0, -10]
+                }).addTo(map);
+                stormLayers.push(layer);
+            }
+        });
+        labels.bringToFront();
+    } catch (err) {
+        console.error(`KMZ load failed (${type}):`, err);
+    }
+}
+
+async function loadActiveStorms() {
+    try {
+        clearStormLayers();
+
+        const res = await fetch('/api/tropical/nhc-active');
+        const data = await res.json();
+
+        if (!data.activeStorms || data.activeStorms.length === 0) return;
+
+        data.activeStorms.forEach(storm => {
+            const color = stormColor(storm.intensity);
+            const label = stormLabel(storm.intensity);
+
+            const marker = L.circleMarker(
+                [storm.latitudeNumeric, storm.longitudeNumeric],
+                {
+                    radius: 10,
+                    fillColor: color,
+                    color: '#ffffff',
+                    weight: 2,
+                    fillOpacity: 1
+                }
+            ).bindTooltip(
+                `<b>${storm.name}</b><br>
+                 ${label} — ${storm.intensity} kt<br>
+                 Pressure: ${storm.pressure} mb<br>
+                 Updated: ${new Date(storm.lastUpdate).toUTCString()}`,
+                { className: 'storm-tooltip', permanent: false }
+            ).addTo(map);
+            stormLayers.push(marker);
+
+            if (storm.forecastTrack?.kmzFile)
+                loadKmzLayer(storm.forecastTrack.kmzFile, 'track');
+
+            if (storm.trackCone?.kmzFile)
+                loadKmzLayer(storm.trackCone.kmzFile, 'cone');
+        });
+
+    } catch (err) {
+        console.error('Active storms failed:', err);
+    }
+}
+
+loadActiveStorms();
+setInterval(loadActiveStorms, 30 * 60 * 1000);
