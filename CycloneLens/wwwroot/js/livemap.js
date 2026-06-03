@@ -1,5 +1,5 @@
 ﻿var map = L.map('map', {
-    minZoom: 2,
+    minZoom: 4,
     maxZoom: 7,
     zoomControl: false
 }).setView([20, -60], 4);
@@ -75,7 +75,7 @@ document.getElementById("toggleRadar").addEventListener("change", (e) => {
     else map.removeLayer(rainLayer);
 });
 
-// Observaties van gebruikers
+// Observaties van observaties
 fetch('/Observatie/GetObservaties')
     .then(response => response.json())
     .then(observations => {
@@ -95,24 +95,24 @@ fetch('/Observatie/GetObservaties')
 // Storm colors
 function stormColor(windKts) {
     const w = parseInt(windKts);
-    if (w < 34) return '#5eead4';
-    if (w < 64) return '#facc15';
-    if (w < 83) return '#fb923c';
-    if (w < 96) return '#f87171';
-    if (w < 113) return '#c084fc';
-    if (w < 137) return '#e879f9';
-    return '#ff0000';
+    if (w < 34) return '#5eead4'; // Tropische Depressie
+    if (w < 64) return '#facc15'; // Tropische Storm
+    if (w < 83) return '#fb923c'; // Categorie 1
+    if (w < 96) return '#f87171'; // Categorie 2
+    if (w < 113) return '#c084fc'; // Categorie 3
+    if (w < 137) return '#e879f9'; // Categorie 4
+    return '#ff0000'; // Categorie 5 
 }
 
 function stormLabel(windKts) {
     const w = parseInt(windKts);
-    if (w < 34) return 'TD';
-    if (w < 64) return 'TS';
-    if (w < 83) return 'Cat 1';
-    if (w < 96) return 'Cat 2';
-    if (w < 113) return 'Cat 3';
-    if (w < 137) return 'Cat 4';
-    return 'Cat 5';
+    if (w < 34) return 'TD'; // Tropische Depressie
+    if (w < 64) return 'TS'; // Tropische Storm
+    if (w < 83) return 'Cat 1'; // Categorie 1
+    if (w < 96) return 'Cat 2'; // Categorie 2
+    if (w < 113) return 'Cat 3'; // Categorie 3
+    if (w < 137) return 'Cat 4'; // Categorie 4
+    return 'Cat 5'; // Categorie 5 
 }
 
 function parseKmlCoords(coordString) {

@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Presentation.Controllers
 {
