@@ -14,24 +14,24 @@ namespace Presentation.Controllers
 
         public CycloonController(IConfiguration config)
         {
-            var connectionString = config.GetConnectionString("DefaultConnection");
+            string? connectionString = config.GetConnectionString("DefaultConnection");
 
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new Exception("Connection string not found");
             }
 
-            var repository = new CycloonRepository(connectionString);
-            var dataRepository = new MetadataRepository(connectionString);
-            var loggingRepository = new LoggingRepository(connectionString);
+            CycloonRepository repository = new CycloonRepository(connectionString);
+            MetadataRepository dataRepository = new MetadataRepository(connectionString);
+            LoggingRepository loggingRepository = new LoggingRepository(connectionString);
             _service = new CycloonService(repository, dataRepository, loggingRepository);
         }
 
         public IActionResult Index()
         {
-            var data = _service.GetActiveCyclonenNATL();
+            List<Cycloon> data = _service.GetActiveCyclonenNATL();
 
-            var ViewModel = data.Select(cycloon => new CycloonViewModel(
+            List<CycloonViewModel> viewModel = data.Select(cycloon => new CycloonViewModel(
                 cycloon.Id,
                 cycloon.Naam,
                 cycloon.Categorie,
@@ -39,22 +39,20 @@ namespace Presentation.Controllers
                 cycloon.Status
             )).ToList();
 
-            return View(ViewModel);
+            return View(viewModel);
         }
-
-        // fr-05
 
     [HttpPost]
     public IActionResult Update(UpdateCycloonViewModel model)
     {
         try
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            var userTypeValue = HttpContext.Session.GetInt32("UserType");
-            var userType = (GebruikerType)(userTypeValue ?? 0);
+            int? userTypeValue = HttpContext.Session.GetInt32("UserType");
+            GebruikerType userType = (GebruikerType)(userTypeValue ?? 0);
 
-            var gebruiker = new Gebruiker(
+            Gebruiker gebruiker = new Gebruiker(
                 userId ?? 0,
                 "test",
                 "test@test",
@@ -73,26 +71,26 @@ namespace Presentation.Controllers
                 return View("Error"); // or Unauthorized()
             }
 
-            var cycloon = new Cycloon(
+            Cycloon cycloon = new Cycloon(
                     model.Id,
                     model.Naam,
                     model.Status,
                     model.Bassin
                 );
 
-                var metadata = new Metadata(
-                    0,
-                    model.Id,
-                    model.Categorie,
-                    model.Windsnelheid,
-                    model.Luchtdruk,
-                    SqlGeography.Point(model.Coordinaten, model.Coordinaten, 4326),
-                    DateTime.UtcNow
-                );
+            Metadata metadata = new Metadata(
+                0,
+                model.Id,
+                model.Categorie,
+                model.Windsnelheid,
+                model.Luchtdruk,
+                SqlGeography.Point(model.Coordinaten, model.Coordinaten, 4326),
+                DateTime.UtcNow
+            );
 
-                _service.UpdateCycloon(cycloon, metadata, gebruiker);
+            _service.UpdateCycloon(cycloon, metadata, gebruiker);
 
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -102,7 +100,7 @@ namespace Presentation.Controllers
 
         public IActionResult Edit(int id)
         {
-            var cycloon = _service.GetById(id);
+            Cycloon? cycloon = _service.GetById(id);
 
             if (cycloon == null)
                 return View("Error");
