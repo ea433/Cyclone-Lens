@@ -2,7 +2,7 @@
 using System.IO.Compression;
 using System.Text;
 
-namespace Presentation.Controllers
+namespace Presentation.APIControllers
 {
     [ApiController]
     [Route("api/[controller]")]
