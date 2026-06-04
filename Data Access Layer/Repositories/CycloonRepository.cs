@@ -15,7 +15,7 @@ namespace Data_Access_Layer.Repositories
 
         public List<CycloonDTO> GetCyclonen()
         {
-            var cyclonen = new List<CycloonDTO>();
+            List<CycloonDTO> cyclonen = new();
 
             try
             {
@@ -30,15 +30,15 @@ namespace Data_Access_Layer.Repositories
                     {
                         while (reader.Read())
                         {
-                            var statusString = reader["status"]?.ToString();
-                            var bassinString = reader["bassin"]?.ToString();
+                            string? statusString = reader["status"]?.ToString();
+                            string? bassinString = reader["bassin"]?.ToString();
 
                             if (string.IsNullOrEmpty(statusString) || string.IsNullOrEmpty(bassinString))
                             {
                                 throw new Exception("Invalid enum value from database");
                             }
 
-                            var cycloon = new CycloonDTO
+                            CycloonDTO cycloon = new()
                             {
                                 Id = (int)reader["id"],
                                 Naam = reader["naam"]?.ToString() ?? "",

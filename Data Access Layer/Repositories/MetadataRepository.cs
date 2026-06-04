@@ -16,7 +16,7 @@ namespace Data_Access_Layer.Repositories
 
         public List<MetadataDTO> GetMetadata()
         {
-            var metadataList = new List<MetadataDTO>();
+            List<MetadataDTO> metadataList = new();
 
             try
             { 
@@ -33,14 +33,14 @@ namespace Data_Access_Layer.Repositories
                     {
                         while (reader.Read())
                         {
-                            var categorieString = reader["categorie"]?.ToString();
+                            string? categorieString = reader["categorie"]?.ToString();
 
                             if (string.IsNullOrEmpty(categorieString))
                             {
                                 throw new Exception("Invalid categorie value from database");
                             }
 
-                            var metadata = new MetadataDTO
+                            MetadataDTO metadata = new()
                             {
                                 Id = (int)reader["id"],
                                 CycloonId = Convert.ToInt32(reader["cycloon_id"]),
