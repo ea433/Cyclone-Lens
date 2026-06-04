@@ -54,7 +54,7 @@ namespace Business_Logic_Layer.Services
             if (string.IsNullOrWhiteSpace(cycloon.Naam))
                 throw new ArgumentException("Naam is verplicht");
 
-            CycloonDTO cycloonDto = new CycloonDTO
+            CycloonDTO cycloonDto = new()
             {
                 Id = cycloon.Id,
                 Naam = cycloon.Naam,
@@ -66,7 +66,7 @@ namespace Business_Logic_Layer.Services
 
             if (metadata != null)
             {
-                MetadataDTO metadataDto = new MetadataDTO
+                MetadataDTO metadataDto = new()
                 {
                     Id = metadata.Id,
                     CycloonId = metadata.Cycloon_Id,

@@ -34,7 +34,7 @@ namespace Business_Logic_Layer.Services
             if (coordinaten.Lat.Value > 90 || coordinaten.Long.Value > 180)
                 throw new Exception("Ongeldige locatie");
 
-            var observatie = new ObservatieDTO
+            ObservatieDTO observatie = new()
             {
                 GebruikerId = gebruikerId,
                 CycloonId = cycloonId,
