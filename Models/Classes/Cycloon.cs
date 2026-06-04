@@ -22,7 +22,7 @@ namespace Models.Classes
         public Cycloon(int id, string naam, CategorieType categorie, BassinType bassin, StatusType status)
         {
             this.Id = id;
-            this.Naam = naam;
+            this.Naam = naam ?? throw new ArgumentNullException(nameof(naam));
             this.Categorie = categorie;
             this.Bassin = bassin;
             this.Status = status;

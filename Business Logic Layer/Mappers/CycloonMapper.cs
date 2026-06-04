@@ -4,7 +4,7 @@ namespace Business_Logic_Layer.Mappers
 {
     public static class CycloonMapper
     {
-        // Alle methodes zijn static zodat je ze kan aanroepen zonder een instantie van CycloonMapper te hoefen te maken
+        // Alle methodes zijn static zodat je ze kan aanroepen zonder een instantie van CycloonMapper te hoeven te maken
         
         // Parse: String -> Enum
         public static StatusType ParseStatus(string status) => Enum.Parse<StatusType>(status);
