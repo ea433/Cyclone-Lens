@@ -21,8 +21,8 @@ namespace Business_Logic_Layer.Services
 
         public List<Cycloon> GetActiveCyclonenNATL()
         {
-            var cyclonen = _repository.GetCyclonen();
-            var metadata = _dataRepository.GetMetadata();
+            List<CycloonDTO> cyclonen = _repository.GetCyclonen();
+            List<MetadataDTO> metadata = _dataRepository.GetMetadata();
 
             return cyclonen
                 .Where(cycloon =>
@@ -30,7 +30,7 @@ namespace Business_Logic_Layer.Services
                     cycloon.Bassin.Replace("-", "_") == BassinType.Noord_Atlantisch.ToString())
                 .Select(cycloon =>
                 {
-                    var latest = metadata
+                    MetadataDTO? latest = metadata
                         .Where(metadata => metadata.CycloonId == cycloon.Id)
                         .OrderByDescending(metadata => metadata.Tijdstip)
                         .FirstOrDefault();
@@ -54,7 +54,7 @@ namespace Business_Logic_Layer.Services
             if (string.IsNullOrWhiteSpace(cycloon.Naam))
                 throw new ArgumentException("Naam is verplicht");
 
-            var cycloonDto = new CycloonDTO
+            CycloonDTO cycloonDto = new CycloonDTO
             {
                 Id = cycloon.Id,
                 Naam = cycloon.Naam,
@@ -66,7 +66,7 @@ namespace Business_Logic_Layer.Services
 
             if (metadata != null)
             {
-                var metadataDto = new MetadataDTO
+                MetadataDTO metadataDto = new MetadataDTO
                 {
                     Id = metadata.Id,
                     CycloonId = metadata.Cycloon_Id,
@@ -89,7 +89,7 @@ namespace Business_Logic_Layer.Services
 
         public Cycloon? GetById(int id)
         {
-            var dto = _repository.GetById(id);
+            CycloonDTO? dto = _repository.GetById(id);
 
             if (dto == null)
                 return null;
@@ -104,19 +104,19 @@ namespace Business_Logic_Layer.Services
 
         public Cycloon? GetCycloonDetails(int id)
         {
-            var cycloonDetails = _repository.GetById(id);
+            CycloonDTO? cycloonDetails = _repository.GetById(id);
 
             if (cycloonDetails == null)
                 return null;
 
-            var metadata = _dataRepository.GetMetadata()
+            List<Metadata> metadata = _dataRepository.GetMetadata()
                 .Where(metadata => metadata.CycloonId == id)
                 .OrderBy(metadata => metadata.Tijdstip)
                 .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, CycloonMapper.ParseCategorie(metadata.Categorie), metadata.Windsnelheid,
                     metadata.Luchtdruk, metadata.Coordinaten, metadata.Tijdstip))
                 .ToList();
 
-            var latestCategorie = metadata.LastOrDefault()?.Categorie
+            CategorieType latestCategorie = metadata.LastOrDefault()?.Categorie
                 ?? CategorieType.Tropische_Depressie;
 
             return new Cycloon(
