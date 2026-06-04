@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Business_Logic_Layer.Services;    
+using Business_Logic_Layer.Services;
+using Models.Classes;
 
 namespace Presentation.Controllers
 {
@@ -14,7 +15,7 @@ namespace Presentation.Controllers
 
         public IActionResult Details(int id)
         {
-            var result = _cycloonService.GetCycloonDetails(id);
+            Cycloon? result = _cycloonService.GetCycloonDetails(id);
 
             if (result == null)
                 return NotFound();

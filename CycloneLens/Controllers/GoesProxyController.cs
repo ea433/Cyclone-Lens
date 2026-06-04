@@ -39,7 +39,7 @@ namespace Presentation.Controllers
             double bufferX = (dMaxX - dMinX) * 0.01;
             double bufferY = (dMaxY - dMinY) * 0.01;
 
-            var bbox = string.Format(
+            string bbox = string.Format(
                 System.Globalization.CultureInfo.InvariantCulture,
                 "{0},{1},{2},{3}",
                 dMinX - bufferX,
@@ -47,7 +47,7 @@ namespace Presentation.Controllers
                 dMaxX + bufferX,
                 dMaxY + bufferY);
 
-            var wmsUrl =
+            string wmsUrl =
                 $"https://nowcoast.noaa.gov/geoserver/observations/satellite/ows" +
                 $"?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap" +
                 $"&LAYERS={layers}" +
@@ -59,13 +59,13 @@ namespace Presentation.Controllers
 
             try
             {
-                var response = await _http.GetAsync(wmsUrl);
+                HttpResponseMessage response = await _http.GetAsync(wmsUrl);
 
                 if (!response.IsSuccessStatusCode)
                     return StatusCode((int)response.StatusCode);
 
-                var contentType = response.Content.Headers.ContentType?.ToString() ?? "image/png";
-                var bytes = await response.Content.ReadAsByteArrayAsync();
+                string contentType = response.Content.Headers.ContentType?.ToString() ?? "image/png";
+                byte[] bytes = await response.Content.ReadAsByteArrayAsync();
 
                 Response.Headers["Cache-Control"] = "public, max-age=240";
                 return File(bytes, contentType);

@@ -34,7 +34,7 @@ namespace Presentation.Controllers
             {
                 int gebruikerId = 1; // temp
 
-                var coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
+                SqlGeography coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
 
                 _service.PlaatsObservatie(
                     gebruikerId,
@@ -61,7 +61,7 @@ namespace Presentation.Controllers
 
             List<ObservatieViewModel> viewModels = new();
 
-            foreach (var observatie in observaties)
+            foreach (Observatie observatie in observaties)
             {
                 viewModels.Add(new ObservatieViewModel
                 {

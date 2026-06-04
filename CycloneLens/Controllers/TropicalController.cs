@@ -19,9 +19,9 @@ namespace Presentation.Controllers
         [HttpGet("nhc-active")]
         public async Task<IActionResult> GetNhcActive()
         {
-            var url = "https://www.nhc.noaa.gov/CurrentStorms.json";
-            var response = await _http.GetAsync(url);
-            var content = await response.Content.ReadAsStringAsync();
+            string url = "https://www.nhc.noaa.gov/CurrentStorms.json";
+            HttpResponseMessage response = await _http.GetAsync(url);
+            string content = await response.Content.ReadAsStringAsync();
             return Content(content, "application/json");
         }
 
@@ -32,23 +32,23 @@ namespace Presentation.Controllers
             if (string.IsNullOrEmpty(url))
                 return BadRequest("url required");
 
-            var response = await _http.GetAsync(url, HttpCompletionOption.ResponseContentRead);
+            HttpResponseMessage response = await _http.GetAsync(url, HttpCompletionOption.ResponseContentRead);
             if (!response.IsSuccessStatusCode)
                 return StatusCode((int)response.StatusCode);
 
-            var zipBytes = await response.Content.ReadAsByteArrayAsync();
+            byte[] zipBytes = await response.Content.ReadAsByteArrayAsync();
 
             try
             {
-                using var zipStream = new System.IO.MemoryStream(zipBytes);
-                using var archive = new ZipArchive(zipStream, ZipArchiveMode.Read);
+                using System.IO.MemoryStream zipStream = new(zipBytes);
+                using ZipArchive archive = new(zipStream, ZipArchiveMode.Read);
 
-                foreach (var entry in archive.Entries)
+                foreach (ZipArchiveEntry entry in archive.Entries)
                 {
                     if (entry.Name.EndsWith(".kml", StringComparison.OrdinalIgnoreCase))
                     {
-                        using var reader = new System.IO.StreamReader(entry.Open(), Encoding.UTF8);
-                        var kml = await reader.ReadToEndAsync();
+                        using System.IO.StreamReader reader = new(entry.Open(), Encoding.UTF8);
+                        string kml = await reader.ReadToEndAsync();
                         return Content(kml, "application/xml");
                     }
                 }
@@ -64,14 +64,15 @@ namespace Presentation.Controllers
         [HttpGet("kmz-contents")]
         public async Task<IActionResult> GetKmzContents([FromQuery] string url)
         {
-            var response = await _http.GetAsync(url, HttpCompletionOption.ResponseContentRead);
+            HttpResponseMessage response = await _http.GetAsync(url, HttpCompletionOption.ResponseContentRead);
 
-            var zipBytes = await response.Content.ReadAsByteArrayAsync();
+            byte[] zipBytes = await response.Content.ReadAsByteArrayAsync();
 
             using var zipStream = new System.IO.MemoryStream(zipBytes);
             using var archive = new ZipArchive(zipStream, ZipArchiveMode.Read);
 
-            var files = archive.Entries.Select(e => e.Name).ToList();
+            List<string> files = archive.Entries.Select(e => e.Name)
+                .ToList();
             return Ok(files);
         }
     }
