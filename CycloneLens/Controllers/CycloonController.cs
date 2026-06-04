@@ -55,7 +55,6 @@ namespace Presentation.Controllers
             Gebruiker gebruiker = new Gebruiker(
                 userId ?? 0,
                 "test",
-                "test@test",
                 "test",
                 userType
             );

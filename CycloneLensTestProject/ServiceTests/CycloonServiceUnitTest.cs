@@ -217,7 +217,6 @@ namespace CycloneLensTestProject.ServiceTests
             var gebruiker = new Gebruiker(
                 1,
                 "Test",
-                "test@test.nl",
                 "wachtwoord123",
                 GebruikerType.Gebruiker);
 
@@ -244,7 +243,6 @@ namespace CycloneLensTestProject.ServiceTests
             var gebruiker = new Gebruiker(
                 1,
                 "Admin",
-                "admin@test.nl",
                 "wachtwoord123",
                 GebruikerType.Beheerder);
 
