@@ -1,18 +1,10 @@
-﻿body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.auth-container {
+﻿.auth-container {
     background-color: #ffffff;
     padding: 40px;
     width: 500px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 60px auto;
+    font-family: Arial, sans-serif;
 }
 
     .auth-container h1 {
@@ -21,46 +13,46 @@
         margin-bottom: 30px;
     }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-    .form-group label {
-        font-size: 14px;
-        margin-bottom: 6px;
+    .auth-container .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
     }
 
-    .form-group input {
-        padding: 12px;
-        font-size: 14px;
-        border: 1px solid #333;
-        outline: none;
+        .auth-container .form-group label {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .auth-container .form-group input {
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #333;
+            outline: none;
+        }
+
+            .auth-container .form-group input:focus {
+                border-color: #000;
+            }
+
+    .auth-container button[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        background-color: #000000;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
     }
 
-    .form-group input:focus {
-        border-color: #000;
+        .auth-container button[type="submit"]:hover {
+            background-color: #333333;
+        }
+
+    .auth-container .fout {
+        color: red;
+        font-size: 13px;
+        margin-bottom: 10px;
     }
-
-button[type="submit"] {
-    width: 100%;
-    padding: 14px;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-    button[type="submit"]:hover {
-        background-color: #333333;
-    }
-
-.fout {
-    color: red;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
