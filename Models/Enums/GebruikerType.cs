@@ -2,9 +2,9 @@
 {
     public enum GebruikerType
     {
-        Gebruiker,
-        Inzender,
-        Moderator, // ==toezichthouder
-        Beheerder // ==admininistator
+        Gebruiker = 0,
+        Inzender = 1,
+        Moderator = 2, // ==toezichthouder
+        Beheerder = 3 // ==admininistator
     }
 }
