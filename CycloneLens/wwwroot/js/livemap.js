@@ -59,11 +59,6 @@ loadRainLayer();
 
 setInterval(() => goesLayer.redraw(), 5 * 60 * 1000);
 
-document.getElementById("toggleClouds").addEventListener("change", (e) => {
-    if (e.target.checked) map.addLayer(goesLayer);
-    else map.removeLayer(goesLayer);
-});
-
 document.getElementById("toggleLabels").addEventListener("change", (e) => {
     if (e.target.checked) map.addLayer(labels);
     else map.removeLayer(labels);
