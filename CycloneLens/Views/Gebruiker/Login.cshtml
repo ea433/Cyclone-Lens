@@ -8,21 +8,17 @@
         <p class="fout">@ViewBag.Fout</p>
     }
 
-    <div class="form-group">
-        <label asp-for="Gebruikersnaam">Gebruikersnaam</label>
-        <input asp-for="Gebruikersnaam" placeholder="gebruikersnaam" />
-    </div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Gebruikersnaam">Gebruikersnaam</label>
+            <input asp-for="Gebruikersnaam" placeholder="gebruikersnaam" />
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Wachtwoord">Wachtwoord</label>
-        <input asp-for="Wachtwoord" type="password" placeholder="••••••••••" />
-    </div>
+        <div class="form-group">
+            <label asp-for="Wachtwoord">Wachtwoord</label>
+            <input asp-for="Wachtwoord" type="password" placeholder="••••••••••" />
+        </div>
 
-    <button type="button" onclick="submitLogin()">Inloggen</button>
+        <button type="submit">Inloggen</button>
+    </form>
 </div>
-
-<script>
-    function submitLogin() {
-        document.querySelector('form')?.submit();
-    }
-</script>

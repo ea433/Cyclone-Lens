@@ -21,14 +21,14 @@ namespace Data_Access_Layer.Repositories
                 {
                     conn.Open();
 
-                    string query = @"INSERT INTO Gebruiker (gebruikersnaam, wachtwoord_hash, UserType) 
-                                     VALUES (@gebruikersnaam, @wachtwoordHash, @userType)";
+                    string query = @"INSERT INTO Gebruiker (gebruikersnaam, wachtwoord_hash, GebruikerType) 
+                                    VALUES (@gebruikersnaam, @wachtwoordHash, @userType)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@gebruikersnaam", gebruiker.Gebruikersnaam);
                         cmd.Parameters.AddWithValue("@wachtwoordHash", gebruiker.WachtwoordHash);
-                        cmd.Parameters.AddWithValue("@userType", gebruiker.UserType);
+                        cmd.Parameters.AddWithValue("@userType", gebruiker.GebruikerType);
 
                         cmd.ExecuteNonQuery();
                     }
@@ -63,7 +63,7 @@ namespace Data_Access_Layer.Repositories
                                     Id = (int)reader["id"],
                                     Gebruikersnaam = reader["gebruikersnaam"]?.ToString() ?? "",
                                     WachtwoordHash = reader["wachtwoord_hash"]?.ToString() ?? "",
-                                    UserType = (int)reader["UserType"]
+                                    GebruikerType = (int)reader["GebruikerType"]
                                 };
                             }
                         }

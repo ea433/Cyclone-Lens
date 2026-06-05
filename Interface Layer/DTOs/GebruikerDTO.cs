@@ -9,6 +9,6 @@ namespace Interface_Layer.DTOs
         public int Id { get; set; }
         public required string Gebruikersnaam { get; set; }
         public required string WachtwoordHash { get; set; }
-        public int UserType { get; set; }
+        public int GebruikerType { get; set; }
     }
 }

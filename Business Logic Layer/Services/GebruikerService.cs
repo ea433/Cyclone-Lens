@@ -34,7 +34,7 @@ namespace Business_Logic_Layer.Services
             {
                 Gebruikersnaam = gebruikersnaam,
                 WachtwoordHash = wachtwoordHash,
-                UserType = (int)GebruikerType.Gebruiker
+                GebruikerType = (int)GebruikerType.Gebruiker
             };
 
             _repository.RegistreerGebruiker(gebruikerDto);
@@ -51,7 +51,7 @@ namespace Business_Logic_Layer.Services
                 dto.Id,
                 dto.Gebruikersnaam,
                 dto.WachtwoordHash,
-                (GebruikerType)dto.UserType
+                (GebruikerType)dto.GebruikerType
             );
         }
     }
