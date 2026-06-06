@@ -10,14 +10,9 @@ namespace Presentation.Controllers
     {
         private readonly GebruikerService _service;
 
-        public GebruikerController(IConfiguration config)
+        public GebruikerController(GebruikerService service)
         {
-            string? connectionString = config.GetConnectionString("DefaultConnection");
-            if (string.IsNullOrEmpty(connectionString))
-                throw new Exception("Connection string not found");
-
-            GebruikerRepository repository = new(connectionString);
-            _service = new GebruikerService(repository);
+            _service = service;
         }
 
         public IActionResult Register()

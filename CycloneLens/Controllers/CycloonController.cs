@@ -12,19 +12,9 @@ namespace Presentation.Controllers
     {
         private readonly CycloonService _service;
 
-        public CycloonController(IConfiguration config)
+        public CycloonController(CycloonService service)
         {
-            string? connectionString = config.GetConnectionString("DefaultConnection");
-
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new Exception("Connection string not found");
-            }
-
-            CycloonRepository repository = new CycloonRepository(connectionString);
-            MetadataRepository dataRepository = new MetadataRepository(connectionString);
-            LoggingRepository loggingRepository = new LoggingRepository(connectionString);
-            _service = new CycloonService(repository, dataRepository, loggingRepository);
+            _service = service;
         }
 
         public IActionResult Index()

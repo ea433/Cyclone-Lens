@@ -14,6 +14,15 @@ builder.Services.AddScoped<ObservatieService>();
 
 builder.Services.AddScoped<CycloonService>();
 
+builder.Services.AddScoped<GebruikerService>();
+builder.Services.AddScoped<IGebruikerRepository>(provider =>
+{
+    string connectionString = provider.GetRequiredService<IConfiguration>()
+        .GetConnectionString("DefaultConnection")
+        ?? throw new Exception("Connection string not found");
+    return new GebruikerRepository(connectionString);
+});
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
