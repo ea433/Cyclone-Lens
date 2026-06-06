@@ -2,6 +2,7 @@
 using Interface_Layer.API_InterfaceRepositories;
 using Models.Classes;
 using Business_Logic_Layer.Mappers;
+using Business_Logic_Layer.API_Mappers;
 
 namespace Business_Logic_Layer.API_Services
 {
@@ -23,7 +24,7 @@ namespace Business_Logic_Layer.API_Services
                     NhcId = storm.Id,
                     Naam = storm.Name,
                     Categorie = storm.Classification,
-                    Bassin = ParseBassin(storm.Id),
+                    Bassin = CycloonMapper.BassinToString(NhcStormMapper.ParseBassin(storm.Id)),
                     Windsnelheid = int.Parse(storm.Intensity),
                     Luchtdruk = int.Parse(storm.Pressure),
                     Latitude = storm.LatitudeNumeric,
