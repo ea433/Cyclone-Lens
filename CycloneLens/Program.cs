@@ -56,6 +56,20 @@ builder.Services.AddScoped<ILoggingRepository>(provider =>
         return new LoggingRepository(connectionString);
 });
 
+// API's
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<NhcStormService>();
+
+builder.Services.AddScoped<INhcStormRepository>(provider =>
+{
+    IConfiguration config = provider.GetRequiredService<IConfiguration>();
+    string connectionString = config.GetConnectionString("DefaultConnection")
+        ?? throw new Exception("Connection string not found");
+    return new NhcStormRepository(connectionString);
+});
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
