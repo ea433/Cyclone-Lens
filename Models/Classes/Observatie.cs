@@ -8,7 +8,7 @@ namespace Models.Classes
         public int GebruikerId { get; }
         public string GebruikerNaam { get; }
         public int CycloonId { get; }
-        public string Omschrijving { get; private set; } // alleen set wanneer object geinitialiseerd wordt, laat required toe (validatie)
+        public string Omschrijving { get; private set; }
         public string? AfbeeldingPad { get; private set; }
         public SqlGeography? Coordinaten { get; private set; }
         public DateTime Tijdstip { get; private set; }

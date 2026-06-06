@@ -44,7 +44,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Databasefout bij het invoegen van observaties.", databaseException);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Databasefout bij het ophalen van alle observaties.", databaseException);
             }
         }
 
@@ -124,7 +124,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Databasefout bij ophalen van observaties op ID.", databaseException);
             }
         }
 
@@ -151,7 +151,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Databasefout bij het verwijderen van observaties.", databaseException);
             }
         }
 
@@ -176,7 +176,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (Exception)
             {
-                throw new Exception("Je hebt deze observatie al gerapporteerd.");
+                throw new Exception("Databasefout bij het rapporteren van een observatie.");
             }
         }
     }

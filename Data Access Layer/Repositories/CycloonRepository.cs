@@ -123,7 +123,7 @@ namespace Data_Access_Layer.Repositories
 
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cycloon.", databaseException);
+                throw new Exception("Databasefout bij ophalen van cycloon bij ID.", databaseException);
             }
         }
     }

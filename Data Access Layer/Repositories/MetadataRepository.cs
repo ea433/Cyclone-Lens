@@ -57,7 +57,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij ophalen van cyclonen.", databaseException);
+                throw new Exception("Databasefout bij het ophalen van cycloonmetadata.", databaseException);
             }
 
             return metadataList;
@@ -90,7 +90,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch (SqlException databaseException)
             {
-                throw new Exception("Databasefout bij toevoegen van metadata.", databaseException);
+                throw new Exception("Databasefout bij het toevoegen van metadata.", databaseException);
             }
         }
     }
