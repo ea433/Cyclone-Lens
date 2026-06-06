@@ -2,6 +2,8 @@
 {
     public enum BassinType
     {
-        Noord_Atlantisch
+        Noord_Atlantisch,
+        Oost_Pacifisch,
+        Centraal_Pacifisch
     }
 }

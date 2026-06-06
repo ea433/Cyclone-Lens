@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Business_Logic_Layer.Services;
 using Models.Classes;
 using System.Text.Json;
+using Business_Logic_Layer.API_Services;
 
-namespace Presentation.Controllers
+namespace Presentation.APIControllers
 {
     /* pre-API
     

@@ -1,8 +1,8 @@
-﻿using Interface_Layer.DTOs;
-using Interface_Layer.InterfaceRepositories;
+﻿using Interface_Layer.API_DTOs;
+using Interface_Layer.API_InterfaceRepositories;
 using Microsoft.Data.SqlClient;
 
-namespace Data_Access_Layer.Repositories
+namespace Data_Access_Layer.API_Repositories
 {
     public class NhcStormRepository : INhcStormRepository
     {

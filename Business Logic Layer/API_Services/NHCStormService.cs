@@ -1,8 +1,9 @@
-﻿using Interface_Layer.DTOs;
-using Interface_Layer.InterfaceRepositories;
+﻿using Interface_Layer.API_DTOs;
+using Interface_Layer.API_InterfaceRepositories;
 using Models.Classes;
+using Business_Logic_Layer.Mappers;
 
-namespace Business_Logic_Layer.Services
+namespace Business_Logic_Layer.API_Services
 {
     public class NhcStormService
     {
@@ -34,14 +35,10 @@ namespace Business_Logic_Layer.Services
             }
         }
 
+        // Om evt nog later op website te tonen
         public List<NhcStormDTO> GetAll()
         {
             return _repository.GetAll();
-        }
-
-        private string ParseBassin(string nhcId)
-        {
-            return nhcId.StartsWith("al") ? "Noord-Atlantisch" : "Oost-Pacifisch";
         }
     }
 }

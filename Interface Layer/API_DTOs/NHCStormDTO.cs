@@ -1,4 +1,4 @@
-﻿namespace Interface_Layer.DTOs
+﻿namespace Interface_Layer.API_DTOs
 {
     public class NhcStormDTO
     {
