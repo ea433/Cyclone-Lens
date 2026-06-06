@@ -122,5 +122,19 @@ namespace Presentation.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult GetObservaties()
+        {
+            List<Observatie> observaties = _service.GetAllObservaties();
+
+            return Json(observaties.Select(o => new
+            {
+                lat = o.Coordinaten?.Lat.Value,
+                lng = o.Coordinaten?.Long.Value,
+                description = o.Omschrijving,
+                tijdstip = o.Tijdstip
+            }));
+        }
     }
 }

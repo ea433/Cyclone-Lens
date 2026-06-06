@@ -184,12 +184,12 @@ async function loadKmzLayer(kmzUrl, type) {
                 const styleUrl = pm.querySelector('styleUrl')?.textContent || '';
                 const isInitial = styleUrl.includes('initial');
 
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = rawDesc;
-                const rows = tempDiv.querySelectorAll('td');
+                const parser2 = new DOMParser();
+                const descDoc = parser2.parseFromString(rawDesc, 'text/html');
+                const rows = descDoc.querySelectorAll('td');
                 const lines = Array.from(rows)
                     .map(td => td.textContent.trim())
-                    .filter(t => t.length > 0 && t !== '—' && t !== '-');
+                    .filter(t => t.length > 0 && t !== '—' && t !== '-' && t !== '');
 
                 const tooltipHtml = `<div style="line-height:1.6">${lines.join('<br>')}</div>`;
 
