@@ -94,12 +94,7 @@ namespace Business_Logic_Layer.Services
             if (dto == null)
                 return null;
 
-            return new Cycloon(
-                dto.Id,
-                dto.Naam,
-                CycloonMapper.ParseStatus(dto.Status),
-                CycloonMapper.ParseBassin(dto.Bassin)
-            );
+            return CycloonMapper.ToDomain(dto);
         }
 
         public Cycloon? GetCycloonDetails(int id)

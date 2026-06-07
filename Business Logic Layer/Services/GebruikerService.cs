@@ -2,6 +2,7 @@
 using Interface_Layer.InterfaceRepositories;
 using Models.Classes;
 using Models.Enums;
+using Business_Logic_Layer.Mappers;
 
 namespace Business_Logic_Layer.Services
 {
@@ -43,16 +44,13 @@ namespace Business_Logic_Layer.Services
         public Gebruiker? Login(string gebruikersnaam, string wachtwoord)
         {
             GebruikerDTO? dto = _repository.GetByGebruikersnaam(gebruikersnaam);
+            {
+                if (dto == null || !BCrypt.Net.BCrypt.Verify(wachtwoord, dto.WachtwoordHash))
+                    return null;
 
-            if (dto == null || !BCrypt.Net.BCrypt.Verify(wachtwoord, dto.WachtwoordHash))
-                return null;
+                return GebruikerMapper.ToDomain(dto);
 
-            return new Gebruiker(
-                dto.Id,
-                dto.Gebruikersnaam,
-                dto.WachtwoordHash,
-                (GebruikerType)dto.GebruikerType
-            );
+            }
         }
     }
 }

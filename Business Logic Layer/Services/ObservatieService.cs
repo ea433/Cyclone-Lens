@@ -17,22 +17,22 @@ namespace Business_Logic_Layer.Services
         public void PlaatsObservatie(int gebruikerId, int cycloonId, string omschrijving, SqlGeography? coordinaten)
         {
             if (gebruikerId <= 0)
-                throw new Exception("Gebruiker is verplicht");
+                throw new ArgumentException("Gebruiker is verplicht");
 
             if (cycloonId <= 0)
-                throw new Exception("Cycloon is verplicht");
+                throw new ArgumentException("Cycloon is verplicht");
 
             if (string.IsNullOrWhiteSpace(omschrijving))
-                throw new Exception("Omschrijving is verplicht");
+                throw new ArgumentException("Omschrijving is verplicht");
 
             if (coordinaten == null)
-                throw new Exception("Locatie is verplicht");
+                throw new ArgumentException("Locatie is verplicht");
 
             if (coordinaten.Lat.Value == 0 || coordinaten.Long.Value == 0)
-                throw new Exception("Ongeldige locatie");
+                throw new ArgumentException("Ongeldige latitude/longitude.");
 
             if (coordinaten.Lat.Value > 90 || coordinaten.Long.Value > 180)
-                throw new Exception("Ongeldige locatie");
+                throw new ArgumentException("Ongeldige latitude/longitude.");
 
             ObservatieDTO observatie = new()
             {
