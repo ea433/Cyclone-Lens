@@ -31,12 +31,7 @@ namespace Business_Logic_Layer.Services
 
             string wachtwoordHash = BCrypt.Net.BCrypt.HashPassword(wachtwoord);
 
-            GebruikerDTO gebruikerDto = new()
-            {
-                Gebruikersnaam = gebruikersnaam,
-                WachtwoordHash = wachtwoordHash,
-                GebruikerType = (int)GebruikerType.Gebruiker
-            };
+            GebruikerDTO gebruikerDto = GebruikerMapper.ToDTO(gebruikersnaam, wachtwoordHash);
 
             _repository.RegistreerGebruiker(gebruikerDto);
         }

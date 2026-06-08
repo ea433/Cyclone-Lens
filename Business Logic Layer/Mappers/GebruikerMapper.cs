@@ -10,5 +10,15 @@ namespace Business_Logic_Layer.Mappers
         {
             return new Gebruiker(dto.Id, dto.Gebruikersnaam, dto.WachtwoordHash, (GebruikerType)dto.GebruikerType);
         }
+
+        public static GebruikerDTO ToDTO(string gebruikersnaam, string wachtwoordHash)
+        {
+            return new GebruikerDTO
+            {
+                Gebruikersnaam = gebruikersnaam,
+                WachtwoordHash = wachtwoordHash,
+                GebruikerType = (int)GebruikerType.Gebruiker
+            };
+        }
     }
 }
