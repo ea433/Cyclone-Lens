@@ -2,7 +2,6 @@ using Business_Logic_Layer.Services;
 using Data_Access_Layer.Repositories;
 using Interface_Layer.InterfaceRepositories;
 using Data_Access_Layer.API_Repositories;
-using Interface_Layer.API_InterfaceRepositories;
 using Business_Logic_Layer.API_Services;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,8 +1,7 @@
-﻿using Interface_Layer.API_DTOs;
-using Interface_Layer.API_InterfaceRepositories;
+﻿using Interface_Layer.DTOs;
+using Interface_Layer.InterfaceRepositories;
 using Models.Classes;
-using Business_Logic_Layer.Mappers;
-using Business_Logic_Layer.API_Mappers;
+using Models.Enums;
 
 namespace Business_Logic_Layer.API_Services
 {
@@ -24,7 +23,7 @@ namespace Business_Logic_Layer.API_Services
                     NhcId = storm.Id,
                     Naam = storm.Name,
                     Categorie = storm.Classification,
-                    Bassin = CycloonMapper.BassinToString(NhcStormMapper.ParseBassin(storm.Id)),
+                    Bassin = BassinTypeParser.BassinToString(BassinTypeParser.ParseNhcBassin(storm.Id)),
                     Windsnelheid = int.Parse(storm.Intensity),
                     Luchtdruk = int.Parse(storm.Pressure),
                     Latitude = storm.LatitudeNumeric,
@@ -34,12 +33,6 @@ namespace Business_Logic_Layer.API_Services
 
                 _repository.Insert(dto);
             }
-        }
-
-        // Om evt nog later op website te tonen
-        public List<NhcStormDTO> GetAll()
-        {
-            return _repository.GetAll();
         }
     }
 }
