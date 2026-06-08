@@ -11,7 +11,6 @@ namespace CycloneLensTestProject.ModelTests
             // Arrange
             int id = 1;
             string naam = "Leander";
-            string email = "test@mail.com";
             string wachtwoord = "password123";
             GebruikerType userType = GebruikerType.Beheerder; // adjust if needed
 
