@@ -3,6 +3,7 @@ using Data_Access_Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Models.Classes;
 using Presentation.Models;
+using Models.Enums;
 
 namespace Presentation.Controllers
 {
@@ -53,6 +54,8 @@ namespace Presentation.Controllers
 
             HttpContext.Session.SetInt32("UserId", gebruiker.Id);
             HttpContext.Session.SetInt32("UserType", (int)gebruiker.UserType);
+            HttpContext.Session.SetString("GebruikersnaamSession", gebruiker.Naam);
+            HttpContext.Session.SetString("RolSession", gebruiker.UserType.ToString());
             return RedirectToAction("Index", "Cycloon");
         }
     }

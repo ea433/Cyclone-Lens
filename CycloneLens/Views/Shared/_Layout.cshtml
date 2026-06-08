@@ -4,85 +4,78 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] CycloneLens</title>
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/website.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Site.css" />
     <link rel="icon" type="image/png" href="~/FaviconCL.png" />
-
     @RenderSection("Styles", required: false)
 </head>
-
 <body>
-
     <!-- ===== NORMAL NAVBAR ===== -->
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container position-relative">
-
                 <!-- Logo LEFT -->
                 <a class="navbar-brand position-absolute start-0 d-flex align-items-center"
                    asp-controller="Home" asp-action="Index">
                     <img src="~/LogoCL.png" style="height: 30px; margin-right: 6px;" />
                     CycloneLens
                 </a>
-
                 <!-- CENTERED NAV -->
                 <div class="mx-auto">
                     <ul class="navbar-nav flex-row gap-3">
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Gebruiker" asp-action="Login">Profiel</a>
-                        </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="Index">Cyclonen</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Observatie" asp-action="Index">Observaties</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Map" asp-action="Index">Live Map</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Cycloon" asp-action="Satelliet">Satelliet</a>
                         </li>
                     </ul>
                 </div>
-
+                <!-- User INFO RIGHT -->
+                <div class="position-absolute end-0 d-flex align-items-center">
+                    @if (Context.Session.GetInt32("UserId") != null)
+                    {
+                        <span class="nav-link text-dark">
+                            @Context.Session.GetString("GebruikersnaamSession")
+                            <small class="text-muted">(@Context.Session.GetString("RolSession"))</small>
+                        </span>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-dark" asp-controller="Gebruiker" asp-action="Login">Profiel</a>
+                    }
+                </div>
             </div>
         </nav>
     </header>
-
     <!-- ===== PAGE CONTENT ===== -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
     <!-- ===== FOOTER ===== -->
     <footer class="border-top footer text-muted
     @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Map"
-                ? "d-none"
-                : "")">
+                            ? "d-none"
+                            : "")">
         <div class="container">
             &copy; 2026 - CycloneLens
         </div>
     </footer>
-
     <!-- ===== SCRIPTS ===== -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
-
 </body>
 </html>
