@@ -54,29 +54,13 @@ namespace Business_Logic_Layer.Services
             if (string.IsNullOrWhiteSpace(cycloon.Naam))
                 throw new ArgumentException("Naam is verplicht");
 
-            CycloonDTO cycloonDto = new()
-            {
-                Id = cycloon.Id,
-                Naam = cycloon.Naam,
-                Status = StatusTypeParser.StatusToString(cycloon.Status),
-                Bassin = BassinTypeParser.BassinToString(cycloon.Bassin)
-            };
+            CycloonDTO cycloonDto = CycloonMapper.ToDTO(cycloon);
 
             _repository.UpdateCycloon(cycloonDto);
 
             if (metadata != null)
             {
-                MetadataDTO metadataDto = new()
-                {
-                    Id = metadata.Id,
-                    CycloonId = metadata.Cycloon_Id,
-                    Categorie = (int)metadata.Categorie,
-                    Windsnelheid = metadata.Windsnelheid,
-                    Luchtdruk = metadata.Luchtdruk,
-                    Coordinaten = metadata.Coordinaten,
-                    Tijdstip = metadata.Tijdstip
-                };
-
+                MetadataDTO metadataDto = CycloonMapper.ToDTO(metadata);
                 _dataRepository.AddMetadata(metadataDto);
             }
 
@@ -114,14 +98,8 @@ namespace Business_Logic_Layer.Services
             CategorieType latestCategorie = metadata.LastOrDefault()?.Categorie
                 ?? CategorieType.Tropische_Depressie;
 
-            return new Cycloon(
-                cycloonDetails.Id,
-                cycloonDetails.Naam,
-                latestCategorie,
-                StatusTypeParser.ParseStatus(cycloonDetails.Status),
-                BassinTypeParser.ParseBassin(cycloonDetails.Bassin),
-                metadata
-            );
+            return new Cycloon(cycloonDetails.Id, cycloonDetails.Naam, latestCategorie,
+                StatusTypeParser.ParseStatus(cycloonDetails.Status), BassinTypeParser.ParseBassin(cycloonDetails.Bassin), metadata);
         }
     }
 }
