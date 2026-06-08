@@ -93,12 +93,12 @@ fetch('/Observatie/GetObservaties')
 function stormColor(windKts) {
     const w = parseInt(windKts);
     if (w < 34) return '#5eead4'; // Tropische Depressie
-    if (w < 64) return '#facc15'; // Tropische Storm
-    if (w < 83) return '#fb923c'; // Categorie 1
-    if (w < 96) return '#f87171'; // Categorie 2
-    if (w < 113) return '#c084fc'; // Categorie 3
-    if (w < 137) return '#e879f9'; // Categorie 4
-    return '#ff0000'; // Categorie 5 
+    if (w < 64) return '#98fb98'; // Tropische Storm
+    if (w < 83) return '#f9e076'; // Categorie 1
+    if (w < 96) return '#fcae1e'; // Categorie 2
+    if (w < 113) return '#fc6a03'; // Categorie 3
+    if (w < 137) return '#d21404'; // Categorie 4
+    return '#6f2da8'; // Categorie 5 
 }
 
 function stormLabel(windKts) {
