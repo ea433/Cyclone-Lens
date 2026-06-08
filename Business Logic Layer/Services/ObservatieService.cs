@@ -1,4 +1,5 @@
-﻿using Interface_Layer.DTOs;
+﻿using Business_Logic_Layer.Mappers;
+using Interface_Layer.DTOs;
 using Interface_Layer.InterfaceRepositories;
 using Microsoft.SqlServer.Types;
 using Models.Classes;
@@ -34,16 +35,8 @@ namespace Business_Logic_Layer.Services
             if (coordinaten.Lat.Value > 90 || coordinaten.Long.Value > 180)
                 throw new ArgumentException("Ongeldige latitude/longitude.");
 
-            ObservatieDTO observatie = new()
-            {
-                GebruikerId = gebruikerId,
-                CycloonId = cycloonId,
-                Omschrijving = omschrijving,
-                AfbeeldingPad = null,
-                Coordinaten = coordinaten,
-                Tijdstip = DateTime.Now
-            };
-
+            ObservatieDTO observatie = ObservatieMapper.ToDTO(gebruikerId, cycloonId, omschrijving, coordinaten);
+            
             _observatieRepository.InsertObservatie(observatie);
         }
 
@@ -70,7 +63,7 @@ namespace Business_Logic_Layer.Services
             }
             catch
             {
-                throw new Exception("Je hebt deze observatie al gerapporteerd.");
+                throw new InvalidOperationException("Je hebt deze observatie al gerapporteerd.");
             }
         }
     }
