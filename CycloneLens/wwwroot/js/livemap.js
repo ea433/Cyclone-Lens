@@ -71,6 +71,7 @@ document.getElementById("toggleRadar").addEventListener("change", (e) => {
 });
 
 // Observaties van observaties
+obsMarkers = []
 fetch('/Observatie/GetObservaties')
     .then(response => response.json())
     .then(observations => {
@@ -84,6 +85,7 @@ fetch('/Observatie/GetObservaties')
                 );
             obsMarkers.push(marker);
         });
+        labels.bringToFront(); 
     })
     .catch(err => console.error(err));
 
