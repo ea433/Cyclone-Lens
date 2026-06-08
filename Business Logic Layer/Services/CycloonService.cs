@@ -38,9 +38,9 @@ namespace Business_Logic_Layer.Services
                     return new Cycloon(
                         cycloon.Id,
                         cycloon.Naam,
-                        CycloonMapper.ParseCategorie(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
-                        CycloonMapper.ParseBassin(cycloon.Bassin),
-                        CycloonMapper.ParseStatus(cycloon.Status)
+                        CategorieTypeParser.ParseCategorie(latest?.Categorie ?? (int)CategorieType.Tropische_Depressie),
+                        BassinTypeParser.ParseBassin(cycloon.Bassin),
+                        StatusTypeParser.ParseStatus(cycloon.Status)
                     );
                 })
                 .ToList();
@@ -58,8 +58,8 @@ namespace Business_Logic_Layer.Services
             {
                 Id = cycloon.Id,
                 Naam = cycloon.Naam,
-                Status = CycloonMapper.StatusToString(cycloon.Status),
-                Bassin = CycloonMapper.BassinToString(cycloon.Bassin)
+                Status = StatusTypeParser.StatusToString(cycloon.Status),
+                Bassin = BassinTypeParser.BassinToString(cycloon.Bassin)
             };
 
             _repository.UpdateCycloon(cycloonDto);
@@ -107,7 +107,7 @@ namespace Business_Logic_Layer.Services
             List<Metadata> metadata = _dataRepository.GetMetadata()
                 .Where(metadata => metadata.CycloonId == id)
                 .OrderBy(metadata => metadata.Tijdstip)
-                .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, CycloonMapper.ParseCategorie(metadata.Categorie), metadata.Windsnelheid,
+                .Select(metadata => new Metadata(metadata.Id, metadata.CycloonId, CategorieTypeParser.ParseCategorie(metadata.Categorie), metadata.Windsnelheid,
                     metadata.Luchtdruk, metadata.Coordinaten, metadata.Tijdstip))
                 .ToList();
 
@@ -118,8 +118,8 @@ namespace Business_Logic_Layer.Services
                 cycloonDetails.Id,
                 cycloonDetails.Naam,
                 latestCategorie,
-                CycloonMapper.ParseStatus(cycloonDetails.Status),
-                CycloonMapper.ParseBassin(cycloonDetails.Bassin),
+                StatusTypeParser.ParseStatus(cycloonDetails.Status),
+                BassinTypeParser.ParseBassin(cycloonDetails.Bassin),
                 metadata
             );
         }

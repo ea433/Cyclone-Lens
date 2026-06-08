@@ -2,7 +2,7 @@
 {
     public enum CategorieType
     {
-        Tropische_Depressie = 1, 
+        Tropische_Depressie = 1,
         Tropische_Storm = 2,
         Categorie_1 = 3,
         Categorie_2 = 4,
@@ -12,5 +12,10 @@
         Extratropische_Cycloon = 8,
         Subtropische_Cycloon = 9,
         Restlaag = 10
+    }
+
+    public static class CategorieTypeParser
+    {
+        public static CategorieType ParseCategorie(int categorie) => (CategorieType)categorie;
     }
 }
