@@ -1,9 +1,7 @@
 ﻿using Business_Logic_Layer.Services;
-using Data_Access_Layer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Models.Classes;
 using Presentation.Models;
-using Models.Enums;
 
 namespace Presentation.Controllers
 {
