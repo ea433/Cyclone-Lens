@@ -1,12 +1,15 @@
-﻿<h2>@Model.Naam</h2>
+﻿@using Microsoft.AspNetCore.Http
+<h2>@Model.Naam</h2>
 <p>@Model.Bassin.ToString().Replace("_", " ")</p>
-
-<a asp-controller="Cycloon"
-   asp-action="Edit"
-   asp-route-id="@Model.Id"
-   class="btn btn-primary">
-    Bewerken
-</a>
+@if ((Context.Session.GetInt32("UserType") ?? 0) == 3)
+{
+    <a asp-controller="Cycloon"
+       asp-action="Edit"
+       asp-route-id="@Model.Id"
+       class="btn btn-primary">
+        Bewerken
+    </a>
+}
 
 <h3>Traject en Cycloondata</h3>
 

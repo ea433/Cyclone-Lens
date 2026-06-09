@@ -35,7 +35,7 @@ namespace Data_Access_Layer.Repositories
 
                             if (string.IsNullOrEmpty(statusString) || string.IsNullOrEmpty(bassinString))
                             {
-                                throw new Exception("Invalid enum value from database");
+                                throw new ArgumentException("Invalid value from database");
                             }
 
                             CycloonDTO cycloon = new()
@@ -74,7 +74,7 @@ namespace Data_Access_Layer.Repositories
                     {
                         cmd.Parameters.AddWithValue("@id", cycloon.Id);
                         cmd.Parameters.AddWithValue("@naam", cycloon.Naam);
-                        cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); // enums
+                        cmd.Parameters.AddWithValue("@status", cycloon.Status.ToString()); 
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected == 0)

@@ -1,61 +1,57 @@
-﻿<h2>Orkaan @Model.Naam</h2>
-
-<form asp-action="Update" method="post">
-    <input type="hidden" name="Id" value="@Model.Id" />
-
-    @section Styles {
-        <link rel="stylesheet"
-              href="~/css/CycloonEdit.css"
-              asp-append-version="true" />
-    }
-
-    <!-- alle cycloondetails -->
-    <div class="box">
-        <div class="box-header">
-            <h4>Cycloon Details</h4>
-            <button type="submit">Opslaan</button>
-        </div>
-
-        <div class="grid">
-            <div class="field">
-                <label>Categorie:</label>
-                <input name="Categorie" />
+﻿@using Microsoft.AspNetCore.Http
+@if ((Context.Session.GetInt32("UserType") ?? 0) != 3)
+{
+    <p>U heeft geen toegang tot deze pagina.</p>
+}
+else
+{
+    <h2>Orkaan @Model.Naam</h2>
+    <form asp-action="Update" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        @section Styles {
+            <link rel="stylesheet"
+                  href="~/css/CycloonEdit.css"
+                  asp-append-version="true" />
+        }
+        <div class="box">
+            <div class="box-header">
+                <h4>Cycloon Details</h4>
+                <button type="submit">Opslaan</button>
             </div>
-
-            <div class="field">
-                <label>Bassin:</label>
-                <input name="Bassin" value="@Model.Bassin" />
-            </div>
-
-            <div class="field">
-                <label>Status:</label>
-                <input name="Status" value="@Model.Status" />
-            </div>
-
-            <div class="field">
-                <label>Windsnelheid:</label>
-                <input name="Windsnelheid" />
-            </div>
-
-            <div class="field">
-                <label>Druk:</label>
-                <input name="Luchtdruk" />
-            </div>
-
-            <div class="field">
-                <label>Tijdstip:</label>
-                <input disabled value="@DateTime.Now" />
-            </div>
-
-            <div class="field">
-                <label>Breedtegraad:</label>
-                <input name="Latitude" />
-            </div>
-
-            <div class="field">
-                <label>Lengtegraad:</label>
-                <input name="Longitude" />
+            <div class="grid">
+                <div class="field">
+                    <label>Categorie:</label>
+                    <input name="Categorie" />
+                </div>
+                <div class="field">
+                    <label>Bassin:</label>
+                    <input name="Bassin" value="@Model.Bassin" />
+                </div>
+                <div class="field">
+                    <label>Status:</label>
+                    <input name="Status" value="@Model.Status" />
+                </div>
+                <div class="field">
+                    <label>Windsnelheid:</label>
+                    <input name="Windsnelheid" />
+                </div>
+                <div class="field">
+                    <label>Druk:</label>
+                    <input name="Luchtdruk" />
+                </div>
+                <div class="field">
+                    <label>Tijdstip:</label>
+                    <input disabled value="@DateTime.Now" />
+                </div>
+                <div class="field">
+                    <label>Breedtegraad:</label>
+                    <input name="Latitude" />
+                </div>
+                <div class="field">
+                    <label>Lengtegraad:</label>
+                    <input name="Longitude" />
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+}

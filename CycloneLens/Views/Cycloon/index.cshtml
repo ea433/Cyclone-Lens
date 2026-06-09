@@ -7,7 +7,7 @@
             <th>Categorie</th>
             <th>Bassin</th>
             <th>Status</th>
-            @if ((Context.Session.GetInt32("UserType") ?? 0) >= 1)
+            @if ((Context.Session.GetInt32("UserType") ?? 0) < 1)
             {
                 <th>Observaties</th>
             }

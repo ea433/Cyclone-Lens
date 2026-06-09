@@ -32,7 +32,7 @@ namespace Presentation.Controllers
 
             try
             {
-                int gebruikerId = 1; // temp
+                int gebruikerId = 1;
 
                 SqlGeography coordinaten = SqlGeography.Point(vm.Latitude, vm.Longitude, 4326);
 

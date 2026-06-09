@@ -6,8 +6,8 @@ namespace Models.Classes
     {
         public int Id { get; }
         public int GebruikerId { get; }
-        public string GebruikerNaam { get; }
         public int CycloonId { get; }
+        public string GebruikerNaam { get; }
         public string Omschrijving { get; private set; }
         public string? AfbeeldingPad { get; private set; }
         public SqlGeography? Coordinaten { get; private set; }
