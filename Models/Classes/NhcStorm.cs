@@ -2,12 +2,6 @@
 
 namespace Models.Classes
 {
-    public class NhcResponse
-    {
-        [JsonPropertyName("activeStorms")]
-        public List<NhcStorm> ActiveStorms { get; set; } = new();
-    }
-
     public class NhcStorm
     {
         [JsonPropertyName("id")]
