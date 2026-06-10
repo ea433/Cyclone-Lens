@@ -1,51 +1,42 @@
 ﻿@using Presentation.Models
-
+@using Microsoft.AspNetCore.Http
 @model ObservatieViewModel
-
 <div class="container mt-5">
-
     <h1 class="mb-5 text-center">
         Volledige omschrijving observatie
     </h1>
-
     <div class="card p-5">
-
         <p>
             <strong>ID:</strong>
             @Model.Id
         </p>
-
         <p>
             <strong>Ingediend door:</strong>
             @Model.Inzender
         </p>
-
         <p>
             <strong>Beschrijving:</strong>
             @Model.Omschrijving
         </p>
-
         <p>
             <strong>Datum:</strong>
             @Model.Tijdstip.ToString("yyyy-MM-dd HH:mm")
         </p>
-
-        <div class="mt-4">
-
-            <form asp-action="Delete"
-                  asp-controller="Observatie"
-                  method="post">
-
-                <input type="hidden"
-                       name="id"
-                       value="@Model.Id" />
-
-                <button type="submit"
-                        class="btn btn-outline-danger">
-                    Verwijder
-                </button>
-
-            </form>
-        </div>
+        @if ((Context.Session.GetInt32("UserType") ?? 0) >= 2)
+        {
+            <div class="mt-4">
+                <form asp-action="Delete"
+                      asp-controller="Observatie"
+                      method="post">
+                    <input type="hidden"
+                           name="id"
+                           value="@Model.Id" />
+                    <button type="submit"
+                            class="btn btn-outline-danger">
+                        Verwijder
+                    </button>
+                </form>
+            </div>
+        }
     </div>
 </div>
