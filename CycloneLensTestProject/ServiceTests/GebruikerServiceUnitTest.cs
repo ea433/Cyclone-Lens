@@ -105,6 +105,7 @@ namespace CycloneLensTestProject.ServiceTests
             Assert.Null(result);
         }
 
+        // UC02 - Exception [1]: gegevens horen niet bij bestaande account
         [Fact]
         public void Inloggen_GeeftNull_WanneerWachtwoordIncorrect()
         {

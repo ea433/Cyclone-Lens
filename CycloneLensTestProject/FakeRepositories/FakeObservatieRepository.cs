@@ -46,8 +46,13 @@ namespace CycloneLensTestProject.FakeRepositories
             }
         }
 
+        public bool AlGerapporteerd { get; set; }
+
         public void VoegRapportageToe(int gebruikerId, int observatieId)
         {
+            if (AlGerapporteerd)
+                throw new Exception("Al gerapporteerd");
+
             Observatie? observatie = GetById(observatieId) ?? throw new Exception("Observatie bestaat niet.");
         }
     }

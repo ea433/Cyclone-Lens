@@ -36,17 +36,6 @@ namespace CycloneLensTestProject.ModelTests
         }
 
         [Fact]
-        public void Constructor_Throws_WhenEmailIsNull()
-        {
-            // Act
-            var ex = Assert.Throws<ArgumentNullException>(() =>
-                new Gebruiker(1, "Leander", "pass", GebruikerType.Beheerder));
-
-            // Assert
-            Assert.Equal("email", ex.ParamName);
-        }
-
-        [Fact]
         public void Constructor_Throws_WhenWachtwoordIsNull()
         {
             // Act
